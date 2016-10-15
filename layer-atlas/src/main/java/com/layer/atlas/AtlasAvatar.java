@@ -15,9 +15,11 @@ import android.view.ViewGroup;
 import com.layer.atlas.util.AvatarStyle;
 import com.layer.atlas.util.Util;
 import com.layer.atlas.util.picasso.transformations.CircleTransform;
+import com.layer.atlas.util.picasso.transformations.RoundedTransform;
 import com.layer.sdk.messaging.Identity;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
+import com.squareup.picasso.Transformation;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -33,8 +35,10 @@ import java.util.concurrent.atomic.AtomicLong;
 public class AtlasAvatar extends View {
     public static final String TAG = AtlasAvatar.class.getSimpleName();
 
-    private final static CircleTransform SINGLE_TRANSFORM = new CircleTransform(TAG + ".single");
-    private final static CircleTransform MULTI_TRANSFORM = new CircleTransform(TAG + ".multi");
+    //private final static CircleTransform SINGLE_TRANSFORM = new CircleTransform(TAG + ".single");
+    //private final static CircleTransform MULTI_TRANSFORM = new CircleTransform(TAG + ".multi");
+    private final static Transformation SINGLE_TRANSFORM = new RoundedTransform(0);
+    private final static Transformation MULTI_TRANSFORM = new RoundedTransform(0);
 
     private static final Paint PAINT_TRANSPARENT = new Paint();
     private static final Paint PAINT_BITMAP = new Paint();

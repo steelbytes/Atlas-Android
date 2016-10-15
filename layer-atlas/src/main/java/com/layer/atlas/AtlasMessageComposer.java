@@ -31,9 +31,11 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.TypedValue;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -47,6 +49,7 @@ import com.layer.atlas.messagetypes.MessageSender;
 import com.layer.atlas.messagetypes.text.TextSender;
 import com.layer.atlas.util.EditTextUtil;
 import com.layer.sdk.LayerClient;
+import com.layer.sdk.exceptions.LayerException;
 import com.layer.sdk.listeners.LayerTypingIndicatorListener;
 import com.layer.sdk.messaging.Conversation;
 
@@ -132,17 +135,37 @@ public class AtlasMessageComposer extends FrameLayout {
                 }
             }
         });
+        mMessageEditText.setImeOptions(EditorInfo.IME_ACTION_SEND);
+        mMessageEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                switch (actionId) {
+                case EditorInfo.IME_ACTION_SEND:
+                    doSend();
+                    return true;
+                }
+                return false;
+            }
+        });
 
         mSendButton = (Button) findViewById(R.id.send_button);
         mSendButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
-                if (!mTextSender.requestSend(mMessageEditText.getText().toString())) return;
-                mMessageEditText.setText("");
-                mSendButton.setEnabled(false);
+                doSend();
             }
         });
         applyStyle();
         return this;
+    }
+
+    private void doSend() {
+        try {
+            if (!mTextSender.requestSend(mMessageEditText.getText().toString())) return;
+            mMessageEditText.setText("");
+            mSendButton.setEnabled(false);
+        } catch (LayerException e) {
+            e.printStackTrace();
+        }
     }
 
     /**

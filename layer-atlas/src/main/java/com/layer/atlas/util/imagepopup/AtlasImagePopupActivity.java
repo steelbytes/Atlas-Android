@@ -167,4 +167,11 @@ public class AtlasImagePopupActivity extends Activity implements LayerProgressLi
         if (Log.isLoggable(Log.ERROR)) Log.e(e.getMessage(), e);
     }
 
+    @Override
+    protected void onDestroy() {
+        if(mImageView!=null) {
+            mImageView.recycle();
+        }
+        super.onDestroy();
+    }
 }

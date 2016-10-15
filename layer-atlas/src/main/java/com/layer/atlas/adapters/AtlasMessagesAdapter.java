@@ -20,6 +20,7 @@ import com.layer.atlas.messagetypes.MessageStyle;
 import com.layer.atlas.util.IdentityRecyclerViewEventListener;
 import com.layer.atlas.util.Util;
 import com.layer.sdk.LayerClient;
+import com.layer.sdk.exceptions.LayerException;
 import com.layer.sdk.messaging.Identity;
 import com.layer.sdk.messaging.Message;
 import com.layer.sdk.query.ListViewController;
@@ -93,6 +94,14 @@ public class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessagesAdap
 
     private RecyclerView mRecyclerView;
 
+    private boolean mShowReadDeliveryField;
+    private boolean mShowOtherParticipantsAvatar;
+    private AvatarClickCallback mAvatarClickCallback;
+
+    public interface AvatarClickCallback {
+        void onClick(Message m);
+    }
+
     public AtlasMessagesAdapter(Context context, LayerClient layerClient, Picasso picasso) {
         mLayerClient = layerClient;
         mPicasso = picasso;
@@ -101,6 +110,9 @@ public class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessagesAdap
         mDateFormat = android.text.format.DateFormat.getDateFormat(context);
         mTimeFormat = android.text.format.DateFormat.getTimeFormat(context);
         mDisplayMetrics = context.getResources().getDisplayMetrics();
+
+        mShowReadDeliveryField = true;
+        mShowOtherParticipantsAvatar = false;
 
         mQueryController = layerClient.newRecyclerViewController(null, null, this);
         mQueryController.setPreProcessCallback(new ListViewController.PreProcessCallback<Message>() {
@@ -119,6 +131,18 @@ public class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessagesAdap
 
         mIdentityEventListener = new IdentityRecyclerViewEventListener(this);
         mLayerClient.registerEventListener(mIdentityEventListener);
+    }
+
+    public void setShowReadDeliveryField(boolean showReadDeliveryField) {
+        mShowReadDeliveryField = showReadDeliveryField;
+    }
+
+    public void setShowOtherParticipantsAvatar(boolean showOtherParticipantsAvatar) {
+        mShowOtherParticipantsAvatar = showOtherParticipantsAvatar;
+    }
+
+    public void setAvatarClickCallback(AvatarClickCallback avatarClickCallback) {
+        mAvatarClickCallback = avatarClickCallback;
     }
 
     /**
@@ -248,7 +272,7 @@ public class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessagesAdap
         }
 
         CellType cellType = mCellTypesByViewType.get(viewType);
-        int rootResId = cellType.mMe ? CellViewHolder.RESOURCE_ID_ME : CellViewHolder.RESOURCE_ID_THEM;
+        int rootResId = cellType.mMe ? RESOURCE_ID_ME : RESOURCE_ID_THEM;
         CellViewHolder rootViewHolder = new CellViewHolder(mLayoutInflater.inflate(rootResId, parent, false), mPicasso);
         rootViewHolder.mCellHolder = cellType.mCellFactory.createCellHolder(rootViewHolder.mCell, cellType.mMe, mLayoutInflater);
         rootViewHolder.mCellHolderSpecs = new AtlasCellFactory.CellHolderSpecs();
@@ -318,7 +342,11 @@ public class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessagesAdap
                 viewHolder.mCell.setAlpha(1.0f);
             }
         } else {
-            message.markAsRead();
+            try {
+                message.markAsRead();
+            } catch (LayerException e) {
+                e.printStackTrace();
+            }
             // Sender name, only for first message in cluster
             if (!oneOnOne && (cluster.mClusterWithPrevious == null || cluster.mClusterWithPrevious == ClusterType.NEW_SENDER)) {
                 Identity sender = message.getSender();
@@ -336,7 +364,7 @@ public class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessagesAdap
             }
 
             // Avatars
-            if (oneOnOne) {
+            if (oneOnOne && !mShowOtherParticipantsAvatar) {
                 // Not in one-on-one conversations
                 viewHolder.mAvatar.setVisibility(View.GONE);
             } else if (cluster.mClusterWithNext == null || cluster.mClusterWithNext != ClusterType.LESS_THAN_MINUTE) {
@@ -375,7 +403,7 @@ public class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessagesAdap
     }
 
     private void updateViewHolderForRecipientStatus(CellViewHolder viewHolder, int position, Message message) {
-        if (mRecipientStatusPosition != null && mRecipientStatusPosition == position) {
+        if (mShowReadDeliveryField && mRecipientStatusPosition != null && mRecipientStatusPosition == position) {
             int readCount = 0;
             boolean delivered = false;
             Map<Identity, Message.RecipientStatus> statuses = message.getRecipientStatus();
@@ -498,8 +526,11 @@ public class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessagesAdap
     }
 
     private static boolean isDateBoundary(Date d1, Date d2) {
-        if (d1 == null || d2 == null) return false;
-        return (d1.getYear() != d2.getYear()) || (d1.getMonth() != d2.getMonth()) || (d1.getDay() != d2.getDay());
+        //if (d1 == null || d2 == null) return false;
+        //return (d1.getYear() != d2.getYear()) || (d1.getMonth() != d2.getMonth()) || (d1.getDay() != d2.getDay());
+        if (d1 == null) return true;
+        if (d2 == null) return false;
+        return (d2.getTime()-d1.getTime())>=3600*1000;
     }
 
     private void requestUpdate(final Message message, final int lastPosition) {
@@ -605,9 +636,10 @@ public class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessagesAdap
         }
     }
 
-    static class CellViewHolder extends ViewHolder {
-        public final static int RESOURCE_ID_ME = R.layout.atlas_message_item_me;
-        public final static int RESOURCE_ID_THEM = R.layout.atlas_message_item_them;
+    public final static int RESOURCE_ID_ME = R.layout.atlas_message_item_me;
+    public final static int RESOURCE_ID_THEM = R.layout.atlas_message_item_them;
+
+    class CellViewHolder extends ViewHolder  implements View.OnClickListener {
 
         protected Message mMessage;
 
@@ -636,7 +668,19 @@ public class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessagesAdap
             mReceipt = (TextView) itemView.findViewById(R.id.receipt);
 
             mAvatar = ((AtlasAvatar) itemView.findViewById(R.id.avatar));
-            if (mAvatar != null) mAvatar.init(picasso);
+            if (mAvatar != null) {
+                mAvatar.init(picasso);
+                mAvatar.setOnClickListener(this);
+            }
+        }
+
+        @Override
+        public void onClick(View v) {
+            if (v.getId()==R.id.avatar) {
+                if (mAvatarClickCallback!=null) {
+                    mAvatarClickCallback.onClick(mMessage);
+                }
+            }
         }
     }
 
