@@ -135,7 +135,7 @@ public class SinglePartImageCellFactory extends AtlasCellFactory<SinglePartImage
     //==============================================================================================
 
     public static class CellHolder extends AtlasCellFactory.CellHolder {
-        ImageView mImageView;
+        public ImageView mImageView;
         ContentLoadingProgressBar mProgressBar;
 
         public CellHolder(View view) {

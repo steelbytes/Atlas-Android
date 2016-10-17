@@ -130,7 +130,7 @@ public class LocationCellFactory extends AtlasCellFactory<LocationCellFactory.Ce
         }
     }
 
-    static class Location implements AtlasCellFactory.ParsedContent {
+    protected static class Location implements AtlasCellFactory.ParsedContent {
         double mLatitude;
         double mLongitude;
         String mLabel;
@@ -141,8 +141,8 @@ public class LocationCellFactory extends AtlasCellFactory<LocationCellFactory.Ce
         }
     }
 
-    static class CellHolder extends AtlasCellFactory.CellHolder {
-        ImageView mImageView;
+    protected static class CellHolder extends AtlasCellFactory.CellHolder {
+        public ImageView mImageView;
         ContentLoadingProgressBar mProgressBar;
 
         public CellHolder(View view) {

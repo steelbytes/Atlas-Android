@@ -70,7 +70,7 @@ public class GenericCellFactory extends AtlasCellFactory<GenericCellFactory.Cell
     }
 
     public class CellHolder extends AtlasCellFactory.CellHolder {
-        TextView mTextView;
+        public TextView mTextView;
 
         public CellHolder(View view) {
             mTextView = (TextView) view.findViewById(R.id.cell_text);
