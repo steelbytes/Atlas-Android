@@ -41,24 +41,24 @@ ext {
 
 dependencies {
     // Layer SDK
-    compile ('com.layer.sdk:layer-sdk:0.23.0') {
+    compile ('com.layer.sdk:layer-sdk:0.+') {
         exclude group: 'com.google.firebase', module: 'firebase-messaging'
     }
-    compile 'org.slf4j:slf4j-nop:1.7.2'
+    compile 'org.slf4j:slf4j-nop:1.+'
 
     // Google Location
-    compile 'com.google.android.gms:play-services-location:9.6.1'
+    compile 'com.google.android.gms:play-services-location:9.6.+'
 
     // Image cache and loading
-    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.squareup.picasso:picasso:2.+'
 
     // Image popup
-    compile 'com.davemorrissey.labs:subsampling-scale-image-view:3.4.1'
+    compile 'com.davemorrissey.labs:subsampling-scale-image-view:3.5.+' // until atlas is updated
 
     // Android UI
-    compile 'com.android.support:recyclerview-v7:24.2.1'
-    compile 'com.android.support:appcompat-v7:24.2.1'
-    compile 'com.android.support:design:24.2.1'
+    compile 'com.android.support:recyclerview-v7:24.+'
+    compile 'com.android.support:appcompat-v7:24.+'
+    compile 'com.android.support:design:24.+'
 }
 
 def sdkPom() {
