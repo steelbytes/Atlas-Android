@@ -40,25 +40,41 @@ ext {
 }
 
 dependencies {
-    // Layer SDK
-    compile ('com.layer.sdk:layer-sdk:0.+') {
-        exclude group: 'com.google.firebase', module: 'firebase-messaging'
-    }
-    compile 'org.slf4j:slf4j-nop:1.+'
+     ext.supportVersion = '24.+'
+    ext.gmsVersion = '9.6.+'
+    ext.firebaseVersion = ext.gmsVersion
+
+    // Android UI
+    compile "com.android.support:recyclerview-v7:$supportVersion"
+    compile "com.android.support:appcompat-v7:$supportVersion"
+    compile "com.android.support:design:$supportVersion"
 
     // Google Location
-    compile 'com.google.android.gms:play-services-location:9.6.+'
+    compile ("com.google.android.gms:play-services-location:$gmsVersion") {
+        exclude group: 'com.android.support'
+    }
 
+    compile ("com.google.firebase:firebase-messaging:$firebaseVersion") {
+        exclude group: 'com.google.android.gms'
+        exclude group: 'com.android.support'
+    }
+
+    compile 'org.slf4j:slf4j-nop:1.+'
+
+    // Layer SDK
+    compile ('com.layer.sdk:layer-sdk:0.+') {
+        exclude group: 'com.google.android.gms'
+        exclude group: 'com.android.support'
+        exclude group: 'com.google.firebase'
+        exclude group: 'org.slf4j'
+    }
+    
     // Image cache and loading
     compile 'com.squareup.picasso:picasso:2.+'
 
     // Image popup
     compile 'com.davemorrissey.labs:subsampling-scale-image-view:3.5.+' // until atlas is updated
 
-    // Android UI
-    compile 'com.android.support:recyclerview-v7:24.+'
-    compile 'com.android.support:appcompat-v7:24.+'
-    compile 'com.android.support:design:24.+'
 }
 
 def sdkPom() {
