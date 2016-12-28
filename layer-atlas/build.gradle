@@ -41,7 +41,7 @@ ext {
 
 dependencies {
      ext.supportVersion = '25.+'
-    ext.gmsVersion = '9.6.+'
+    ext.gmsVersion = '9.8.+'
     ext.firebaseVersion = ext.gmsVersion
 
     // Android UI
