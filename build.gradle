@@ -5,7 +5,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.+'
+        classpath 'com.android.tools.build:gradle:2.3.+'
         classpath group: 'com.layer', name: 'gradle-git-repo-plugin', version: '2.0.2'
     }
 }
@@ -15,4 +15,6 @@ allprojects {
         jcenter()
         maven { url "https://raw.githubusercontent.com/layerhq/releases-android/master/releases/" }
     }
+    tasks.withType(Javadoc).all { enabled = false }
+    tasks.withType(Test).all { enabled = false }
 }
