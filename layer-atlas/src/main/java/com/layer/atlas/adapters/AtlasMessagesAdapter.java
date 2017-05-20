@@ -257,7 +257,7 @@ public class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessagesAdap
         if (mFooterView != null && position == mFooterPosition) return VIEW_TYPE_FOOTER;
         Message message = getItem(position);
         Identity authenticatedUser = mLayerClient.getAuthenticatedUser();
-        boolean isMe = authenticatedUser != null && authenticatedUser.equals(message.getSender());
+        boolean isMe = message!=null && authenticatedUser != null && authenticatedUser.equals(message.getSender());
         for (AtlasCellFactory factory : mCellFactories) {
             if (!factory.isBindable(message)) continue;
             return isMe ? mMyViewTypesByCell.get(factory) : mTheirViewTypesByCell.get(factory);
@@ -301,6 +301,7 @@ public class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessagesAdap
 
     public void bindCellViewHolder(CellViewHolder viewHolder, int position) {
         Message message = getItem(position);
+        if (message==null) return;
         viewHolder.mMessage = message;
         CellType cellType = mCellTypesByViewType.get(viewHolder.getItemViewType());
         boolean oneOnOne = message.getConversation().getParticipants().size() == 2;

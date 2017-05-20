@@ -119,6 +119,7 @@ public class SinglePartImageCellFactory extends AtlasCellFactory<SinglePartImage
     //==============================================================================================
 
     public static boolean isType(Message message) {
+        if (message==null) return false;
         for (MessagePart part : message.getMessageParts()) {
             if (part.getMimeType().startsWith("image/")) return true;
         }

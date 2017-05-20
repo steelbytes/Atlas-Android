@@ -174,6 +174,7 @@ public class ThreePartImageCellFactory extends AtlasCellFactory<ThreePartImageCe
     //==============================================================================================
 
     public static boolean isType(Message message) {
+        if (message==null) return false;
         List<MessagePart> parts = message.getMessageParts();
         return parts.size() == 3 &&
                 parts.get(ThreePartImageUtils.PART_INDEX_FULL).getMimeType().startsWith("image/") &&

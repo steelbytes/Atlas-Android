@@ -125,13 +125,17 @@ public class AtlasMessageComposer extends FrameLayout {
 
             @Override
             public void afterTextChanged(Editable s) {
-                if (mConversation == null || mConversation.isDeleted()) return;
-                if (s.length() > 0) {
-                    mSendButton.setEnabled(isEnabled());
-                    mConversation.send(LayerTypingIndicatorListener.TypingIndicator.STARTED);
-                } else {
-                    mSendButton.setEnabled(false);
-                    mConversation.send(LayerTypingIndicatorListener.TypingIndicator.FINISHED);
+                try {
+                    if (mConversation == null || mConversation.isDeleted()) return;
+                    if (s.length() > 0) {
+                        mSendButton.setEnabled(isEnabled());
+                        mConversation.send(LayerTypingIndicatorListener.TypingIndicator.STARTED);
+                    } else {
+                        mSendButton.setEnabled(false);
+                        mConversation.send(LayerTypingIndicatorListener.TypingIndicator.FINISHED);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         });

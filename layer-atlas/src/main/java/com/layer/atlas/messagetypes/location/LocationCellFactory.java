@@ -47,6 +47,7 @@ public class LocationCellFactory extends AtlasCellFactory<LocationCellFactory.Ce
     }
 
     public static boolean isType(Message message) {
+        if (message==null) return false;
         return message.getMessageParts().get(0).getMimeType().equals(MIME_TYPE);
     }
 

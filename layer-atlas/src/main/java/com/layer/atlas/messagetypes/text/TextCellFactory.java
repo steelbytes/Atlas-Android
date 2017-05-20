@@ -26,6 +26,7 @@ public class TextCellFactory extends AtlasCellFactory<TextCellFactory.CellHolder
     }
 
     public static boolean isType(Message message) {
+        if (message==null) return false;
         return message.getMessageParts().get(0).getMimeType().equals(MIME_TYPE);
     }
 
