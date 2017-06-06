@@ -83,7 +83,7 @@ dependencies {
     compile 'com.davemorrissey.labs:subsampling-scale-image-view:3.5.+' // until atlas is updated
 
 }
-
+/*
 def sdkPom() {
     pom {
         project {
@@ -220,3 +220,4 @@ afterEvaluate { project ->
         task publishReleaseToGitHub(dependsOn: [uploadReleaseNotes, uploadReleaseAar, uploadReleaseSources, uploadReleaseJavadoc])
     }
 }
+*/
