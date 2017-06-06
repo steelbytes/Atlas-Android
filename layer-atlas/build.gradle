@@ -61,12 +61,19 @@ dependencies {
 
     compile 'org.slf4j:slf4j-nop:1.7.+'
 
+    //noinspection GradleDynamicVersion
+    compile ('com.firebase:firebase-jobdispatcher-with-gcm-dep:0.6.+') { // used by layer 0.23.14
+        exclude group: 'com.google.android.gms'
+        exclude group: 'com.android.support'
+    }
+
     // Layer SDK
-    compile ('com.layer.sdk:layer-sdk:0.+') {
+    compile ('com.layer.sdk:layer-sdk:0.23.13') {
         exclude group: 'com.google.android.gms'
         exclude group: 'com.android.support'
         exclude group: 'com.google.firebase'
         exclude group: 'org.slf4j'
+        exclude group: 'com.firebase'
     }
     
     // Image cache and loading
