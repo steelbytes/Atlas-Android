@@ -18,6 +18,9 @@ android {
         targetSdkVersion 25
         versionName = "${version}"
     }
+    dexOptions {
+        preDexLibraries true
+    }
 
     lintOptions {
         abortOnError false
