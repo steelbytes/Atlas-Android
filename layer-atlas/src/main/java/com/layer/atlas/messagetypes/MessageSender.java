@@ -5,6 +5,7 @@ import android.content.Context;
 import com.layer.atlas.util.Log;
 import com.layer.sdk.LayerClient;
 import com.layer.sdk.messaging.Conversation;
+import com.layer.sdk.messaging.Identity;
 import com.layer.sdk.messaging.Message;
 
 /**
@@ -16,6 +17,8 @@ public abstract class MessageSender {
 
     private Context mContext;
     private LayerClient mLayerClient;
+
+    protected Identity me;
 
     public void init(Context context, LayerClient layerClient) {
         mContext = context;

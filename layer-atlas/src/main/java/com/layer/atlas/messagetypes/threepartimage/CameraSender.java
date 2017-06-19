@@ -36,12 +36,13 @@ public class CameraSender extends AttachmentSender {
 
     private final AtomicReference<String> mPhotoFilePath = new AtomicReference<String>(null);
 
-    public CameraSender(int titleResId, Integer iconResId, Activity activity) {
-        this(activity.getString(titleResId), iconResId, activity);
+    public CameraSender(Identity me, int titleResId, Integer iconResId, Activity activity) {
+        this(me, activity.getString(titleResId), iconResId, activity);
     }
 
-    public CameraSender(String title, Integer iconResId, Activity activity) {
+    public CameraSender(Identity me, String title, Integer iconResId, Activity activity) {
         super(title, iconResId);
+        this.me = me;
         mActivity = new WeakReference<Activity>(activity);
     }
 
@@ -73,7 +74,7 @@ public class CameraSender extends AttachmentSender {
         }
         if (Log.isLoggable(Log.VERBOSE)) Log.v("Received camera response");
         try {
-            Identity me = getLayerClient().getAuthenticatedUser();
+            //Identity me = getLayerClient().getAuthenticatedUser();
             String myName = me == null ? "" : Util.getDisplayName(me);
             Message message = ThreePartImageUtils.newThreePartImageMessage(activity, getLayerClient(), new File(mPhotoFilePath.get()));
 

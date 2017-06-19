@@ -13,11 +13,12 @@ import com.layer.sdk.messaging.PushNotificationPayload;
 public class TextSender extends MessageSender {
     private final int mMaxNotificationLength;
 
-    public TextSender() {
-        this(200);
+    public TextSender(Identity me) {
+        this(me, 200);
     }
 
-    public TextSender(int maxNotificationLength) {
+    public TextSender(Identity me, int maxNotificationLength) {
+        this.me = me;
         mMaxNotificationLength = maxNotificationLength;
     }
 
@@ -29,7 +30,7 @@ public class TextSender extends MessageSender {
         if (Log.isLoggable(Log.VERBOSE)) Log.v("Sending text message");
 
         // Create notification string
-        Identity me = getLayerClient().getAuthenticatedUser();
+        //Identity me = getLayerClient().getAuthenticatedUser();
         String myName = me == null ? "" : Util.getDisplayName(me);
         String notificationString = getContext().getString(R.string.atlas_notification_text, myName, (text.length() < mMaxNotificationLength) ? text : (text.substring(0, mMaxNotificationLength) + "…"));
 

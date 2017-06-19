@@ -50,12 +50,13 @@ public class LocationSender extends AttachmentSender {
 
     private WeakReference<Activity> mActivity = new WeakReference<Activity>(null);
 
-    public LocationSender(int titleResId, Integer iconResId, Activity activity) {
-        this(activity.getString(titleResId), iconResId, activity);
+    public LocationSender(Identity me, int titleResId, Integer iconResId, Activity activity) {
+        this(me, activity.getString(titleResId), iconResId, activity);
     }
 
-    public LocationSender(String title, Integer iconResId, Activity activity) {
+    public LocationSender(Identity me, String title, Integer iconResId, Activity activity) {
         super(title, iconResId);
+        this.me = me;
         mActivity = new WeakReference<Activity>(activity);
         init(activity);
     }
@@ -164,8 +165,8 @@ public class LocationSender extends AttachmentSender {
             Context context = sender.getContext();
             LayerClient client = sender.getLayerClient();
             try {
-                Identity me = client.getAuthenticatedUser();
-                String myName = me == null ? "" : Util.getDisplayName(me);
+                //Identity me = client.getAuthenticatedUser();
+                String myName = sender.me == null ? "" : Util.getDisplayName(sender.me);
                 JSONObject o = new JSONObject()
                         .put(LocationCellFactory.KEY_LATITUDE, location.getLatitude())
                         .put(LocationCellFactory.KEY_LONGITUDE, location.getLongitude())

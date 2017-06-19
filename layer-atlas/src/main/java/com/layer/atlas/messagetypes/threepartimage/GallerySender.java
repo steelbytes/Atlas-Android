@@ -33,12 +33,13 @@ public class GallerySender extends AttachmentSender {
 
     private WeakReference<Activity> mActivity = new WeakReference<Activity>(null);
 
-    public GallerySender(int titleResId, Integer iconResId, Activity activity) {
-        this(activity.getString(titleResId), iconResId, activity);
+    public GallerySender(Identity me, int titleResId, Integer iconResId, Activity activity) {
+        this(me, activity.getString(titleResId), iconResId, activity);
     }
 
-    public GallerySender(String title, Integer iconResId, Activity activity) {
+    public GallerySender(Identity me, String title, Integer iconResId, Activity activity) {
         super(title, iconResId);
+        this.me = me;
         mActivity = new WeakReference<Activity>(activity);
     }
 
@@ -81,7 +82,7 @@ public class GallerySender extends AttachmentSender {
         }
         if (Log.isLoggable(Log.VERBOSE)) Log.v("Received gallery response");
         try {
-            Identity me = getLayerClient().getAuthenticatedUser();
+            //Identity me = getLayerClient().getAuthenticatedUser();
             String myName = me == null ? "" : Util.getDisplayName(me);
             Message message = ThreePartImageUtils.newThreePartImageMessage(activity, getLayerClient(), data.getData());
 
