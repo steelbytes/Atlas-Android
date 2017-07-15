@@ -72,7 +72,7 @@ dependencies {
     }
 
     // Layer SDK
-    compile ('com.layer.sdk:layer-sdk:0.23.+') {
+    compile ('com.layer.sdk:layer-sdk:0.23.13') { // 23.13 was the last without telemetry which is way too broken
         exclude group: 'com.google.android.gms'
         exclude group: 'com.android.support'
         exclude group: 'com.google.firebase'
