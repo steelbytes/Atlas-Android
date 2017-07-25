@@ -11,7 +11,7 @@ group 'com.layer.atlas'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    buildToolsVersion "25.0.3"
 
     defaultConfig {
         minSdkVersion 14
@@ -66,7 +66,7 @@ dependencies {
     compile 'org.slf4j:slf4j-nop:1.7.+'
 
     //noinspection GradleDynamicVersion
-    compile ('com.firebase:firebase-jobdispatcher-with-gcm-dep:0.6.+') { // used by layer 0.23.14
+    compile ('com.firebase:firebase-jobdispatcher-with-gcm-dep:0.+') { // used by layer 0.23.14
         exclude group: 'com.google.android.gms'
         exclude group: 'com.android.support'
     }
