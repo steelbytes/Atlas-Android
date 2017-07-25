@@ -9,3 +9,4 @@ layer-atlas/src/main/bin
 layer-atlas/build
 *.apk
 *.iml
+.settings
