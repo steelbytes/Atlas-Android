@@ -16,9 +16,9 @@ allprojects {
         maven {
             url "https://maven.google.com"
         }
-        maven {
-            url "https://raw.githubusercontent.com/layerhq/releases-android/master/releases/"
-        }
+        //maven {
+        //    url "https://raw.githubusercontent.com/layerhq/releases-android/master/releases/"
+        //}
     }
     tasks.withType(Javadoc).all { enabled = false }
     tasks.withType(Test).all { enabled = false }
