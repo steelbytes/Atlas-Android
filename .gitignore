@@ -10,3 +10,5 @@ layer-atlas/build
 *.apk
 *.iml
 .settings
+.project
+.classpath
