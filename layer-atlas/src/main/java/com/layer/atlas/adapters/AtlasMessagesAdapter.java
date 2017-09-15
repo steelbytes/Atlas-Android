@@ -96,7 +96,7 @@ public class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessagesAdap
 
     private boolean mShowReadDeliveryField;
     private boolean mShowOtherParticipantsAvatar;
-    private AvatarClickCallback mAvatarClickCallback;
+    AvatarClickCallback mAvatarClickCallback;
 
     public interface AvatarClickCallback {
         void onClick(Message m);

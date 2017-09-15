@@ -38,7 +38,7 @@ import com.layer.sdk.query.SortDescriptor;
 import com.squareup.picasso.Picasso;
 
 public class AtlasMessagesRecyclerView extends RecyclerView {
-    private AtlasMessagesAdapter mAdapter;
+    AtlasMessagesAdapter mAdapter;
     private LinearLayoutManager mLayoutManager;
     private ItemTouchHelper mSwipeItemTouchHelper;
 
@@ -195,7 +195,7 @@ public class AtlasMessagesRecyclerView extends RecyclerView {
     /**
      * Scrolls if the user is at the end
      */
-    private void autoScroll() {
+    void autoScroll() {
         int end = mAdapter.getItemCount() - 1;
         if (end <= 0) return;
         int visible = findLastVisibleItemPosition();
