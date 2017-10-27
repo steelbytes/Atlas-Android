@@ -1,4 +1,4 @@
-import java.util.regex.Pattern
+//import java.util.regex.Pattern
 
 apply plugin: 'com.android.library'
 //apply plugin: 'maven'
@@ -12,6 +12,18 @@ group 'com.layer.atlas'
 repositories {
     maven { url "https://raw.githubusercontent.com/layerhq/releases-android/master/releases/" }
     //jcenter()
+}
+
+tasks.whenTaskAdded { task ->
+    if (task.name.equals("lint")) {
+        //this is for speed up build
+        task.enabled = false
+    }
+    if(task.name.contains("Test"))
+    {
+        //this is what you need
+        task.enabled = false
+    }
 }
 
 android {
