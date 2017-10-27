@@ -15,7 +15,7 @@ repositories {
 }
 
 tasks.whenTaskAdded { task ->
-    if (task.name.equals("lint")) {
+    if (task.name.contains("lint")) {
         //this is for speed up build
         task.enabled = false
     }
