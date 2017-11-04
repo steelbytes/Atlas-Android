@@ -15,13 +15,12 @@ repositories {
 }
 
 tasks.whenTaskAdded { task ->
-    if (task.name.contains("lint")) {
+    if (task.name.contains("lint")
+        || task.name.contains("Lint")
+        || task.name.contains("test")
+        || task.name.contains("Test")
+    ) {
         //this is for speed up build
-        task.enabled = false
-    }
-    if(task.name.contains("Test"))
-    {
-        //this is what you need
         task.enabled = false
     }
 }
