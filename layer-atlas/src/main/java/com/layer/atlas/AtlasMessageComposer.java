@@ -205,10 +205,17 @@ public class AtlasMessageComposer extends FrameLayout {
      * @return This AtlasMessageComposer.
      */
     public AtlasMessageComposer setTextSender(TextSender textSender) {
+        if (mTextSender!=null) {
+            mTextSender.setCallback(null);
+            mTextSender.setConversation(null);
+            mTextSender.init(null, null);
+        }
         mTextSender = textSender;
-        mTextSender.init(this.getContext().getApplicationContext(), mLayerClient);
-        mTextSender.setConversation(mConversation);
-        if (mMessageSenderCallback != null) mTextSender.setCallback(mMessageSenderCallback);
+        if (mTextSender!=null) {
+            mTextSender.init(this.getContext().getApplicationContext(), mLayerClient);
+            mTextSender.setConversation(mConversation);
+            mTextSender.setCallback(mMessageSenderCallback);
+        }
         return this;
     }
 
