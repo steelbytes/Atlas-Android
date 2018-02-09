@@ -11,7 +11,6 @@ group 'com.layer.atlas'
 
 repositories {
     maven { url "https://raw.githubusercontent.com/layerhq/releases-android/master/releases/" }
-    //jcenter()
 }
 
 tasks.whenTaskAdded { task ->
@@ -29,7 +28,7 @@ tasks.whenTaskAdded { task ->
 
 android {
     compileSdkVersion 27
-    buildToolsVersion "27.0.2"
+    buildToolsVersion "27.0.3"
 
     defaultConfig {
         minSdkVersion 14
@@ -63,8 +62,8 @@ dependencies {
     ext.firebaseVersion = ext.gmsVersion
 
     // Android UI
-    implementation "com.android.support:appcompat-v7:$supportVersion"
-    implementation "com.android.support:recyclerview-v7:$supportVersion"
+    //implementation "com.android.support:appcompat-v7:$supportVersion" // included in design
+    //implementation "com.android.support:recyclerview-v7:$supportVersion" // included in design
     implementation "com.android.support:design:$supportVersion"
 
     // Google Location
@@ -77,6 +76,7 @@ dependencies {
         exclude group: 'com.android.support'
     }
 
+    //noinspection GradleDynamicVersion
     implementation 'org.slf4j:slf4j-nop:1.7.+'
 
     //noinspection GradleDynamicVersion
@@ -85,6 +85,9 @@ dependencies {
         exclude group: 'com.android.support'
     }
 
+    //noinspection GradleDynamicVersion
+    implementation 'com.google.code.gson:gson:2.+' // used by aws and layer
+
     // Layer SDK
     implementation ('com.layer.sdk:layer-sdk:0.+') { // 23.13 was the last without telemetry which is way too broken
         exclude group: 'com.google.android.gms'
@@ -92,9 +95,11 @@ dependencies {
         exclude group: 'com.google.firebase'
         exclude group: 'org.slf4j'
         exclude group: 'com.firebase'
+        exclude group: 'com.google.code.gson'
     }
     
     // Image cache and loading
+    //noinspection GradleDynamicVersion
     implementation 'com.squareup.picasso:picasso:2.+'
 
     // Image popup
