@@ -43,7 +43,7 @@ public class BubbleTypingIndicatorFactory implements AtlasTypingIndicator.Typing
         l.setGravity(Gravity.CENTER);
         l.setOrientation(LinearLayout.HORIZONTAL);
         l.setLayoutParams(new AtlasTypingIndicator.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        l.setBackgroundDrawable(r.getDrawable(R.drawable.atlas_message_item_cell_them));
+        l.setBackgroundDrawable(r.getDrawable(R.drawable.atlas_typing_buble));
 
         ImageView v;
         LinearLayout.LayoutParams vp;

@@ -61,4 +61,8 @@
     <color name="atlas_delete_icon">@android:color/white</color>
 
     <color name="atlas_image_popup_background">@android:color/black</color>
+
+    <color name="atlas_dn_black">#ff000000</color>
+    <color name="atlas_dn_white">#ffffffff</color>
+
 </resources>
