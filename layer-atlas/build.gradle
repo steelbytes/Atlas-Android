@@ -20,6 +20,9 @@ tasks.whenTaskAdded { task ->
         || task.name.contains("Test")
         || task.name.contains("Renderscript")
         || task.name.contains("Ndk")
+        || task.name.contains("Jni")
+        || task.name.contains("NativeLibs")
+        || task.name.contains("Shaders")
     ) {
         //this is for speed up build
         task.enabled = false
