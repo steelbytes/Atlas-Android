@@ -29,15 +29,21 @@ public class MyEditText extends AppCompatMultiAutoCompleteTextView {
 
     @Override
     public boolean onTextContextMenuItem(int id) {
-        if (id == android.R.id.paste) {
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                id = android.R.id.pasteAsPlainText;
-            } else {
-                pastePlain();
-                return true;
+        try {
+            if (id == android.R.id.paste) {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    id = android.R.id.pasteAsPlainText;
+                } else {
+                    pastePlain();
+                    return true;
+                }
             }
+            return super.onTextContextMenuItem(id);
+        } catch (Exception e) {
+            if (BuildConfig.DEBUG)
+                e.printStackTrace();
+            return true;
         }
-        return super.onTextContextMenuItem(id);
     }
 
     /**
