@@ -3,17 +3,17 @@ package com.layer.atlas.messagetypes;
 import android.graphics.Typeface;
 import android.support.annotation.ColorInt;
 
-public class MessageStyle {
-    int mMyBubbleColor;
-    int mMyTextColor;
-    int mMyTextStyle;
-    float mMyTextSize;
+public final class MessageStyle {
+    final int mMyBubbleColor;
+    final int mMyTextColor;
+    final int mMyTextStyle;
+    final float mMyTextSize;
     Typeface mMyTextTypeface;
 
-    int mOtherBubbleColor;
-    int mOtherTextColor;
-    int mOtherTextStyle;
-    float mOtherTextSize;
+    final int mOtherBubbleColor;
+    final int mOtherTextColor;
+    final int mOtherTextStyle;
+    final float mOtherTextSize;
     Typeface mOtherTextTypeface;
 
     private MessageStyle(Builder builder) {

@@ -10,7 +10,7 @@ import com.layer.sdk.messaging.MessageOptions;
 import com.layer.sdk.messaging.MessagePart;
 import com.layer.sdk.messaging.PushNotificationPayload;
 
-public class TextSender extends MessageSender {
+public final class TextSender extends MessageSender {
     private final int mMaxNotificationLength;
 
     public TextSender(Identity me) {

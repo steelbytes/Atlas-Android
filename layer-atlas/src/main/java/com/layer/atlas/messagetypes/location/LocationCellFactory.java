@@ -143,8 +143,8 @@ public class LocationCellFactory extends AtlasCellFactory<LocationCellFactory.Ce
     }
 
     protected static class CellHolder extends AtlasCellFactory.CellHolder {
-        public ImageView mImageView;
-        ContentLoadingProgressBar mProgressBar;
+        public final ImageView mImageView;
+        final ContentLoadingProgressBar mProgressBar;
 
         public CellHolder(View view) {
             mImageView = (ImageView) view.findViewById(R.id.cell_image);

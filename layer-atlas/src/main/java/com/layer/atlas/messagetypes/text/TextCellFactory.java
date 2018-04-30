@@ -6,7 +6,6 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.textservice.TextInfo;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -89,7 +88,7 @@ public class TextCellFactory extends AtlasCellFactory<TextCellFactory.CellHolder
     }
 
     public static class CellHolder extends AtlasCellFactory.CellHolder {
-        public TextView mTextView;
+        public final TextView mTextView;
 
         public CellHolder(View view) {
             mTextView = (TextView) view.findViewById(R.id.cell_text);

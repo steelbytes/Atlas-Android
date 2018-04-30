@@ -2,7 +2,6 @@ package com.layer.atlas.util.picasso.requesthandlers;
 
 import android.net.Uri;
 
-import com.layer.atlas.util.Log;
 import com.layer.atlas.util.Util;
 import com.layer.sdk.LayerClient;
 import com.layer.sdk.messaging.MessagePart;
@@ -20,7 +19,7 @@ import static com.squareup.picasso.Picasso.LoadedFrom;
  * (e.g. MessagePart.isContentReady() is `false`), registers a LayerProgressListener, downloads
  * the part, and waits for completion.
  */
-public class MessagePartRequestHandler extends com.squareup.picasso.RequestHandler {
+public final class MessagePartRequestHandler extends com.squareup.picasso.RequestHandler {
     private final LayerClient mLayerClient;
 
     public MessagePartRequestHandler(LayerClient layerClient) {

@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 
 import com.layer.atlas.util.AvatarStyle;
 import com.layer.atlas.util.Util;
-import com.layer.atlas.util.picasso.transformations.CircleTransform;
 import com.layer.atlas.util.picasso.transformations.RoundedTransform;
 import com.layer.sdk.messaging.Identity;
 import com.squareup.picasso.Picasso;
@@ -32,7 +31,7 @@ import java.util.Queue;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
 
-public class AtlasAvatar extends View {
+public final class AtlasAvatar extends View {
     public static final String TAG = AtlasAvatar.class.getSimpleName();
 
     //private final static CircleTransform SINGLE_TRANSFORM = new CircleTransform(TAG + ".single");
@@ -77,8 +76,8 @@ public class AtlasAvatar extends View {
     private float mDeltaY;
     private float mTextSize;
 
-    private Rect mRect = new Rect();
-    private RectF mContentRect = new RectF();
+    private final Rect mRect = new Rect();
+    private final RectF mContentRect = new RectF();
 
     public AtlasAvatar(Context context) {
         super(context);
@@ -371,8 +370,8 @@ public class AtlasAvatar extends View {
     }
 
     private static class Diff {
-        public List<Identity> existing = new ArrayList<>();
-        public List<Identity> added = new ArrayList<>();
-        public List<Identity> removed = new ArrayList<>();
+        public final List<Identity> existing = new ArrayList<>();
+        public final List<Identity> added = new ArrayList<>();
+        public final List<Identity> removed = new ArrayList<>();
     }
 }

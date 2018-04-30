@@ -11,7 +11,7 @@ import android.text.Spannable;
 import android.text.Spanned;
 import android.util.AttributeSet;
 
-public class MyEditText extends AppCompatMultiAutoCompleteTextView {
+public final class MyEditText extends AppCompatMultiAutoCompleteTextView {
 
     // forces paste to be plain text
 

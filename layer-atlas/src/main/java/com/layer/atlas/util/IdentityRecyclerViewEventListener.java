@@ -19,7 +19,7 @@ import java.util.Set;
  * A {@link LayerChangeEventListener} that looks for changes to identities that are bound to
  * view holders in a {@link RecyclerView.Adapter}, and trigger updates in the adapter accordingly.
  */
-public class IdentityRecyclerViewEventListener implements LayerChangeEventListener.Weak {
+public final  class IdentityRecyclerViewEventListener implements LayerChangeEventListener.Weak {
     private final RecyclerView.Adapter mAdapter;
     private final Map<Uri, Set<Integer>> identityPositions = new HashMap<>();
 

@@ -13,7 +13,7 @@ import com.layer.atlas.adapters.AtlasBaseAdapter;
 import com.layer.sdk.query.Queryable;
 
 
-public class SwipeableItem extends FrameLayout {
+public final class SwipeableItem extends FrameLayout {
     private static final int[] STATES_SWIPING_ACTIVE = {R.attr.state_swiping};
 
     private boolean mSwipingActive = false;

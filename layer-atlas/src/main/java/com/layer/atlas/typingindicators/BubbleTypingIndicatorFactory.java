@@ -20,7 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-public class BubbleTypingIndicatorFactory implements AtlasTypingIndicator.TypingIndicatorFactory<LinearLayout> {
+public final class BubbleTypingIndicatorFactory implements AtlasTypingIndicator.TypingIndicatorFactory<LinearLayout> {
     private static final String TAG = BubbleTypingIndicatorFactory.class.getSimpleName();
 
     private static final int DOT_RES_ID = R.drawable.atlas_typing_indicator_dot;

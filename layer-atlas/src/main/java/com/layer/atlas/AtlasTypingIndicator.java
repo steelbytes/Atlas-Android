@@ -34,7 +34,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * maintains a set of typists for the given Conversation, providing callbacks when UI updates are
  * needed.  AtlasTypingIndicator can provide a default UI updater if desired.
  */
-public class AtlasTypingIndicator extends FrameLayout implements LayerTypingIndicatorListener.Weak {
+public final class AtlasTypingIndicator extends FrameLayout implements LayerTypingIndicatorListener.Weak {
     private final ConcurrentHashMap<Identity, TypingIndicator> mTypists = new ConcurrentHashMap<>();
 
     private volatile Conversation mConversation;

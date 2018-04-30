@@ -55,7 +55,7 @@ import com.layer.sdk.messaging.Conversation;
 
 import java.util.ArrayList;
 
-public class AtlasMessageComposer extends FrameLayout {
+public final class AtlasMessageComposer extends FrameLayout {
     private EditText mMessageEditText;
     Button mSendButton;
     private ImageView mAttachButton;
@@ -64,7 +64,7 @@ public class AtlasMessageComposer extends FrameLayout {
     Conversation mConversation;
 
     private TextSender mTextSender;
-    private ArrayList<AttachmentSender> mAttachmentSenders = new ArrayList<AttachmentSender>();
+    private final ArrayList<AttachmentSender> mAttachmentSenders = new ArrayList<AttachmentSender>();
     private MessageSender.Callback mMessageSenderCallback;
 
     PopupWindow mAttachmentMenu;

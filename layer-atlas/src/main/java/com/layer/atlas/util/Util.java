@@ -22,7 +22,6 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
-import com.layer.atlas.BuildConfig;
 import com.layer.atlas.R;
 import com.layer.atlas.messagetypes.generic.GenericCellFactory;
 import com.layer.atlas.messagetypes.location.LocationCellFactory;
@@ -48,19 +47,21 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class Util {
+public final class Util {
     private static final String METADATA_KEY_CONVERSATION_TITLE = "conversationName";
     private static final int TIME_HOURS_24 = 24 * 60 * 60 * 1000;
     private static final SimpleDateFormat DAY_OF_WEEK = new SimpleDateFormat("EEE, LLL dd,", Locale.US);
 
-    /**
-     * Returns the app version name.
-     *
-     * @return The app version name.
-     */
-    public static String getVersion() {
-        return BuildConfig.VERSION_NAME;
-    }
+// --Commented out by Inspection START (2018-04-30 7:50 PM):
+//    /**
+//     * Returns the app version name.
+//     *
+//     * @return The app version name.
+//     */
+//    public static String getVersion() {
+//        return BuildConfig.VERSION_NAME;
+//    }
+// --Commented out by Inspection STOP (2018-04-30 7:50 PM)
 
     public static void copyToClipboard(Context context, int stringResId, String content) {
         copyToClipboard(context, context.getString(stringResId), content);
@@ -89,20 +90,22 @@ public class Util {
         return GenericCellFactory.getPreview(context, message);
     }
 
-    public static String getConversationTitle(LayerClient client, Conversation conversation) {
-        String metadataTitle = getConversationMetadataTitle(conversation);
-        if (metadataTitle != null) return metadataTitle.trim();
-
-        StringBuilder sb = new StringBuilder();
-        Identity authenticatedUser = client.getAuthenticatedUser();
-        for (Identity participant : conversation.getParticipants()) {
-            if (participant.equals(authenticatedUser)) continue;
-            String initials = conversation.getParticipants().size() > 2 ? getInitials(participant) : Util.getDisplayName(participant);
-            if (sb.length() > 0) sb.append(", ");
-            sb.append(initials);
-        }
-        return sb.toString().trim();
-    }
+// --Commented out by Inspection START (2018-04-30 7:57 PM):
+//    public static String getConversationTitle(LayerClient client, Conversation conversation) {
+//        String metadataTitle = getConversationMetadataTitle(conversation);
+//        if (metadataTitle != null) return metadataTitle.trim();
+//
+//        StringBuilder sb = new StringBuilder();
+//        Identity authenticatedUser = client.getAuthenticatedUser();
+//        for (Identity participant : conversation.getParticipants()) {
+//            if (participant.equals(authenticatedUser)) continue;
+//            String initials = conversation.getParticipants().size() > 2 ? getInitials(participant) : Util.getDisplayName(participant);
+//            if (sb.length() > 0) sb.append(", ");
+//            sb.append(initials);
+//        }
+//        return sb.toString().trim();
+//    }
+// --Commented out by Inspection STOP (2018-04-30 7:57 PM)
 
     public static String getConversationMetadataTitle(Conversation conversation) {
         String metadataTitle = (String) conversation.getMetadata().get(METADATA_KEY_CONVERSATION_TITLE);
@@ -110,13 +113,15 @@ public class Util {
         return null;
     }
 
-    public static void setConversationMetadataTitle(Conversation conversation, String title) {
-        if (title == null || title.trim().isEmpty()) {
-            conversation.removeMetadataAtKeyPath(METADATA_KEY_CONVERSATION_TITLE);
-        } else {
-            conversation.putMetadataAtKeyPath(METADATA_KEY_CONVERSATION_TITLE, title.trim());
-        }
-    }
+// --Commented out by Inspection START (2018-04-30 7:57 PM):
+//    public static void setConversationMetadataTitle(Conversation conversation, String title) {
+//        if (title == null || title.trim().isEmpty()) {
+//            conversation.removeMetadataAtKeyPath(METADATA_KEY_CONVERSATION_TITLE);
+//        } else {
+//            conversation.putMetadataAtKeyPath(METADATA_KEY_CONVERSATION_TITLE, title.trim());
+//        }
+//    }
+// --Commented out by Inspection STOP (2018-04-30 7:57 PM)
 
     public static String getInitials(Identity user) {
         String first = user.getFirstName();
@@ -170,28 +175,30 @@ public class Util {
         return identity.getDisplayName();
     }
 
-    public static String formatTime(Context context, Date date, DateFormat timeFormat, DateFormat dateFormat) {
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.HOUR_OF_DAY, 0);
-        cal.set(Calendar.MINUTE, 0);
-        cal.set(Calendar.SECOND, 0);
-        long todayMidnight = cal.getTimeInMillis();
-        long yesterMidnight = todayMidnight - TIME_HOURS_24;
-        long weekAgoMidnight = todayMidnight - TIME_HOURS_24 * 7;
-
-        String timeText;
-        if (date.getTime() > todayMidnight) {
-            timeText = timeFormat.format(date.getTime());
-        } else if (date.getTime() > yesterMidnight) {
-            timeText = context.getString(R.string.atlas_time_yesterday);
-        } else if (date.getTime() > weekAgoMidnight) {
-            cal.setTime(date);
-            timeText = context.getResources().getStringArray(R.array.atlas_time_days_of_week)[cal.get(Calendar.DAY_OF_WEEK) - 1];
-        } else {
-            timeText = dateFormat.format(date);
-        }
-        return timeText;
-    }
+// --Commented out by Inspection START (2018-04-30 7:57 PM):
+//    public static String formatTime(Context context, Date date, DateFormat timeFormat, DateFormat dateFormat) {
+//        Calendar cal = Calendar.getInstance();
+//        cal.set(Calendar.HOUR_OF_DAY, 0);
+//        cal.set(Calendar.MINUTE, 0);
+//        cal.set(Calendar.SECOND, 0);
+//        long todayMidnight = cal.getTimeInMillis();
+//        long yesterMidnight = todayMidnight - TIME_HOURS_24;
+//        long weekAgoMidnight = todayMidnight - TIME_HOURS_24 * 7;
+//
+//        String timeText;
+//        if (date.getTime() > todayMidnight) {
+//            timeText = timeFormat.format(date.getTime());
+//        } else if (date.getTime() > yesterMidnight) {
+//            timeText = context.getString(R.string.atlas_time_yesterday);
+//        } else if (date.getTime() > weekAgoMidnight) {
+//            cal.setTime(date);
+//            timeText = context.getResources().getStringArray(R.array.atlas_time_days_of_week)[cal.get(Calendar.DAY_OF_WEEK) - 1];
+//        } else {
+//            timeText = dateFormat.format(date);
+//        }
+//        return timeText;
+//    }
+// --Commented out by Inspection STOP (2018-04-30 7:57 PM)
 
     /**
      * Returns Today, Yesterday, the day of the week within one week, or a date if greater.
@@ -304,49 +311,51 @@ public class Util {
         return part.isContentReady();
     }
 
-    /**
-     * Asynchronously deauthenticates with Layer.
-     *
-     * @param layerClient LayerClient to deauthenticate.
-     * @param callback    Callback to report deauthentication success and failure.
-     */
-    public static void deauthenticate(LayerClient layerClient, final DeauthenticationCallback callback) {
-        final AtomicBoolean alerted = new AtomicBoolean(false);
-        final LayerAuthenticationListener listener = new LayerAuthenticationListener.BackgroundThread() {
-            @Override
-            public void onAuthenticated(LayerClient layerClient, String s) {
-
-            }
-
-            @Override
-            public void onDeauthenticated(LayerClient layerClient) {
-                if (alerted.compareAndSet(false, true)) {
-                    callback.onDeauthenticationSuccess(layerClient);
-                }
-            }
-
-            @Override
-            public void onAuthenticationChallenge(LayerClient layerClient, String s) {
-
-            }
-
-            @Override
-            public void onAuthenticationError(LayerClient layerClient, LayerException e) {
-                if (alerted.compareAndSet(false, true)) {
-                    callback.onDeauthenticationFailed(layerClient, e.getMessage());
-                }
-            }
-        };
-        layerClient.registerAuthenticationListener(listener);
-        if (!layerClient.isAuthenticated()) {
-            layerClient.unregisterAuthenticationListener(listener);
-            if (alerted.compareAndSet(false, true)) {
-                callback.onDeauthenticationSuccess(layerClient);
-            }
-            return;
-        }
-        layerClient.deauthenticate();
-    }
+// --Commented out by Inspection START (2018-04-30 7:57 PM):
+//    /**
+//     * Asynchronously deauthenticates with Layer.
+//     *
+//     * @param layerClient LayerClient to deauthenticate.
+//     * @param callback    Callback to report deauthentication success and failure.
+//     */
+//    public static void deauthenticate(LayerClient layerClient, final DeauthenticationCallback callback) {
+//        final AtomicBoolean alerted = new AtomicBoolean(false);
+//        final LayerAuthenticationListener listener = new LayerAuthenticationListener.BackgroundThread() {
+//            @Override
+//            public void onAuthenticated(LayerClient layerClient, String s) {
+//
+//            }
+//
+//            @Override
+//            public void onDeauthenticated(LayerClient layerClient) {
+//                if (alerted.compareAndSet(false, true)) {
+//                    callback.onDeauthenticationSuccess(layerClient);
+//                }
+//            }
+//
+//            @Override
+//            public void onAuthenticationChallenge(LayerClient layerClient, String s) {
+//
+//            }
+//
+//            @Override
+//            public void onAuthenticationError(LayerClient layerClient, LayerException e) {
+//                if (alerted.compareAndSet(false, true)) {
+//                    callback.onDeauthenticationFailed(layerClient, e.getMessage());
+//                }
+//            }
+//        };
+//        layerClient.registerAuthenticationListener(listener);
+//        if (!layerClient.isAuthenticated()) {
+//            layerClient.unregisterAuthenticationListener(listener);
+//            if (alerted.compareAndSet(false, true)) {
+//                callback.onDeauthenticationSuccess(layerClient);
+//            }
+//            return;
+//        }
+//        layerClient.deauthenticate();
+//    }
+// --Commented out by Inspection STOP (2018-04-30 7:57 PM)
 
     public interface ContentAvailableCallback {
         void onContentAvailable(LayerClient client, Queryable object);

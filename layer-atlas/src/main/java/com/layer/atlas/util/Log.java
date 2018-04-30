@@ -4,7 +4,7 @@ package com.layer.atlas.util;
  * Unified Log class used by Atlas classes that maintains similar signatures to `android.util.Log`.
  * Logs are tagged with `Atlas`.
  */
-public class Log {
+public final class Log {
     public static final String TAG = "LayerAtlas";
 
     // Makes IDE auto-completion easy

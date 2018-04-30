@@ -26,7 +26,7 @@ import static android.support.v4.content.ContextCompat.checkSelfPermission;
  * Requires `Manifest.permission.READ_EXTERNAL_STORAGE` to read photos from external storage.
  */
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-public class GallerySender extends AttachmentSender {
+public final class GallerySender extends AttachmentSender {
     private static final String PERMISSION = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) ? Manifest.permission.READ_EXTERNAL_STORAGE : null;
     public static final int ACTIVITY_REQUEST_CODE = 10;
     public static final int PERMISSION_REQUEST_CODE = 11;

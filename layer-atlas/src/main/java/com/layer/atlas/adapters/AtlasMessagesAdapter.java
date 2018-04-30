@@ -60,7 +60,7 @@ import java.util.Set;
  *
  * @see AtlasCellFactory
  */
-public class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessagesAdapter.ViewHolder> implements AtlasBaseAdapter<Message>, RecyclerViewController.Callback {
+public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessagesAdapter.ViewHolder> implements AtlasBaseAdapter<Message>, RecyclerViewController.Callback {
     private final static int VIEW_TYPE_FOOTER = 0;
 
     protected final LayerClient mLayerClient;
@@ -629,7 +629,7 @@ public class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessagesAdap
         public final static int RESOURCE_ID_FOOTER = R.layout.atlas_message_item_footer;
 
         // View cache
-        protected ViewGroup mRoot;
+        protected final ViewGroup mRoot;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -645,14 +645,14 @@ public class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessagesAdap
         protected Message mMessage;
 
         // View cache
-        protected TextView mUserName;
-        protected View mTimeGroup;
-        protected TextView mTimeGroupDay;
-        protected TextView mTimeGroupTime;
-        protected Space mClusterSpaceGap;
-        protected AtlasAvatar mAvatar;
-        protected ViewGroup mCell;
-        protected TextView mReceipt;
+        protected final TextView mUserName;
+        protected final View mTimeGroup;
+        protected final TextView mTimeGroupDay;
+        protected final TextView mTimeGroupTime;
+        protected final Space mClusterSpaceGap;
+        protected final AtlasAvatar mAvatar;
+        protected final ViewGroup mCell;
+        protected final TextView mReceipt;
 
         // Cell
         protected AtlasCellFactory.CellHolder mCellHolder;
@@ -718,8 +718,8 @@ public class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessagesAdap
     }
 
     private static class MessagePosition {
-        public Message mMessage;
-        public int mPosition;
+        public final Message mMessage;
+        public final int mPosition;
 
         public MessagePosition(Message message, int position) {
             mMessage = message;

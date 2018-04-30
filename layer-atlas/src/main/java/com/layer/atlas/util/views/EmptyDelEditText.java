@@ -8,7 +8,7 @@ import android.view.inputmethod.InputConnection;
 import android.view.inputmethod.InputConnectionWrapper;
 import android.widget.EditText;
 
-public class EmptyDelEditText extends EditText {
+public final class EmptyDelEditText extends EditText {
     OnEmptyDelListener mListener;
 
     public EmptyDelEditText(Context context) {

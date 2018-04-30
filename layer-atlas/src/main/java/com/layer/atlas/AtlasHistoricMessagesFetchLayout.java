@@ -11,7 +11,7 @@ import com.layer.sdk.changes.LayerChangeEvent;
 import com.layer.sdk.listeners.LayerChangeEventListener;
 import com.layer.sdk.messaging.Conversation;
 
-public class AtlasHistoricMessagesFetchLayout extends SwipeRefreshLayout implements LayerChangeEventListener.BackgroundThread.Weak {
+public final class AtlasHistoricMessagesFetchLayout extends SwipeRefreshLayout implements LayerChangeEventListener.BackgroundThread.Weak {
     private LayerClient mLayerClient;
     Conversation mConversation;
     int mSyncAmount = 25;

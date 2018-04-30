@@ -29,7 +29,7 @@ import java.util.concurrent.atomic.AtomicReference;
  * be granted. See http://developer.android.com/reference/android/provider/MediaStore.html#ACTION_IMAGE_CAPTURE
  * for details.
  */
-public class CameraSender extends AttachmentSender {
+public final class CameraSender extends AttachmentSender {
     public static final int ACTIVITY_REQUEST_CODE = 20;
 
     private WeakReference<Activity> mActivity = new WeakReference<Activity>(null);

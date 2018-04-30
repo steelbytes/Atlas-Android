@@ -4,9 +4,9 @@ import android.graphics.Typeface;
 
 public final class AvatarStyle {
 
-    private int mAvatarBackgroundColor;
-    private int mAvatarBorderColor;
-    private int mAvatarTextColor;
+    private final int mAvatarBackgroundColor;
+    private final int mAvatarBorderColor;
+    private final int mAvatarTextColor;
     private Typeface mAvatarTextTypeface;
 
     private AvatarStyle(Builder builder) {

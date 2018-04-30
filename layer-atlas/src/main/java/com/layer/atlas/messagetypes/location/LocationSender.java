@@ -41,7 +41,7 @@ import static android.support.v4.content.ContextCompat.checkSelfPermission;
  * Google Play Services.  Requires `Manifest.permission.ACCESS_FINE_LOCATION` for getting device
  * location.
  */
-public class LocationSender extends AttachmentSender {
+public final class LocationSender extends AttachmentSender {
     private static final String PERMISSION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final int ACTIVITY_REQUEST_CODE = 30;
     public static final int PERMISSION_REQUEST_CODE = 31;
@@ -61,7 +61,7 @@ public class LocationSender extends AttachmentSender {
         init(activity);
     }
 
-    private void init(final Activity activity) {
+    private static void init(final Activity activity) {
         // If the client has already been created, ensure connected and return.
         if (sGoogleApiClient != null) {
             if (!sGoogleApiClient.isConnected()) sGoogleApiClient.connect();

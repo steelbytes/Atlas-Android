@@ -20,7 +20,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Locale;
 
-public class ThreePartImageUtils {
+public final class ThreePartImageUtils {
     public static final int ORIENTATION_0 = 0;
     public static final int ORIENTATION_180 = 1;
     public static final int ORIENTATION_90 = 2;
