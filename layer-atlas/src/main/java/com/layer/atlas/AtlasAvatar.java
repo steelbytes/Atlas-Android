@@ -12,7 +12,6 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.layer.atlas.util.AvatarStyle;
 import com.layer.atlas.util.Util;
 import com.layer.atlas.util.picasso.transformations.RoundedTransform;
 import com.layer.sdk.messaging.Identity;
@@ -32,7 +31,7 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
 
 public final class AtlasAvatar extends View {
-    public static final String TAG = AtlasAvatar.class.getSimpleName();
+    protected static final String TAG = AtlasAvatar.class.getSimpleName();
 
     //private final static CircleTransform SINGLE_TRANSFORM = new CircleTransform(TAG + ".single");
     //private final static CircleTransform MULTI_TRANSFORM = new CircleTransform(TAG + ".multi");
@@ -305,17 +304,17 @@ public final class AtlasAvatar extends View {
         private String mUrl;
         private Bitmap mBitmap;
 
-        public ImageTarget(AtlasAvatar cluster) {
+        ImageTarget(AtlasAvatar cluster) {
             mId = sCounter.incrementAndGet();
             mCluster = cluster;
         }
 
-        public ImageTarget setUrl(String url) {
+        ImageTarget setUrl(String url) {
             mUrl = url;
             return this;
         }
 
-        public String getUrl() {
+        final String getUrl() {
             return mUrl;
         }
 
@@ -336,7 +335,7 @@ public final class AtlasAvatar extends View {
             mBitmap = null;
         }
 
-        public Bitmap getBitmap() {
+        final Bitmap getBitmap() {
             return mBitmap;
         }
 
@@ -372,8 +371,8 @@ public final class AtlasAvatar extends View {
     }
 
     private static class Diff {
-        public final List<Identity> existing = new ArrayList<>();
-        public final List<Identity> added = new ArrayList<>();
+        final List<Identity> existing = new ArrayList<>();
+        final List<Identity> added = new ArrayList<>();
         final List<Identity> removed = new ArrayList<>();
     }
 }

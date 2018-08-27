@@ -18,7 +18,6 @@ package com.layer.atlas.util;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.text.TextUtils;
 
@@ -30,11 +29,9 @@ import com.layer.atlas.messagetypes.text.TextCellFactory;
 import com.layer.atlas.messagetypes.threepartimage.ThreePartImageCellFactory;
 import com.layer.sdk.LayerClient;
 import com.layer.sdk.listeners.LayerProgressListener;
-import com.layer.sdk.messaging.Conversation;
 import com.layer.sdk.messaging.Identity;
 import com.layer.sdk.messaging.Message;
 import com.layer.sdk.messaging.MessagePart;
-import com.layer.sdk.query.Queryable;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -44,7 +41,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
 public final class Util {
-    private static final String METADATA_KEY_CONVERSATION_TITLE = "conversationName";
+    //private static final String METADATA_KEY_CONVERSATION_TITLE = "conversationName";
     private static final int TIME_HOURS_24 = 24 * 60 * 60 * 1000;
     private static final SimpleDateFormat DAY_OF_WEEK = new SimpleDateFormat("EEE, LLL dd,", Locale.US);
 
@@ -63,7 +60,7 @@ public final class Util {
         copyToClipboard(context, context.getString(stringResId), content);
     }
 
-    public static void copyToClipboard(Context context, String description, String content) {
+    protected static void copyToClipboard(Context context, String description, String content) {
         ClipboardManager manager = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clipData = new ClipData(description, new String[]{"text/plain"}, new ClipData.Item(content));
         manager.setPrimaryClip(clipData);
@@ -103,11 +100,13 @@ public final class Util {
 //    }
 // --Commented out by Inspection STOP (2018-04-30 7:57 PM)
 
+    /*
     public static String getConversationMetadataTitle(Conversation conversation) {
         String metadataTitle = (String) conversation.getMetadata().get(METADATA_KEY_CONVERSATION_TITLE);
         if (metadataTitle != null && !metadataTitle.trim().isEmpty()) return metadataTitle.trim();
         return null;
     }
+    */
 
 // --Commented out by Inspection START (2018-04-30 7:57 PM):
 //    public static void setConversationMetadataTitle(Conversation conversation, String title) {
@@ -366,9 +365,11 @@ public final class Util {
 // --Commented out by Inspection STOP (2018-08-27 1:07 PM)
 
 
+    /*
     public interface DeauthenticationCallback {
         void onDeauthenticationSuccess(LayerClient client);
 
         void onDeauthenticationFailed(LayerClient client, String reason);
     }
+    */
 }

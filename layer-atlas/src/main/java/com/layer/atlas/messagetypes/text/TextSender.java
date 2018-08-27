@@ -17,7 +17,7 @@ public final class TextSender extends MessageSender {
         this(me, 200);
     }
 
-    public TextSender(Identity me, int maxNotificationLength) {
+    protected TextSender(Identity me, int maxNotificationLength) {
         this.me = me;
         mMaxNotificationLength = maxNotificationLength;
     }

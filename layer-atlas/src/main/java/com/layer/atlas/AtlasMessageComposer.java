@@ -57,17 +57,17 @@ import java.util.ArrayList;
 
 public final class AtlasMessageComposer extends FrameLayout {
     private EditText mMessageEditText;
-    Button mSendButton;
+    protected Button mSendButton;
     private ImageView mAttachButton;
 
     private LayerClient mLayerClient;
-    Conversation mConversation;
+    protected Conversation mConversation;
 
     private TextSender mTextSender;
     private final ArrayList<AttachmentSender> mAttachmentSenders = new ArrayList<>();
     private MessageSender.Callback mMessageSenderCallback;
 
-    PopupWindow mAttachmentMenu;
+    protected PopupWindow mAttachmentMenu;
 
     // styles
     private boolean mEnabled;
@@ -162,7 +162,7 @@ public final class AtlasMessageComposer extends FrameLayout {
         return this;
     }
 
-    void doSend() {
+    protected final void doSend() {
         try {
             if (!mTextSender.requestSend(mMessageEditText.getText().toString())) return;
             mMessageEditText.setText("");

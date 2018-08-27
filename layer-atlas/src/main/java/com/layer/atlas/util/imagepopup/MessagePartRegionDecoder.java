@@ -16,7 +16,7 @@ import com.layer.sdk.messaging.MessagePart;
 
 import java.util.concurrent.TimeUnit;
 
-public final class MessagePartRegionDecoder implements ImageRegionDecoder {
+final class MessagePartRegionDecoder implements ImageRegionDecoder {
     private final Object mLock = new Object();
     private BitmapRegionDecoder mDecoder;
     private static LayerClient sLayerClient;

@@ -13,7 +13,7 @@ import com.layer.sdk.messaging.MessagePart;
 
 import java.util.concurrent.TimeUnit;
 
-public final class MessagePartDecoder implements ImageDecoder {
+final class MessagePartDecoder implements ImageDecoder {
     private static LayerClient sLayerClient;
 
     public static void init(LayerClient layerClient) {

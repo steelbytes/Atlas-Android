@@ -38,7 +38,7 @@ import com.layer.sdk.query.SortDescriptor;
 import com.squareup.picasso.Picasso;
 
 public final class AtlasMessagesRecyclerView extends RecyclerView {
-    AtlasMessagesAdapter mAdapter;
+    protected AtlasMessagesAdapter mAdapter;
     private LinearLayoutManager mLayoutManager;
     private ItemTouchHelper mSwipeItemTouchHelper;
 
@@ -113,7 +113,7 @@ public final class AtlasMessagesRecyclerView extends RecyclerView {
         refresh();
     }
 
-    public AtlasMessagesRecyclerView refresh() {
+    protected AtlasMessagesRecyclerView refresh() {
         if (mAdapter != null) mAdapter.refresh();
         return this;
     }
@@ -197,7 +197,7 @@ public final class AtlasMessagesRecyclerView extends RecyclerView {
     /**
      * Scrolls if the user is at the end
      */
-    void autoScroll() {
+    protected final void autoScroll() {
         int end = mAdapter.getItemCount() - 1;
         if (end <= 0) return;
         int visible = findLastVisibleItemPosition();
@@ -205,7 +205,7 @@ public final class AtlasMessagesRecyclerView extends RecyclerView {
         if (visible >= (end - 3)) scrollToPosition(end);
     }
 
-    public void parseStyle(Context context, AttributeSet attrs, int defStyle) {
+    protected final void parseStyle(Context context, AttributeSet attrs, int defStyle) {
         TypedArray ta = context.getTheme().obtainStyledAttributes(attrs, R.styleable.AtlasMessagesRecyclerView, R.attr.AtlasMessagesRecyclerView, defStyle);
         MessageStyle.Builder messageStyleBuilder = new MessageStyle.Builder();
         messageStyleBuilder.myTextColor(ta.getColor(R.styleable.AtlasMessagesRecyclerView_myTextColor, context.getResources().getColor(R.color.atlas_text_black)));

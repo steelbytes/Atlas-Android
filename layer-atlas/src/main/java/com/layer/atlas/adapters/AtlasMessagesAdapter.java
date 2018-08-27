@@ -74,14 +74,13 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
 
     // Cells
     protected int mViewTypeCount = VIEW_TYPE_FOOTER;
-    protected final Set<AtlasCellFactory> mCellFactories = new LinkedHashSet<AtlasCellFactory>();
-    protected final Map<Integer, CellType> mCellTypesByViewType = new HashMap<Integer, CellType>();
-    protected final Map<AtlasCellFactory, Integer> mMyViewTypesByCell = new HashMap<AtlasCellFactory, Integer>();
-    protected final Map<AtlasCellFactory, Integer> mTheirViewTypesByCell = new HashMap<AtlasCellFactory, Integer>();
+    protected final Set<AtlasCellFactory> mCellFactories = new LinkedHashSet<>();
+    protected final Map<Integer, CellType> mCellTypesByViewType = new HashMap<>();
+    protected final Map<AtlasCellFactory, Integer> mMyViewTypesByCell = new HashMap<>();
+    protected final Map<AtlasCellFactory, Integer> mTheirViewTypesByCell = new HashMap<>();
 
     // Dates and Clustering
-    private final Map<Uri, Cluster> mClusterCache = new HashMap<Uri, Cluster>();
-    private final DateFormat mDateFormat;
+    private final Map<Uri, Cluster> mClusterCache = new HashMap<>();
     private final DateFormat mTimeFormat;
 
     private View mFooterView;
@@ -96,7 +95,7 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
 
     private boolean mShowReadDeliveryField;
     private boolean mShowOtherParticipantsAvatar;
-    AvatarClickCallback mAvatarClickCallback;
+    protected AvatarClickCallback mAvatarClickCallback;
 
     public interface AvatarClickCallback {
         void onClick(Message m);
@@ -107,7 +106,7 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
         mPicasso = picasso;
         mLayoutInflater = LayoutInflater.from(context);
         mUiThreadHandler = new Handler(Looper.getMainLooper());
-        mDateFormat = android.text.format.DateFormat.getDateFormat(context);
+        DateFormat mDateFormat = android.text.format.DateFormat.getDateFormat(context);
         mTimeFormat = android.text.format.DateFormat.getTimeFormat(context);
         mDisplayMetrics = context.getResources().getDisplayMetrics();
 
@@ -291,7 +290,7 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
         }
     }
 
-    public void bindFooter(ViewHolder viewHolder) {
+    protected final void bindFooter(ViewHolder viewHolder) {
         viewHolder.mRoot.removeAllViews();
         if (mFooterView.getParent() != null) {
             ((ViewGroup) mFooterView.getParent()).removeView(mFooterView);
@@ -299,7 +298,7 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
         viewHolder.mRoot.addView(mFooterView);
     }
 
-    public void bindCellViewHolder(CellViewHolder viewHolder, int position) {
+    protected final void bindCellViewHolder(CellViewHolder viewHolder, int position) {
         Message message = getItem(position);
         if (message==null) return;
         viewHolder.mMessage = message;
@@ -626,49 +625,49 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
     //==============================================================================================
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-        public final static int RESOURCE_ID_FOOTER = R.layout.atlas_message_item_footer;
+        final static int RESOURCE_ID_FOOTER = R.layout.atlas_message_item_footer;
 
         // View cache
-        protected final ViewGroup mRoot;
+        final ViewGroup mRoot;
 
-        public ViewHolder(View itemView) {
+        ViewHolder(View itemView) {
             super(itemView);
-            mRoot = (ViewGroup) itemView.findViewById(R.id.swipeable);
+            mRoot = itemView.findViewById(R.id.swipeable);
         }
     }
 
-    public final static int RESOURCE_ID_ME = R.layout.atlas_message_item_me;
-    public final static int RESOURCE_ID_THEM = R.layout.atlas_message_item_them;
+    protected final static int RESOURCE_ID_ME = R.layout.atlas_message_item_me;
+    protected final static int RESOURCE_ID_THEM = R.layout.atlas_message_item_them;
 
-    class CellViewHolder extends ViewHolder  implements View.OnClickListener {
+    final class CellViewHolder extends ViewHolder  implements View.OnClickListener {
 
-        protected Message mMessage;
+        Message mMessage;
 
         // View cache
-        protected final TextView mUserName;
-        protected final View mTimeGroup;
-        protected final TextView mTimeGroupDay;
-        protected final TextView mTimeGroupTime;
-        protected final Space mClusterSpaceGap;
-        protected final AtlasAvatar mAvatar;
-        protected final ViewGroup mCell;
-        protected final TextView mReceipt;
+        final TextView mUserName;
+        final View mTimeGroup;
+        final TextView mTimeGroupDay;
+        final TextView mTimeGroupTime;
+        final Space mClusterSpaceGap;
+        final AtlasAvatar mAvatar;
+        final ViewGroup mCell;
+        final TextView mReceipt;
 
         // Cell
-        protected AtlasCellFactory.CellHolder mCellHolder;
-        protected AtlasCellFactory.CellHolderSpecs mCellHolderSpecs;
+        AtlasCellFactory.CellHolder mCellHolder;
+        AtlasCellFactory.CellHolderSpecs mCellHolderSpecs;
 
-        public CellViewHolder(View itemView, Picasso picasso) {
+        CellViewHolder(View itemView, Picasso picasso) {
             super(itemView);
-            mUserName = (TextView) itemView.findViewById(R.id.sender);
+            mUserName = itemView.findViewById(R.id.sender);
             mTimeGroup = itemView.findViewById(R.id.time_group);
-            mTimeGroupDay = (TextView) itemView.findViewById(R.id.time_group_day);
-            mTimeGroupTime = (TextView) itemView.findViewById(R.id.time_group_time);
-            mClusterSpaceGap = (Space) itemView.findViewById(R.id.cluster_space);
-            mCell = (ViewGroup) itemView.findViewById(R.id.cell);
-            mReceipt = (TextView) itemView.findViewById(R.id.receipt);
+            mTimeGroupDay = itemView.findViewById(R.id.time_group_day);
+            mTimeGroupTime = itemView.findViewById(R.id.time_group_time);
+            mClusterSpaceGap = itemView.findViewById(R.id.cluster_space);
+            mCell = itemView.findViewById(R.id.cell);
+            mReceipt = itemView.findViewById(R.id.receipt);
 
-            mAvatar = ((AtlasAvatar) itemView.findViewById(R.id.avatar));
+            mAvatar = itemView.findViewById(R.id.avatar);
             if (mAvatar != null) {
                 mAvatar.init(picasso);
                 mAvatar.setOnClickListener(this);
@@ -694,7 +693,7 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
         private static final long MILLIS_MINUTE = 60 * 1000;
         private static final long MILLIS_HOUR = 60 * MILLIS_MINUTE;
 
-        public static ClusterType fromMessages(Message older, Message newer) {
+        static ClusterType fromMessages(Message older, Message newer) {
             // Different users?
             if (!older.getSender().equals(newer.getSender())) return NEW_SENDER;
 
@@ -710,16 +709,16 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
     }
 
     private static class Cluster {
-        public boolean mDateBoundaryWithPrevious;
-        public ClusterType mClusterWithPrevious;
+        boolean mDateBoundaryWithPrevious;
+        ClusterType mClusterWithPrevious;
 
-        public boolean mDateBoundaryWithNext;
-        public ClusterType mClusterWithNext;
+        boolean mDateBoundaryWithNext;
+        ClusterType mClusterWithNext;
     }
 
     private static class MessagePosition {
-        public final Message mMessage;
-        public final int mPosition;
+        final Message mMessage;
+        final int mPosition;
 
         public MessagePosition(Message message, int position) {
             mMessage = message;
@@ -728,10 +727,10 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
     }
 
     private static class CellType {
-        protected final boolean mMe;
-        protected final AtlasCellFactory mCellFactory;
+        final boolean mMe;
+        final AtlasCellFactory mCellFactory;
 
-        public CellType(boolean me, AtlasCellFactory CellFactory) {
+        CellType(boolean me, AtlasCellFactory CellFactory) {
             mMe = me;
             mCellFactory = CellFactory;
         }

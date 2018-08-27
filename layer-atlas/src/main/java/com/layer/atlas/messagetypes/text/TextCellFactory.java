@@ -18,7 +18,7 @@ import com.layer.sdk.messaging.Message;
 import com.layer.sdk.messaging.MessagePart;
 
 public class TextCellFactory extends AtlasCellFactory<TextCellFactory.CellHolder, TextCellFactory.TextInfo> implements View.OnLongClickListener {
-    public final static String MIME_TYPE = "text/plain";
+    protected final static String MIME_TYPE = "text/plain";
 
     public TextCellFactory() {
         super(256 * 1024);
@@ -90,7 +90,7 @@ public class TextCellFactory extends AtlasCellFactory<TextCellFactory.CellHolder
     public static class CellHolder extends AtlasCellFactory.CellHolder {
         public final TextView mTextView;
 
-        public CellHolder(View view) {
+        CellHolder(View view) {
             mTextView = view.findViewById(R.id.cell_text);
         }
     }
@@ -100,7 +100,7 @@ public class TextCellFactory extends AtlasCellFactory<TextCellFactory.CellHolder
         private final String mClipboardPrefix;
         private final int mSize;
 
-        public TextInfo(String string, String clipboardPrefix) {
+        TextInfo(String string, String clipboardPrefix) {
             mString = string;
             mClipboardPrefix = clipboardPrefix;
             mSize = mString.getBytes().length + mClipboardPrefix.getBytes().length;
@@ -110,7 +110,7 @@ public class TextCellFactory extends AtlasCellFactory<TextCellFactory.CellHolder
             return mString;
         }
 
-        public String getClipboardPrefix() {
+        String getClipboardPrefix() {
             return mClipboardPrefix;
         }
 

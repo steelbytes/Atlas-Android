@@ -23,7 +23,7 @@ public abstract class AtlasCellFactory<Tholder extends AtlasCellFactory.CellHold
      *
      * @param cacheBytes Maximum bytes of parsed content to maintain in an LRU cache.
      */
-    public AtlasCellFactory(int cacheBytes) {
+    protected AtlasCellFactory(int cacheBytes) {
         mCache = new LruCache<String, Tcache>(cacheBytes) {
             @Override
             protected int sizeOf(String key, Tcache value) {

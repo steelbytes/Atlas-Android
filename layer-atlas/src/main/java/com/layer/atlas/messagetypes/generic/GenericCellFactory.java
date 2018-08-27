@@ -72,7 +72,7 @@ public class GenericCellFactory extends AtlasCellFactory<GenericCellFactory.Cell
     public final class CellHolder extends AtlasCellFactory.CellHolder {
         public final TextView mTextView;
 
-        public CellHolder(View view) {
+        CellHolder(View view) {
             mTextView = view.findViewById(R.id.cell_text);
         }
     }
@@ -81,7 +81,7 @@ public class GenericCellFactory extends AtlasCellFactory<GenericCellFactory.Cell
         private final String mString;
         private final int mSize;
 
-        public ParsedContent(String string) {
+        ParsedContent(String string) {
             mString = string;
             mSize = mString.getBytes().length;
         }

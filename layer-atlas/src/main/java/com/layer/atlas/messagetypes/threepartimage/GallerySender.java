@@ -28,8 +28,8 @@ import static android.support.v4.content.ContextCompat.checkSelfPermission;
 @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
 public final class GallerySender extends AttachmentSender {
     private static final String PERMISSION = (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) ? Manifest.permission.READ_EXTERNAL_STORAGE : null;
-    public static final int ACTIVITY_REQUEST_CODE = 10;
-    public static final int PERMISSION_REQUEST_CODE = 11;
+    protected static final int ACTIVITY_REQUEST_CODE = 10;
+    protected static final int PERMISSION_REQUEST_CODE = 11;
 
     private WeakReference<Activity> mActivity = new WeakReference<>(null);
 
@@ -37,7 +37,7 @@ public final class GallerySender extends AttachmentSender {
         this(me, activity.getString(titleResId), iconResId, activity);
     }
 
-    public GallerySender(Identity me, String title, Integer iconResId, Activity activity) {
+    protected GallerySender(Identity me, String title, Integer iconResId, Activity activity) {
         super(title, iconResId);
         this.me = me;
         mActivity = new WeakReference<>(activity);

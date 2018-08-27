@@ -186,7 +186,7 @@ public class ThreePartImageCellFactory extends AtlasCellFactory<ThreePartImageCe
         return context.getString(R.string.atlas_message_preview_image);
     }
 
-    public static Info getInfo(Message message) {
+    protected static Info getInfo(Message message) {
         try {
             Info info = new Info();
             JSONObject infoObject = new JSONObject(new String(ThreePartImageUtils.getInfoPart(message).getData()));
@@ -213,8 +213,8 @@ public class ThreePartImageCellFactory extends AtlasCellFactory<ThreePartImageCe
         public int orientation;
         public int width;
         public int height;
-        public Uri fullPartId;
-        public Uri previewPartId;
+        Uri fullPartId;
+        Uri previewPartId;
 
         @Override
         public int sizeOf() {
@@ -253,7 +253,7 @@ public class ThreePartImageCellFactory extends AtlasCellFactory<ThreePartImageCe
         public final ImageView mImageView;
         final ContentLoadingProgressBar mProgressBar;
 
-        public CellHolder(View view) {
+        CellHolder(View view) {
             mImageView = view.findViewById(R.id.cell_image);
             mProgressBar = view.findViewById(R.id.cell_progress);
         }

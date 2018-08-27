@@ -13,7 +13,7 @@ public abstract class AttachmentSender extends MessageSender {
     private final String mTitle;
     private final Integer mIcon;
 
-    public AttachmentSender(String title, Integer icon) {
+    protected AttachmentSender(String title, Integer icon) {
         mTitle = title;
         mIcon = icon;
     }

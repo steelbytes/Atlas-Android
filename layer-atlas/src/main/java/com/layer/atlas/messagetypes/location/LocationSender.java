@@ -44,20 +44,22 @@ import static android.support.v4.content.ContextCompat.checkSelfPermission;
 public final class LocationSender extends AttachmentSender {
     private static final String PERMISSION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final int ACTIVITY_REQUEST_CODE = 30;
-    public static final int PERMISSION_REQUEST_CODE = 31;
+    protected static final int PERMISSION_REQUEST_CODE = 31;
 
     private static GoogleApiClient sGoogleApiClient;
 
-    private WeakReference<Activity> mActivity = new WeakReference<Activity>(null);
+    private WeakReference<Activity> mActivity = new WeakReference<>(null);
 
+    /*
     public LocationSender(Identity me, int titleResId, Integer iconResId, Activity activity) {
         this(me, activity.getString(titleResId), iconResId, activity);
     }
+    */
 
-    public LocationSender(Identity me, String title, Integer iconResId, Activity activity) {
+    protected LocationSender(Identity me, String title, Integer iconResId, Activity activity) {
         super(title, iconResId);
         this.me = me;
-        mActivity = new WeakReference<Activity>(activity);
+        mActivity = new WeakReference<>(activity);
         init(activity);
     }
 
@@ -153,8 +155,8 @@ public final class LocationSender extends AttachmentSender {
     private static class SenderLocationListener implements LocationListener {
         private final WeakReference<LocationSender> mLocationSenderReference;
 
-        public SenderLocationListener(LocationSender locationsender) {
-            mLocationSenderReference = new WeakReference<LocationSender>(locationsender);
+        SenderLocationListener(LocationSender locationsender) {
+            mLocationSenderReference = new WeakReference<>(locationsender);
         }
 
         @Override

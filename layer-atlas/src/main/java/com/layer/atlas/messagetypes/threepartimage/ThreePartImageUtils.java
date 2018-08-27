@@ -33,9 +33,9 @@ public final class ThreePartImageUtils {
     public static final int PART_INDEX_PREVIEW = 1;
     public static final int PART_INDEX_INFO = 2;
 
-    public static final int PREVIEW_COMPRESSION_QUALITY = 75;
-    public static final int PREVIEW_MAX_WIDTH = 512;
-    public static final int PREVIEW_MAX_HEIGHT = 512;
+    protected static final int PREVIEW_COMPRESSION_QUALITY = 75;
+    protected static final int PREVIEW_MAX_WIDTH = 512;
+    protected static final int PREVIEW_MAX_HEIGHT = 512;
 
     public static MessagePart getInfoPart(Message message) {
         return message.getMessageParts().get(PART_INDEX_INFO);

@@ -139,16 +139,16 @@ public class SinglePartImageCellFactory extends AtlasCellFactory<SinglePartImage
         public final ImageView mImageView;
         final ContentLoadingProgressBar mProgressBar;
 
-        public CellHolder(View view) {
+        CellHolder(View view) {
             mImageView = view.findViewById(R.id.cell_image);
             mProgressBar = view.findViewById(R.id.cell_progress);
         }
     }
 
     public static class PartId implements AtlasCellFactory.ParsedContent {
-        public final Uri mId;
+        final Uri mId;
 
-        public PartId(Uri id) {
+        PartId(Uri id) {
             mId = id;
         }
 
