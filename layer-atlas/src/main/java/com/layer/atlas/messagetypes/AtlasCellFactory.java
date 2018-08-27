@@ -64,7 +64,7 @@ public abstract class AtlasCellFactory<Tholder extends AtlasCellFactory.CellHold
      * @param message             Message to parse
      * @return Cacheable parsed object generated from the given Message
      */
-    public abstract Tcache parseContent(LayerClient layerClient, Message message);
+    protected abstract Tcache parseContent(LayerClient layerClient, Message message);
 
     /**
      * Renders a Message by applying data to the provided CellHolder.  The CellHolder was previously
@@ -124,9 +124,11 @@ public abstract class AtlasCellFactory<Tholder extends AtlasCellFactory.CellHold
             return this;
         }
 
-        public Message getMessage() {
-            return mMessage;
-        }
+// --Commented out by Inspection START (2018-08-27 1:09 PM):
+//        public Message getMessage() {
+//            return mMessage;
+//        }
+// --Commented out by Inspection STOP (2018-08-27 1:09 PM)
     }
 
     /**

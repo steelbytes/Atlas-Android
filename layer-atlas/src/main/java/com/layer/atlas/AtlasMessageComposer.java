@@ -64,7 +64,7 @@ public final class AtlasMessageComposer extends FrameLayout {
     Conversation mConversation;
 
     private TextSender mTextSender;
-    private final ArrayList<AttachmentSender> mAttachmentSenders = new ArrayList<AttachmentSender>();
+    private final ArrayList<AttachmentSender> mAttachmentSenders = new ArrayList<>();
     private MessageSender.Callback mMessageSenderCallback;
 
     PopupWindow mAttachmentMenu;
@@ -104,7 +104,7 @@ public final class AtlasMessageComposer extends FrameLayout {
 
         mLayerClient = layerClient;
 
-        mAttachButton = (ImageView) findViewById(R.id.attachment);
+        mAttachButton = findViewById(R.id.attachment);
         mAttachButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 LinearLayout menu = (LinearLayout) mAttachmentMenu.getContentView();
@@ -113,7 +113,7 @@ public final class AtlasMessageComposer extends FrameLayout {
             }
         });
 
-        mMessageEditText = (EditText) findViewById(R.id.message_edit_text);
+        mMessageEditText = findViewById(R.id.message_edit_text);
         mMessageEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -152,7 +152,7 @@ public final class AtlasMessageComposer extends FrameLayout {
             }
         });
 
-        mSendButton = (Button) findViewById(R.id.send_button);
+        mSendButton = findViewById(R.id.send_button);
         mSendButton.setOnClickListener(new OnClickListener() {
             public void onClick(View v) {
                 doSend();
@@ -280,19 +280,21 @@ public final class AtlasMessageComposer extends FrameLayout {
         return this;
     }
 
-    /**
-     * Must be called from Activity's onRequestPermissionsResult to allow attachment senders to
-     * manage dynamic permisttions.
-     *
-     * @param requestCode  The request code passed in requestPermissions(android.app.Activity, String[], int)
-     * @param permissions  The requested permissions. Never null.
-     * @param grantResults The grant results for the corresponding permissions which is either PERMISSION_GRANTED or PERMISSION_DENIED. Never null.
-     */
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        for (AttachmentSender sender : mAttachmentSenders) {
-            sender.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        }
-    }
+// --Commented out by Inspection START (2018-08-27 1:09 PM):
+//    /**
+//     * Must be called from Activity's onRequestPermissionsResult to allow attachment senders to
+//     * manage dynamic permisttions.
+//     *
+//     * @param requestCode  The request code passed in requestPermissions(android.app.Activity, String[], int)
+//     * @param permissions  The requested permissions. Never null.
+//     * @param grantResults The grant results for the corresponding permissions which is either PERMISSION_GRANTED or PERMISSION_DENIED. Never null.
+//     */
+//    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+//        for (AttachmentSender sender : mAttachmentSenders) {
+//            sender.onRequestPermissionsResult(requestCode, permissions, grantResults);
+//        }
+//    }
+// --Commented out by Inspection STOP (2018-08-27 1:09 PM)
 
     @Override
     public void setEnabled(boolean enabled) {
@@ -354,7 +356,7 @@ public final class AtlasMessageComposer extends FrameLayout {
             }
         });
         if (sender.getIcon() != null) {
-            ImageView iconView = ((ImageView) menuItem.findViewById(R.id.icon));
+            ImageView iconView = menuItem.findViewById(R.id.icon);
             iconView.setImageResource(sender.getIcon());
             iconView.setVisibility(VISIBLE);
             Drawable d = DrawableCompat.wrap(iconView.getDrawable());
@@ -414,7 +416,7 @@ public final class AtlasMessageComposer extends FrameLayout {
     private static class SavedState extends BaseSavedState {
         Bundle mBundle = new Bundle();
 
-        public SavedState(Parcelable superState) {
+        SavedState(Parcelable superState) {
             super(superState);
         }
 

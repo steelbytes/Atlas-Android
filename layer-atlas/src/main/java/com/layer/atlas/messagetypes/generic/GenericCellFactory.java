@@ -45,7 +45,7 @@ public class GenericCellFactory extends AtlasCellFactory<GenericCellFactory.Cell
         View v = layoutInflater.inflate(R.layout.atlas_message_item_cell_text, cellView, true);
         v.setBackgroundResource(isMe ? R.drawable.atlas_message_item_cell_me : R.drawable.atlas_message_item_cell_them);
 
-        TextView t = (TextView) v.findViewById(R.id.cell_text);
+        TextView t = v.findViewById(R.id.cell_text);
         t.setTextColor(context.getResources().getColor(isMe ? R.color.atlas_text_white : R.color.atlas_text_black));
         return new CellHolder(v);
     }
@@ -69,11 +69,11 @@ public class GenericCellFactory extends AtlasCellFactory<GenericCellFactory.Cell
         cellHolder.mTextView.setText(string.toString());
     }
 
-    public class CellHolder extends AtlasCellFactory.CellHolder {
+    public final class CellHolder extends AtlasCellFactory.CellHolder {
         public final TextView mTextView;
 
         public CellHolder(View view) {
-            mTextView = (TextView) view.findViewById(R.id.cell_text);
+            mTextView = view.findViewById(R.id.cell_text);
         }
     }
 
@@ -86,9 +86,11 @@ public class GenericCellFactory extends AtlasCellFactory<GenericCellFactory.Cell
             mSize = mString.getBytes().length;
         }
 
-        public String getString() {
-            return mString;
-        }
+// --Commented out by Inspection START (2018-08-27 1:08 PM):
+//        public String getString() {
+//            return mString;
+//        }
+// --Commented out by Inspection STOP (2018-08-27 1:08 PM)
 
         @Override
         public int sizeOf() {

@@ -147,8 +147,8 @@ public class LocationCellFactory extends AtlasCellFactory<LocationCellFactory.Ce
         final ContentLoadingProgressBar mProgressBar;
 
         public CellHolder(View view) {
-            mImageView = (ImageView) view.findViewById(R.id.cell_image);
-            mProgressBar = (ContentLoadingProgressBar) view.findViewById(R.id.cell_progress);
+            mImageView = view.findViewById(R.id.cell_image);
+            mProgressBar = view.findViewById(R.id.cell_progress);
         }
     }
 }

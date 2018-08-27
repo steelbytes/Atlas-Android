@@ -107,16 +107,18 @@ public final class AtlasTypingIndicator extends FrameLayout implements LayerTypi
         return this;
     }
 
-    /**
-     * Clears the current list of typists and calls refresh().
-     *
-     * @return This AtlasTypingIndicator for chaining.
-     */
-    public AtlasTypingIndicator clear() {
-        mTypists.clear();
-        refresh();
-        return this;
-    }
+// --Commented out by Inspection START (2018-08-27 1:09 PM):
+//    /**
+//     * Clears the current list of typists and calls refresh().
+//     *
+//     * @return This AtlasTypingIndicator for chaining.
+//     */
+//    public AtlasTypingIndicator clear() {
+//        mTypists.clear();
+//        refresh();
+//        return this;
+//    }
+// --Commented out by Inspection STOP (2018-08-27 1:09 PM)
 
     /**
      * Calls Callback.onBindView() with the current list of typists.

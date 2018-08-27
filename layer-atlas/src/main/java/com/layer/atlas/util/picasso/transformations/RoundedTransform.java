@@ -10,7 +10,7 @@ import android.graphics.RectF;
 import com.squareup.picasso.Transformation;
 
 public final class RoundedTransform implements Transformation {
-    private float mCornerRadius = 0;
+    private float mCornerRadius;
     private final Paint mPaint;
     private final PorterDuffXfermode mShapeXferMode;
     private final PorterDuffXfermode mBitmapXferMode;

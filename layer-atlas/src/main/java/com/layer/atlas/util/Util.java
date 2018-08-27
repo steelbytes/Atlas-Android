@@ -29,8 +29,6 @@ import com.layer.atlas.messagetypes.singlepartimage.SinglePartImageCellFactory;
 import com.layer.atlas.messagetypes.text.TextCellFactory;
 import com.layer.atlas.messagetypes.threepartimage.ThreePartImageCellFactory;
 import com.layer.sdk.LayerClient;
-import com.layer.sdk.exceptions.LayerException;
-import com.layer.sdk.listeners.LayerAuthenticationListener;
 import com.layer.sdk.listeners.LayerProgressListener;
 import com.layer.sdk.messaging.Conversation;
 import com.layer.sdk.messaging.Identity;
@@ -38,14 +36,12 @@ import com.layer.sdk.messaging.Message;
 import com.layer.sdk.messaging.MessagePart;
 import com.layer.sdk.query.Queryable;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 public final class Util {
     private static final String METADATA_KEY_CONVERSATION_TITLE = "conversationName";
@@ -357,11 +353,17 @@ public final class Util {
 //    }
 // --Commented out by Inspection STOP (2018-04-30 7:57 PM)
 
-    public interface ContentAvailableCallback {
-        void onContentAvailable(LayerClient client, Queryable object);
-
-        void onContentFailed(LayerClient client, Uri objectId, String reason);
-    }
+// --Commented out by Inspection START (2018-08-27 1:07 PM):
+//// --Commented out by Inspection START (2018-08-27 1:07 PM):
+// --Commented out by Inspection START (2018-08-27 1:07 PM):
+//////    public interface ContentAvailableCallback {
+//////        void onContentAvailable(LayerClient client, Queryable object);
+// --Commented out by Inspection STOP (2018-08-27 1:07 PM)
+// --Commented out by Inspection STOP (2018-08-27 1:07 PM)
+//
+//        void onContentFailed(LayerClient client, Uri objectId, String reason);
+//    }
+// --Commented out by Inspection STOP (2018-08-27 1:07 PM)
 
 
     public interface DeauthenticationCallback {

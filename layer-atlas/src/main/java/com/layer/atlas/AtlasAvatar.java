@@ -65,7 +65,7 @@ public final class AtlasAvatar extends View {
     // Initials and Picasso image targets by user ID
     private final Map<Identity, ImageTarget> mImageTargets = new HashMap<>();
     private final Map<Identity, String> mInitials = new HashMap<>();
-    private final List<ImageTarget> mPendingLoads = new ArrayList<ImageTarget>();
+    private final List<ImageTarget> mPendingLoads = new ArrayList<>();
 
     // Sizing set in setClusterSizes() and used in onDraw()
     private float mOuterRadius;
@@ -106,13 +106,15 @@ public final class AtlasAvatar extends View {
         return this;
     }
 
-    public AtlasAvatar setStyle(AvatarStyle avatarStyle) {
-        mPaintBackground.setColor(avatarStyle.getAvatarBackgroundColor());
-        mPaintBorder.setColor(avatarStyle.getAvatarBorderColor());
-        mPaintInitials.setColor(avatarStyle.getAvatarTextColor());
-        mPaintInitials.setTypeface(avatarStyle.getAvatarTextTypeface());
-        return this;
-    }
+// --Commented out by Inspection START (2018-08-27 1:09 PM):
+//    public AtlasAvatar setStyle(AvatarStyle avatarStyle) {
+//        mPaintBackground.setColor(avatarStyle.getAvatarBackgroundColor());
+//        mPaintBorder.setColor(avatarStyle.getAvatarBorderColor());
+//        mPaintInitials.setColor(avatarStyle.getAvatarTextColor());
+//        mPaintInitials.setTypeface(avatarStyle.getAvatarTextTypeface());
+//        return this;
+//    }
+// --Commented out by Inspection STOP (2018-08-27 1:09 PM)
 
     public AtlasAvatar setParticipants(Identity... participants) {
         mParticipants.clear();
@@ -163,7 +165,7 @@ public final class AtlasAvatar extends View {
         Diff diff = diff(mInitials.keySet(), mParticipants);
         List<ImageTarget> toLoad = new ArrayList<>();
 
-        List<ImageTarget> recyclableTargets = new ArrayList<ImageTarget>();
+        List<ImageTarget> recyclableTargets = new ArrayList<>();
         for (Identity removed : diff.removed) {
             mInitials.remove(removed);
             ImageTarget target = mImageTargets.remove(removed);
@@ -372,6 +374,6 @@ public final class AtlasAvatar extends View {
     private static class Diff {
         public final List<Identity> existing = new ArrayList<>();
         public final List<Identity> added = new ArrayList<>();
-        public final List<Identity> removed = new ArrayList<>();
+        final List<Identity> removed = new ArrayList<>();
     }
 }

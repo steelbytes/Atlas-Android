@@ -33,8 +33,8 @@ public final class AtlasImagePopupActivity extends Activity implements LayerProg
 
         getWindow().setBackgroundDrawableResource(R.color.atlas_image_popup_background);
         setContentView(R.layout.atlas_image_popup);
-        mImageView = (SubsamplingScaleImageView) findViewById(R.id.image_popup);
-        mProgressBar = (ContentLoadingProgressBar) findViewById(R.id.image_popup_progress);
+        mImageView = findViewById(R.id.image_popup);
+        mProgressBar = findViewById(R.id.image_popup_progress);
 
         mImageView.setPanEnabled(true);
         mImageView.setZoomEnabled(true);

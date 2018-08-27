@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.Map;
 
 public final class BubbleTypingIndicatorFactory implements AtlasTypingIndicator.TypingIndicatorFactory<LinearLayout> {
-    private static final String TAG = BubbleTypingIndicatorFactory.class.getSimpleName();
+    // --Commented out by Inspection (2018-08-27 1:09 PM):private static final String TAG = BubbleTypingIndicatorFactory.class.getSimpleName();
 
     private static final int DOT_RES_ID = R.drawable.atlas_typing_indicator_dot;
     private static final float DOT_ON_ALPHA = 0.31f;
@@ -48,7 +48,7 @@ public final class BubbleTypingIndicatorFactory implements AtlasTypingIndicator.
         ImageView v;
         LinearLayout.LayoutParams vp;
 
-        List<View> dots = new ArrayList<View>(3);
+        List<View> dots = new ArrayList<>(3);
 
         v = new ImageView(context);
         vp = new LinearLayout.LayoutParams(dotSize, dotSize);

@@ -53,7 +53,7 @@ public class ThreePartImageCellFactory extends AtlasCellFactory<ThreePartImageCe
 
     public ThreePartImageCellFactory(Activity activity, LayerClient layerClient, Picasso picasso) {
         super(256 * 1024);
-        mActivity = new WeakReference<Activity>(activity);
+        mActivity = new WeakReference<>(activity);
         mLayerClient = layerClient;
         mPicasso = picasso;
         float radius = activity.getResources().getDimension(com.layer.atlas.R.dimen.atlas_message_item_cell_radius);
@@ -254,8 +254,8 @@ public class ThreePartImageCellFactory extends AtlasCellFactory<ThreePartImageCe
         final ContentLoadingProgressBar mProgressBar;
 
         public CellHolder(View view) {
-            mImageView = (ImageView) view.findViewById(R.id.cell_image);
-            mProgressBar = (ContentLoadingProgressBar) view.findViewById(R.id.cell_progress);
+            mImageView = view.findViewById(R.id.cell_image);
+            mProgressBar = view.findViewById(R.id.cell_progress);
         }
     }
 }

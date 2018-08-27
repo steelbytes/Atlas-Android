@@ -183,14 +183,16 @@ public final class AtlasMessagesRecyclerView extends RecyclerView {
         return this;
     }
 
-    /**
-     * Convenience pass-through to this list's AtlasMessagesAdapter.
-     *
-     * @see AtlasMessagesAdapter#getFooterView()
-     */
-    public View getFooterView() {
-        return mAdapter.getFooterView();
-    }
+// --Commented out by Inspection START (2018-08-27 1:09 PM):
+//    /**
+//     * Convenience pass-through to this list's AtlasMessagesAdapter.
+//     *
+//     * @see AtlasMessagesAdapter#getFooterView()
+//     */
+//    public View getFooterView() {
+//        return mAdapter.getFooterView();
+//    }
+// --Commented out by Inspection STOP (2018-08-27 1:09 PM)
 
     /**
      * Scrolls if the user is at the end
