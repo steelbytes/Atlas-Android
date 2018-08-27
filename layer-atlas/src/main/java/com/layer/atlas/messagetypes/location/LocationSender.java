@@ -44,11 +44,11 @@ import static android.support.v4.content.ContextCompat.checkSelfPermission;
 public final class LocationSender extends AttachmentSender {
     private static final String PERMISSION = Manifest.permission.ACCESS_FINE_LOCATION;
     private static final int ACTIVITY_REQUEST_CODE = 30;
-    protected static final int PERMISSION_REQUEST_CODE = 31;
+    static final int PERMISSION_REQUEST_CODE = 31;
 
     private static GoogleApiClient sGoogleApiClient;
 
-    private WeakReference<Activity> mActivity = new WeakReference<>(null);
+    private WeakReference<Activity> mActivity;
 
     /*
     public LocationSender(Identity me, int titleResId, Integer iconResId, Activity activity) {

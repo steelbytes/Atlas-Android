@@ -41,7 +41,7 @@ public final class SwipeableItem extends FrameLayout {
         }
     }
 
-    protected SwipeableItem setSwipingActive(boolean swipingActive) {
+    SwipeableItem setSwipingActive(boolean swipingActive) {
         if (mSwipingActive == swipingActive) return this;
         mSwipingActive = swipingActive;
         refreshDrawableState();

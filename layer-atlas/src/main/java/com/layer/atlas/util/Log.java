@@ -5,7 +5,7 @@ package com.layer.atlas.util;
  * Logs are tagged with `Atlas`.
  */
 public final class Log {
-    protected static final String TAG = "LayerAtlas";
+    static final String TAG = "LayerAtlas";
 
     // Makes IDE auto-completion easy
     public static final int VERBOSE = android.util.Log.VERBOSE;

@@ -60,7 +60,7 @@ public final class Util {
         copyToClipboard(context, context.getString(stringResId), content);
     }
 
-    protected static void copyToClipboard(Context context, String description, String content) {
+    static void copyToClipboard(Context context, String description, String content) {
         ClipboardManager manager = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
         ClipData clipData = new ClipData(description, new String[]{"text/plain"}, new ClipData.Item(content));
         manager.setPrimaryClip(clipData);

@@ -63,21 +63,21 @@ import java.util.Set;
 public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessagesAdapter.ViewHolder> implements AtlasBaseAdapter<Message>, RecyclerViewController.Callback {
     private final static int VIEW_TYPE_FOOTER = 0;
 
-    protected final LayerClient mLayerClient;
-    protected final Picasso mPicasso;
+    final LayerClient mLayerClient;
+    final Picasso mPicasso;
     private final RecyclerViewController<Message> mQueryController;
-    protected final LayoutInflater mLayoutInflater;
-    protected final Handler mUiThreadHandler;
-    protected OnMessageAppendListener mAppendListener;
-    protected final DisplayMetrics mDisplayMetrics;
+    final LayoutInflater mLayoutInflater;
+    final Handler mUiThreadHandler;
+    OnMessageAppendListener mAppendListener;
+    final DisplayMetrics mDisplayMetrics;
     private final IdentityRecyclerViewEventListener mIdentityEventListener;
 
     // Cells
-    protected int mViewTypeCount = VIEW_TYPE_FOOTER;
-    protected final Set<AtlasCellFactory> mCellFactories = new LinkedHashSet<>();
-    protected final Map<Integer, CellType> mCellTypesByViewType = new HashMap<>();
-    protected final Map<AtlasCellFactory, Integer> mMyViewTypesByCell = new HashMap<>();
-    protected final Map<AtlasCellFactory, Integer> mTheirViewTypesByCell = new HashMap<>();
+    int mViewTypeCount = VIEW_TYPE_FOOTER;
+    final Set<AtlasCellFactory> mCellFactories = new LinkedHashSet<>();
+    final Map<Integer, CellType> mCellTypesByViewType = new HashMap<>();
+    final Map<AtlasCellFactory, Integer> mMyViewTypesByCell = new HashMap<>();
+    final Map<AtlasCellFactory, Integer> mTheirViewTypesByCell = new HashMap<>();
 
     // Dates and Clustering
     private final Map<Uri, Cluster> mClusterCache = new HashMap<>();
@@ -95,7 +95,7 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
 
     private boolean mShowReadDeliveryField;
     private boolean mShowOtherParticipantsAvatar;
-    protected AvatarClickCallback mAvatarClickCallback;
+    AvatarClickCallback mAvatarClickCallback;
 
     public interface AvatarClickCallback {
         void onClick(Message m);
@@ -290,7 +290,7 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
         }
     }
 
-    protected final void bindFooter(ViewHolder viewHolder) {
+    final void bindFooter(ViewHolder viewHolder) {
         viewHolder.mRoot.removeAllViews();
         if (mFooterView.getParent() != null) {
             ((ViewGroup) mFooterView.getParent()).removeView(mFooterView);
@@ -298,7 +298,7 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
         viewHolder.mRoot.addView(mFooterView);
     }
 
-    protected final void bindCellViewHolder(CellViewHolder viewHolder, int position) {
+    final void bindCellViewHolder(CellViewHolder viewHolder, int position) {
         Message message = getItem(position);
         if (message==null) return;
         viewHolder.mMessage = message;
@@ -636,8 +636,8 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
         }
     }
 
-    protected final static int RESOURCE_ID_ME = R.layout.atlas_message_item_me;
-    protected final static int RESOURCE_ID_THEM = R.layout.atlas_message_item_them;
+    final static int RESOURCE_ID_ME = R.layout.atlas_message_item_me;
+    final static int RESOURCE_ID_THEM = R.layout.atlas_message_item_them;
 
     final class CellViewHolder extends ViewHolder  implements View.OnClickListener {
 

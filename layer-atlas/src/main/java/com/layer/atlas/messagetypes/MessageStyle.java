@@ -4,17 +4,17 @@ import android.graphics.Typeface;
 import android.support.annotation.ColorInt;
 
 public final class MessageStyle {
-    protected final int mMyBubbleColor;
-    protected final int mMyTextColor;
-    protected final int mMyTextStyle;
-    protected final float mMyTextSize;
-    protected Typeface mMyTextTypeface;
+    final int mMyBubbleColor;
+    final int mMyTextColor;
+    final int mMyTextStyle;
+    final float mMyTextSize;
+    Typeface mMyTextTypeface;
 
-    protected final int mOtherBubbleColor;
-    protected final int mOtherTextColor;
-    protected final int mOtherTextStyle;
-    protected final float mOtherTextSize;
-    protected Typeface mOtherTextTypeface;
+    final int mOtherBubbleColor;
+    final int mOtherTextColor;
+    final int mOtherTextStyle;
+    final float mOtherTextSize;
+    Typeface mOtherTextTypeface;
 
     private MessageStyle(Builder builder) {
         mMyBubbleColor = builder.myBubbleColor;

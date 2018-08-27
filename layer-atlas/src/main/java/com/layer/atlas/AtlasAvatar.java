@@ -31,7 +31,7 @@ import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
 
 public final class AtlasAvatar extends View {
-    protected static final String TAG = AtlasAvatar.class.getSimpleName();
+    static final String TAG = AtlasAvatar.class.getSimpleName();
 
     //private final static CircleTransform SINGLE_TRANSFORM = new CircleTransform(TAG + ".single");
     //private final static CircleTransform MULTI_TRANSFORM = new CircleTransform(TAG + ".multi");

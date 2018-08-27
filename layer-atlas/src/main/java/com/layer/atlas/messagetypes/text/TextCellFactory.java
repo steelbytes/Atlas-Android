@@ -18,7 +18,7 @@ import com.layer.sdk.messaging.Message;
 import com.layer.sdk.messaging.MessagePart;
 
 public class TextCellFactory extends AtlasCellFactory<TextCellFactory.CellHolder, TextCellFactory.TextInfo> implements View.OnLongClickListener {
-    protected final static String MIME_TYPE = "text/plain";
+    final static String MIME_TYPE = "text/plain";
 
     public TextCellFactory() {
         super(256 * 1024);

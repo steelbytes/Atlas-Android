@@ -13,8 +13,8 @@ import com.layer.sdk.messaging.Conversation;
 
 public final class AtlasHistoricMessagesFetchLayout extends SwipeRefreshLayout implements LayerChangeEventListener.BackgroundThread.Weak {
     private LayerClient mLayerClient;
-    protected Conversation mConversation;
-    protected int mSyncAmount = 25;
+    Conversation mConversation;
+    int mSyncAmount = 25;
 
     public AtlasHistoricMessagesFetchLayout(Context context) {
         super(context);

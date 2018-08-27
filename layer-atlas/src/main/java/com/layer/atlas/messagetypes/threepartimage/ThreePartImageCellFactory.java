@@ -186,7 +186,7 @@ public class ThreePartImageCellFactory extends AtlasCellFactory<ThreePartImageCe
         return context.getString(R.string.atlas_message_preview_image);
     }
 
-    protected static Info getInfo(Message message) {
+    static Info getInfo(Message message) {
         try {
             Info info = new Info();
             JSONObject infoObject = new JSONObject(new String(ThreePartImageUtils.getInfoPart(message).getData()));
