@@ -134,7 +134,7 @@ public abstract class AtlasCellFactory<Tholder extends AtlasCellFactory.CellHold
     /**
      * CellHolderSpecs contains CellHolder specifications for use during binding.
      */
-    public static class CellHolderSpecs {
+    public final static class CellHolderSpecs {
         // True if the CellHolder is for my message, or false if for a remote user.
         public boolean isMe;
 

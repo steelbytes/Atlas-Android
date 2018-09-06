@@ -135,7 +135,7 @@ public class SinglePartImageCellFactory extends AtlasCellFactory<SinglePartImage
     // Inner classes
     //==============================================================================================
 
-    public static class CellHolder extends AtlasCellFactory.CellHolder {
+    public final static class CellHolder extends AtlasCellFactory.CellHolder {
         public final ImageView mImageView;
         final ContentLoadingProgressBar mProgressBar;
 
@@ -145,7 +145,7 @@ public class SinglePartImageCellFactory extends AtlasCellFactory<SinglePartImage
         }
     }
 
-    public static class PartId implements AtlasCellFactory.ParsedContent {
+    public final static class PartId implements AtlasCellFactory.ParsedContent {
         final Uri mId;
 
         PartId(Uri id) {

@@ -99,14 +99,14 @@ public final class AtlasMessageComposer extends FrameLayout {
      *
      * @return this AtlasMessageComposer.
      */
-    public AtlasMessageComposer init(LayerClient layerClient) {
+    public final AtlasMessageComposer init(LayerClient layerClient) {
         LayoutInflater.from(getContext()).inflate(R.layout.atlas_message_composer, this);
 
         mLayerClient = layerClient;
 
         mAttachButton = findViewById(R.id.attachment);
         mAttachButton.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
+            public final void onClick(View v) {
                 LinearLayout menu = (LinearLayout) mAttachmentMenu.getContentView();
                 menu.measure(MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED), MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED));
                 mAttachmentMenu.showAsDropDown(v, 0, -menu.getMeasuredHeight() - v.getHeight());
@@ -116,15 +116,15 @@ public final class AtlasMessageComposer extends FrameLayout {
         mMessageEditText = findViewById(R.id.message_edit_text);
         mMessageEditText.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            public final void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            public final void onTextChanged(CharSequence s, int start, int before, int count) {
             }
 
             @Override
-            public void afterTextChanged(Editable s) {
+            public final void afterTextChanged(Editable s) {
                 try {
                     if (mConversation == null || mConversation.isDeleted()) return;
                     if (s.length() > 0) {
@@ -142,7 +142,7 @@ public final class AtlasMessageComposer extends FrameLayout {
         mMessageEditText.setImeOptions(EditorInfo.IME_ACTION_SEND);
         mMessageEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+            public final boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 switch (actionId) {
                 case EditorInfo.IME_ACTION_SEND:
                     doSend();
@@ -154,7 +154,7 @@ public final class AtlasMessageComposer extends FrameLayout {
 
         mSendButton = findViewById(R.id.send_button);
         mSendButton.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
+            public final void onClick(View v) {
                 doSend();
             }
         });
@@ -178,7 +178,7 @@ public final class AtlasMessageComposer extends FrameLayout {
      * @param conversation the Conversation used for sending Messages.
      * @return This AtlasMessageComposer.
      */
-    public AtlasMessageComposer setConversation(Conversation conversation) {
+    public final AtlasMessageComposer setConversation(Conversation conversation) {
         mConversation = conversation;
         if (mTextSender != null) mTextSender.setConversation(conversation);
         for (AttachmentSender sender : mAttachmentSenders) {
@@ -193,10 +193,12 @@ public final class AtlasMessageComposer extends FrameLayout {
      * @param listener Listener for receiving the message EditText focus change callbacks.
      * @return This AtlasMessageComposer.
      */
-    public AtlasMessageComposer setOnMessageEditTextFocusChangeListener(OnFocusChangeListener listener) {
+    /*
+    public final AtlasMessageComposer setOnMessageEditTextFocusChangeListener(OnFocusChangeListener listener) {
         mMessageEditText.setOnFocusChangeListener(listener);
         return this;
     }
+    */
 
     /**
      * Sets the TextSender used for sending composed text messages.
@@ -204,7 +206,7 @@ public final class AtlasMessageComposer extends FrameLayout {
      * @param textSender TextSender used for sending composed text messages.
      * @return This AtlasMessageComposer.
      */
-    public AtlasMessageComposer setTextSender(TextSender textSender) {
+    public final AtlasMessageComposer setTextSender(TextSender textSender) {
         if (mTextSender!=null) {
             mTextSender.setCallback(null);
             mTextSender.setConversation(null);
@@ -225,7 +227,7 @@ public final class AtlasMessageComposer extends FrameLayout {
      * @param senders AttachmentSenders to add to this AtlasMessageComposer's attachment menu.
      * @return This AtlasMessageComposer.
      */
-    public AtlasMessageComposer addAttachmentSenders(AttachmentSender... senders) {
+    public final AtlasMessageComposer addAttachmentSenders(AttachmentSender... senders) {
         for (AttachmentSender sender : senders) {
             if (sender.getTitle() == null && sender.getIcon() == null) {
                 throw new NullPointerException("Attachment handlers must have at least a title or icon specified.");
@@ -247,7 +249,8 @@ public final class AtlasMessageComposer extends FrameLayout {
      * @param callback Callback to receive MessageSender events.
      * @return This AtlasMessageComposer.
      */
-    public AtlasMessageComposer setMessageSenderCallback(MessageSender.Callback callback) {
+    /*
+    public final AtlasMessageComposer setMessageSenderCallback(MessageSender.Callback callback) {
         mMessageSenderCallback = callback;
         if (mMessageSenderCallback == null) return this;
         if (mTextSender != null) mTextSender.setCallback(callback);
@@ -256,8 +259,9 @@ public final class AtlasMessageComposer extends FrameLayout {
         }
         return this;
     }
+    */
 
-    public AtlasMessageComposer setTypeface(Typeface typeface) {
+    public final AtlasMessageComposer setTypeface(Typeface typeface) {
         this.mTypeFace = typeface;
         applyTypeface();
         return this;
@@ -273,7 +277,7 @@ public final class AtlasMessageComposer extends FrameLayout {
      * @param data        Intent data from the Activity's onActivityResult.
      * @return this AtlasMessageComposer.
      */
-    public AtlasMessageComposer onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
+    public final AtlasMessageComposer onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
         for (AttachmentSender sender : mAttachmentSenders) {
             sender.onActivityResult(activity, requestCode, resultCode, data);
         }
@@ -297,7 +301,7 @@ public final class AtlasMessageComposer extends FrameLayout {
 // --Commented out by Inspection STOP (2018-08-27 1:09 PM)
 
     @Override
-    public void setEnabled(boolean enabled) {
+    public final void setEnabled(boolean enabled) {
         if (mAttachButton != null) mAttachButton.setEnabled(enabled);
         if (mMessageEditText != null) mMessageEditText.setEnabled(enabled);
         if (mSendButton != null) {
@@ -350,7 +354,7 @@ public final class AtlasMessageComposer extends FrameLayout {
         ((TextView) menuItem.findViewById(R.id.title)).setText(sender.getTitle());
         menuItem.setTag(sender);
         menuItem.setOnClickListener(new OnClickListener() {
-            public void onClick(View v) {
+            public final void onClick(View v) {
                 mAttachmentMenu.dismiss();
                 ((AttachmentSender) v.getTag()).requestSend();
             }
@@ -413,7 +417,7 @@ public final class AtlasMessageComposer extends FrameLayout {
     /**
      * Saves a map from AttachmentSender class to AttachmentSender saved instance.
      */
-    private static class SavedState extends BaseSavedState {
+    private final static class SavedState extends BaseSavedState {
         Bundle mBundle = new Bundle();
 
         SavedState(Parcelable superState) {
@@ -430,17 +434,17 @@ public final class AtlasMessageComposer extends FrameLayout {
         }
 
         @Override
-        public void writeToParcel(Parcel dest, int flags) {
+        public final void writeToParcel(Parcel dest, int flags) {
             super.writeToParcel(dest, flags);
             dest.writeBundle(mBundle);
         }
 
         public static final Parcelable.Creator<SavedState> CREATOR = new Parcelable.Creator<SavedState>() {
-            public SavedState createFromParcel(Parcel in) {
+            public final SavedState createFromParcel(Parcel in) {
                 return new SavedState(in);
             }
 
-            public SavedState[] newArray(int size) {
+            public final SavedState[] newArray(int size) {
                 return new SavedState[size];
             }
         };

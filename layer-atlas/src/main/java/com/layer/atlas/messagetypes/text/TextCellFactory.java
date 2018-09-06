@@ -87,7 +87,7 @@ public class TextCellFactory extends AtlasCellFactory<TextCellFactory.CellHolder
         return true;
     }
 
-    public static class CellHolder extends AtlasCellFactory.CellHolder {
+    public final static class CellHolder extends AtlasCellFactory.CellHolder {
         public final TextView mTextView;
 
         CellHolder(View view) {
@@ -95,7 +95,7 @@ public class TextCellFactory extends AtlasCellFactory<TextCellFactory.CellHolder
         }
     }
 
-    public static class TextInfo implements AtlasCellFactory.ParsedContent {
+    public final static class TextInfo implements AtlasCellFactory.ParsedContent {
         private final String mString;
         private final String mClipboardPrefix;
         private final int mSize;

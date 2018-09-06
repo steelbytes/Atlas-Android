@@ -28,7 +28,7 @@ public final class MyEditText extends AppCompatMultiAutoCompleteTextView {
     }
 
     @Override
-    public boolean onTextContextMenuItem(int id) {
+    public final boolean onTextContextMenuItem(int id) {
         try {
             if (id == android.R.id.paste) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

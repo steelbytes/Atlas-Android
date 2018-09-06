@@ -90,7 +90,7 @@ public final class AtlasAvatar extends View {
         super(context, attrs, defStyleAttr);
     }
 
-    public AtlasAvatar init(Picasso picasso) {
+    public final AtlasAvatar init(Picasso picasso) {
         mPicasso = picasso;
 
         mPaintInitials.setAntiAlias(true);
@@ -115,7 +115,7 @@ public final class AtlasAvatar extends View {
 //    }
 // --Commented out by Inspection STOP (2018-08-27 1:09 PM)
 
-    public AtlasAvatar setParticipants(Identity... participants) {
+    public final AtlasAvatar setParticipants(Identity... participants) {
         mParticipants.clear();
         mParticipants.addAll(Arrays.asList(participants));
         update();
@@ -125,14 +125,14 @@ public final class AtlasAvatar extends View {
     /**
      * Should be called from UI thread.
      */
-    public AtlasAvatar setParticipants(Set<Identity> participants) {
+    public final AtlasAvatar setParticipants(Set<Identity> participants) {
         mParticipants.clear();
         mParticipants.addAll(participants);
         update();
         return this;
     }
 
-    public Set<Identity> getParticipants() {
+    public final Set<Identity> getParticipants() {
         return new LinkedHashSet<>(mParticipants);
     }
 
@@ -297,7 +297,7 @@ public final class AtlasAvatar extends View {
         }
     }
 
-    private static class ImageTarget implements Target {
+    private final static class ImageTarget implements Target {
         private final static AtomicLong sCounter = new AtomicLong(0);
         private final long mId;
         private final AtlasAvatar mCluster;
@@ -319,19 +319,19 @@ public final class AtlasAvatar extends View {
         }
 
         @Override
-        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+        public final void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
             mCluster.invalidate();
             mBitmap = bitmap;
         }
 
         @Override
-        public void onBitmapFailed(Drawable errorDrawable) {
+        public final void onBitmapFailed(Drawable errorDrawable) {
             mCluster.invalidate();
             mBitmap = null;
         }
 
         @Override
-        public void onPrepareLoad(Drawable placeHolderDrawable) {
+        public final void onPrepareLoad(Drawable placeHolderDrawable) {
             mBitmap = null;
         }
 
@@ -340,7 +340,7 @@ public final class AtlasAvatar extends View {
         }
 
         @Override
-        public boolean equals(Object o) {
+        public final boolean equals(Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
             ImageTarget target = (ImageTarget) o;
@@ -348,7 +348,7 @@ public final class AtlasAvatar extends View {
         }
 
         @Override
-        public int hashCode() {
+        public final int hashCode() {
             return (int) (mId ^ (mId >>> 32));
         }
     }
@@ -370,7 +370,7 @@ public final class AtlasAvatar extends View {
         return diff;
     }
 
-    private static class Diff {
+    private final static class Diff {
         final List<Identity> existing = new ArrayList<>();
         final List<Identity> added = new ArrayList<>();
         final List<Identity> removed = new ArrayList<>();

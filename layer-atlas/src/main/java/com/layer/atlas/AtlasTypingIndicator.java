@@ -60,7 +60,7 @@ public final class AtlasTypingIndicator extends FrameLayout implements LayerTypi
      *
      * @return This AtlasTypingIndicator for chaining.
      */
-    public AtlasTypingIndicator init(LayerClient layerClient) {
+    public final AtlasTypingIndicator init(LayerClient layerClient) {
         if (layerClient == null) throw new IllegalArgumentException("LayerClient cannot be null");
         layerClient.registerTypingIndicator(this);
         return this;
@@ -72,7 +72,7 @@ public final class AtlasTypingIndicator extends FrameLayout implements LayerTypi
      * @param conversation Conversation to listen for typing on
      * @return This AtlasTypingIndicator for chaining.
      */
-    public AtlasTypingIndicator setConversation(Conversation conversation) {
+    public final AtlasTypingIndicator setConversation(Conversation conversation) {
         mConversation = conversation;
         return this;
     }
@@ -84,7 +84,7 @@ public final class AtlasTypingIndicator extends FrameLayout implements LayerTypi
      * @return This AtlasTypingIndicator.
      * @see com.layer.atlas.AtlasTypingIndicator.TypingIndicatorFactory
      */
-    public AtlasTypingIndicator setTypingIndicatorFactory(TypingIndicatorFactory factory) {
+    public final AtlasTypingIndicator setTypingIndicatorFactory(TypingIndicatorFactory factory) {
         mTypingIndicatorFactory = factory;
         removeAllViews();
         if (factory != null) {
@@ -102,7 +102,7 @@ public final class AtlasTypingIndicator extends FrameLayout implements LayerTypi
      * @param listener TypingActivityListener for receiving TypingIndicator activity state changes.
      * @return This AtlasTypingIndicator.
      */
-    public AtlasTypingIndicator setTypingActivityListener(TypingActivityListener listener) {
+    public final AtlasTypingIndicator setTypingActivityListener(TypingActivityListener listener) {
         mActivityListener = listener;
         return this;
     }
@@ -141,7 +141,7 @@ public final class AtlasTypingIndicator extends FrameLayout implements LayerTypi
     }
 
     @Override
-    public void onTypingIndicator(LayerClient layerClient, Conversation conversation, Identity user, TypingIndicator typingIndicator) {
+    public final void onTypingIndicator(LayerClient layerClient, Conversation conversation, Identity user, TypingIndicator typingIndicator) {
         // Only monitor typing in this indicator's conversation.
         if (mConversation != conversation) return;
 

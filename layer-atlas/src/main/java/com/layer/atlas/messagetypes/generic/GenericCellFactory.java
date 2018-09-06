@@ -77,7 +77,7 @@ public class GenericCellFactory extends AtlasCellFactory<GenericCellFactory.Cell
         }
     }
 
-    public static class ParsedContent implements AtlasCellFactory.ParsedContent {
+    public final static class ParsedContent implements AtlasCellFactory.ParsedContent {
         private final String mString;
         private final int mSize;
 

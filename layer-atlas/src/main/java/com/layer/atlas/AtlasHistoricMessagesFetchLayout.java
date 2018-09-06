@@ -24,11 +24,11 @@ public final class AtlasHistoricMessagesFetchLayout extends SwipeRefreshLayout i
         super(context, attrs);
     }
 
-    public AtlasHistoricMessagesFetchLayout init(LayerClient layerClient) {
+    public final AtlasHistoricMessagesFetchLayout init(LayerClient layerClient) {
         mLayerClient = layerClient;
         setOnRefreshListener(new OnRefreshListener() {
             @Override
-            public void onRefresh() {
+            public final void onRefresh() {
                 if (mConversation.getHistoricSyncStatus() == Conversation.HistoricSyncStatus.MORE_AVAILABLE) {
                     mConversation.syncMoreHistoricMessages(mSyncAmount);
                 }
@@ -54,7 +54,7 @@ public final class AtlasHistoricMessagesFetchLayout extends SwipeRefreshLayout i
      * @param conversation The `Conversation` to synchronize historic `Messages` for.
      * @return This `AtlasMessagesSwipeSyncLayout`.
      */
-    public AtlasHistoricMessagesFetchLayout setConversation(Conversation conversation) {
+    public final AtlasHistoricMessagesFetchLayout setConversation(Conversation conversation) {
         mConversation = conversation;
         mLayerClient.registerEventListener(this);
         refresh();
@@ -68,7 +68,7 @@ public final class AtlasHistoricMessagesFetchLayout extends SwipeRefreshLayout i
      * @param syncAmount Number of historic Messages to synchronize.
      * @return This `AtlasMessagesSwipeSyncLayout`.
      */
-    public AtlasHistoricMessagesFetchLayout setHistoricMessagesPerFetch(int syncAmount) {
+    public final AtlasHistoricMessagesFetchLayout setHistoricMessagesPerFetch(int syncAmount) {
         mSyncAmount = syncAmount;
         return this;
     }
@@ -81,7 +81,7 @@ public final class AtlasHistoricMessagesFetchLayout extends SwipeRefreshLayout i
     private AtlasHistoricMessagesFetchLayout refresh() {
         post(new Runnable() {
             @Override
-            public void run() {
+            public final void run() {
                 if (mConversation == null) {
                     setEnabled(false);
                     setRefreshing(false);
@@ -96,7 +96,7 @@ public final class AtlasHistoricMessagesFetchLayout extends SwipeRefreshLayout i
     }
 
     @Override
-    public void onChangeEvent(LayerChangeEvent layerChangeEvent) {
+    public final void onChangeEvent(LayerChangeEvent layerChangeEvent) {
         for (LayerChange change : layerChangeEvent.getChanges()) {
             if (change.getObject() != mConversation) continue;
             if (change.getChangeType() != LayerChange.Type.UPDATE) continue;

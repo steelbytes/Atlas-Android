@@ -57,7 +57,7 @@ public final class AtlasMessagesRecyclerView extends RecyclerView {
         super(context);
     }
 
-    public AtlasMessagesRecyclerView init(LayerClient layerClient, Picasso picasso) {
+    public final AtlasMessagesRecyclerView init(LayerClient layerClient, Picasso picasso) {
         mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         mLayoutManager.setStackFromEnd(true);
         setLayoutManager(mLayoutManager);
@@ -67,7 +67,7 @@ public final class AtlasMessagesRecyclerView extends RecyclerView {
                 .setRecyclerView(this)
                 .setOnMessageAppendListener(new AtlasMessagesAdapter.OnMessageAppendListener() {
                     @Override
-                    public void onMessageAppend(AtlasMessagesAdapter adapter, Message message) {
+                    public final void onMessageAppend(AtlasMessagesAdapter adapter, Message message) {
                         autoScroll();
                     }
                 });
@@ -79,7 +79,7 @@ public final class AtlasMessagesRecyclerView extends RecyclerView {
 
         addOnScrollListener(new OnScrollListener() {
             @Override
-            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            public final void onScrollStateChanged(RecyclerView recyclerView, int newState) {
                 for (AtlasCellFactory factory : mAdapter.getCellFactories()) {
                     factory.onScrollStateChanged(newState);
                 }
@@ -90,14 +90,14 @@ public final class AtlasMessagesRecyclerView extends RecyclerView {
     }
 
     @Override
-    public void setAdapter(Adapter adapter) {
+    public final void setAdapter(Adapter adapter) {
         throw new RuntimeException("AtlasMessagesRecyclerView sets its own Adapter");
     }
 
     /**
      * Performs cleanup when the Activity/Fragment using the adapter is destroyed.
      */
-    public void onDestroy() {
+    public final void onDestroy() {
         if (mAdapter != null) {
             mAdapter.onDestroy();
         }
@@ -125,7 +125,7 @@ public final class AtlasMessagesRecyclerView extends RecyclerView {
      * @param conversation Conversation to display Messages for.
      * @return This AtlasMessagesRecyclerView.
      */
-    public AtlasMessagesRecyclerView setConversation(Conversation conversation) {
+    public final AtlasMessagesRecyclerView setConversation(Conversation conversation) {
         mAdapter.setQuery(Query.builder(Message.class)
                 .predicate(new Predicate(Message.Property.CONVERSATION, Predicate.Operator.EQUAL_TO, conversation))
                 .sortDescriptor(new SortDescriptor(Message.Property.POSITION, SortDescriptor.Order.ASCENDING))
@@ -133,6 +133,7 @@ public final class AtlasMessagesRecyclerView extends RecyclerView {
         return this;
     }
 
+    /*
     public AtlasMessagesRecyclerView setOnMessageSwipeListener(SwipeableItem.OnSwipeListener<Message> listener) {
         if (mSwipeItemTouchHelper != null) {
             mSwipeItemTouchHelper.attachToRecyclerView(null);
@@ -146,22 +147,25 @@ public final class AtlasMessagesRecyclerView extends RecyclerView {
         }
         return this;
     }
+    */
 
     /**
      * Convenience pass-through to this list's AtlasMessagesAdapter.
      *
      * @see AtlasMessagesAdapter#addCellFactories(AtlasCellFactory...)
      */
-    public AtlasMessagesRecyclerView addCellFactories(AtlasCellFactory... cellFactories) {
+    public final AtlasMessagesRecyclerView addCellFactories(AtlasCellFactory... cellFactories) {
         mAdapter.addCellFactories(cellFactories);
         return this;
     }
 
-    public AtlasMessagesRecyclerView setTextTypeface(Typeface myTypeface, Typeface otherTypeface) {
+    /*
+    public final AtlasMessagesRecyclerView setTextTypeface(Typeface myTypeface, Typeface otherTypeface) {
         mMessageStyle.setMyTextTypeface(myTypeface);
         mMessageStyle.setOtherTextTypeface(otherTypeface);
         return this;
     }
+    */
 
     /**
      * Convenience pass-through to this list's LinearLayoutManager.
@@ -177,7 +181,7 @@ public final class AtlasMessagesRecyclerView extends RecyclerView {
      *
      * @see AtlasMessagesAdapter#setFooterView(View)
      */
-    public AtlasMessagesRecyclerView setFooterView(View footerView) {
+    public final AtlasMessagesRecyclerView setFooterView(View footerView) {
         mAdapter.setFooterView(footerView);
         autoScroll();
         return this;

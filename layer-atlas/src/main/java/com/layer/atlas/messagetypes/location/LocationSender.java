@@ -152,7 +152,7 @@ public final class LocationSender extends AttachmentSender {
         return true;
     }
 
-    private static class SenderLocationListener implements LocationListener {
+    private final static class SenderLocationListener implements LocationListener {
         private final WeakReference<LocationSender> mLocationSenderReference;
 
         SenderLocationListener(LocationSender locationsender) {
@@ -188,7 +188,7 @@ public final class LocationSender extends AttachmentSender {
         }
     }
 
-    private static class GoogleApiCallbacks implements GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
+    private final static class GoogleApiCallbacks implements GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
         @Override
         public void onConnected(Bundle bundle) {
             if (Log.isLoggable(Log.VERBOSE)) Log.v("GoogleApiClient connected");

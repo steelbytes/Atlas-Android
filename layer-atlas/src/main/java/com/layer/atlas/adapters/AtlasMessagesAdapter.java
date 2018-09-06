@@ -708,7 +708,7 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
         }
     }
 
-    private static class Cluster {
+    private final static class Cluster {
         boolean mDateBoundaryWithPrevious;
         ClusterType mClusterWithPrevious;
 
@@ -716,7 +716,7 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
         ClusterType mClusterWithNext;
     }
 
-    private static class MessagePosition {
+    private final static class MessagePosition {
         final Message mMessage;
         final int mPosition;
 
@@ -726,7 +726,7 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
         }
     }
 
-    private static class CellType {
+    private final static class CellType {
         final boolean mMe;
         final AtlasCellFactory mCellFactory;
 
