@@ -50,37 +50,42 @@ public final class MyEditText extends AppCompatMultiAutoCompleteTextView {
      * from TextView api 27 source
      */
     private void pastePlain() {
-        CharSequence mText = getText();
-        int min = 0;
-        int max = mText.length();
-        if (isFocused()) {
-            final int selStart = getSelectionStart();
-            final int selEnd = getSelectionEnd();
-            min = Math.max(0, Math.min(selStart, selEnd));
-            max = Math.max(0, Math.max(selStart, selEnd));
-        }
-        ClipboardManager clipboard =
-            (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
-        ClipData clip = clipboard.getPrimaryClip();
-        if (clip != null) {
-            boolean didFirst = false;
-            for (int i = 0; i < clip.getItemCount(); i++) {
-                final CharSequence paste;
-                // Get an item as text and remove all spans by toString().
-                final CharSequence text = clip.getItemAt(i).coerceToText(getContext());
-                paste = (text instanceof Spanned) ? text.toString() : text;
-                if (paste != null) {
-                    if (!didFirst) {
-                        Selection.setSelection((Spannable) mText, max);
-                        ((Editable) mText).replace(min, max, paste);
-                        didFirst = true;
-                    } else {
-                        ((Editable) mText).insert(getSelectionEnd(), "\n");
-                        ((Editable) mText).insert(getSelectionEnd(), paste);
+        try {
+            CharSequence mText = getText();
+            int min = 0;
+            int max = mText.length();
+            if (isFocused()) {
+                final int selStart = getSelectionStart();
+                final int selEnd = getSelectionEnd();
+                min = Math.max(0, Math.min(selStart, selEnd));
+                max = Math.max(0, Math.max(selStart, selEnd));
+            }
+            ClipboardManager clipboard =
+                (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+            ClipData clip = clipboard.getPrimaryClip();
+            if (clip != null) {
+                boolean didFirst = false;
+                for (int i = 0; i < clip.getItemCount(); i++) {
+                    final CharSequence paste;
+                    // Get an item as text and remove all spans by toString().
+                    final CharSequence text = clip.getItemAt(i).coerceToText(getContext());
+                    paste = (text instanceof Spanned) ? text.toString() : text;
+                    if (paste != null) {
+                        if (!didFirst) {
+                            Selection.setSelection((Spannable) mText, max);
+                            ((Editable) mText).replace(min, max, paste);
+                            didFirst = true;
+                        } else {
+                            ((Editable) mText).insert(getSelectionEnd(), "\n");
+                            ((Editable) mText).insert(getSelectionEnd(), paste);
+                        }
                     }
                 }
+                //sLastCutCopyOrTextChangedTime = 0;
             }
-            //sLastCutCopyOrTextChangedTime = 0;
+        } catch (Exception e) {
+            if (BuildConfig.DEBUG)
+                e.printStackTrace();
         }
     }
 

@@ -48,7 +48,7 @@ public final class LocationSender extends AttachmentSender {
 
     private static GoogleApiClient sGoogleApiClient;
 
-    private WeakReference<Activity> mActivity;
+    private final WeakReference<Activity> mActivity;
 
     /*
     public LocationSender(Identity me, int titleResId, Integer iconResId, Activity activity) {

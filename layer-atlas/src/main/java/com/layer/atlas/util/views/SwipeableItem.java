@@ -51,6 +51,7 @@ public final class SwipeableItem extends FrameLayout {
     /**
      * Listens for item swipes on an AtlasConversationsList.
      */
+    /*
     public static abstract class OnSwipeListener<Tquery extends Queryable> extends ItemTouchHelper.SimpleCallback {
         final float SWIPE_RATIO = 1f;
         final float DELETE_RATIO = 0.5f;
@@ -67,11 +68,11 @@ public final class SwipeableItem extends FrameLayout {
             return DELETE_RATIO;
         }
 
-        /**
+        **
          * Alerts the listener to item swipes.
          *
          * @param item The item swiped.
-         */
+         *
         public abstract void onSwipe(Tquery item, int direction);
 
         @Override
@@ -140,4 +141,5 @@ public final class SwipeableItem extends FrameLayout {
             mAdapter = adapter;
         }
     }
+    */
 }

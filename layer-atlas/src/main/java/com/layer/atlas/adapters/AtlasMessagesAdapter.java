@@ -69,7 +69,7 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
     final LayoutInflater mLayoutInflater;
     final Handler mUiThreadHandler;
     OnMessageAppendListener mAppendListener;
-    final DisplayMetrics mDisplayMetrics;
+    //final DisplayMetrics mDisplayMetrics;
     private final IdentityRecyclerViewEventListener mIdentityEventListener;
 
     // Cells
@@ -106,9 +106,9 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
         mPicasso = picasso;
         mLayoutInflater = LayoutInflater.from(context);
         mUiThreadHandler = new Handler(Looper.getMainLooper());
-        DateFormat mDateFormat = android.text.format.DateFormat.getDateFormat(context);
+        //DateFormat mDateFormat = android.text.format.DateFormat.getDateFormat(context);
         mTimeFormat = android.text.format.DateFormat.getTimeFormat(context);
-        mDisplayMetrics = context.getResources().getDisplayMetrics();
+        //mDisplayMetrics = context.getResources().getDisplayMetrics();
 
         mShowReadDeliveryField = true;
         mShowOtherParticipantsAvatar = false;
@@ -716,6 +716,7 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
         ClusterType mClusterWithNext;
     }
 
+    /*
     private final static class MessagePosition {
         final Message mMessage;
         final int mPosition;
@@ -725,6 +726,7 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
             mPosition = position;
         }
     }
+    */
 
     private final static class CellType {
         final boolean mMe;

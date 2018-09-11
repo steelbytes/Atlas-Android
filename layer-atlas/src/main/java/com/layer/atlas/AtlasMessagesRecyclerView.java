@@ -28,7 +28,6 @@ import com.layer.atlas.adapters.AtlasMessagesAdapter;
 import com.layer.atlas.messagetypes.AtlasCellFactory;
 import com.layer.atlas.messagetypes.MessageStyle;
 import com.layer.atlas.util.itemanimators.NoChangeAnimator;
-import com.layer.atlas.util.views.SwipeableItem;
 import com.layer.sdk.LayerClient;
 import com.layer.sdk.messaging.Conversation;
 import com.layer.sdk.messaging.Message;
@@ -40,7 +39,7 @@ import com.squareup.picasso.Picasso;
 public final class AtlasMessagesRecyclerView extends RecyclerView {
     AtlasMessagesAdapter mAdapter;
     private LinearLayoutManager mLayoutManager;
-    private ItemTouchHelper mSwipeItemTouchHelper;
+    //private ItemTouchHelper mSwipeItemTouchHelper;
 
     private MessageStyle mMessageStyle;
 
