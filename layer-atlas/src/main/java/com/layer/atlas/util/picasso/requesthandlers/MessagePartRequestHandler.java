@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import okio.Buffer;
+
 import static com.squareup.picasso.Picasso.LoadedFrom;
 
 /**
@@ -39,10 +41,13 @@ public final class MessagePartRequestHandler extends com.squareup.picasso.Reques
     @Override
     public Result load(Request request, int networkPolicy) throws IOException {
         Queryable queryable = mLayerClient.get(request.uri);
-        if (!(queryable instanceof MessagePart)) return null;
+        if (!(queryable instanceof MessagePart))
+            return null;
         MessagePart part = (MessagePart) queryable;
-        if (part.isContentReady()) return new Result(part.getDataStream(), LoadedFrom.DISK);
-        if (!Util.downloadMessagePart(mLayerClient, part, 3, TimeUnit.MINUTES)) return null;
-        return new Result(part.getDataStream(), LoadedFrom.NETWORK);
+        if (part.isContentReady())
+            return new Result(new Buffer().readFrom(part.getDataStream()), LoadedFrom.DISK);
+        if (!Util.downloadMessagePart(mLayerClient, part, 3, TimeUnit.MINUTES))
+            return null;
+        return new Result(new Buffer().readFrom(part.getDataStream()), LoadedFrom.NETWORK);
     }
 }

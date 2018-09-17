@@ -109,7 +109,7 @@ public class ThreePartImageCellFactory extends AtlasCellFactory<ThreePartImageCe
             }
 
             @Override
-            public void onError() {
+            public void onError(Exception e) {
                 cellHolder.mProgressBar.hide();
             }
         });

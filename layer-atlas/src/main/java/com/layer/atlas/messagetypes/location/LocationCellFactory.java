@@ -104,7 +104,7 @@ public class LocationCellFactory extends AtlasCellFactory<LocationCellFactory.Ce
             }
 
             @Override
-            public void onError() {
+            public void onError(Exception e) {
                 cellHolder.mProgressBar.hide();
             }
         });

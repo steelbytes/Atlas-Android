@@ -325,7 +325,7 @@ public final class AtlasAvatar extends View {
         }
 
         @Override
-        public final void onBitmapFailed(Drawable errorDrawable) {
+        public final void onBitmapFailed(Exception e, Drawable errorDrawable) {
             mCluster.invalidate();
             mBitmap = null;
         }
