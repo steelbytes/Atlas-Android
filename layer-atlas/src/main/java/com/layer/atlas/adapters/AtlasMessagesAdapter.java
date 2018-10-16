@@ -14,6 +14,7 @@ import android.widget.Space;
 import android.widget.TextView;
 
 import com.layer.atlas.AtlasAvatar;
+import com.layer.atlas.BuildConfig;
 import com.layer.atlas.R;
 import com.layer.atlas.messagetypes.AtlasCellFactory;
 import com.layer.atlas.messagetypes.MessageStyle;
@@ -253,13 +254,18 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
 
     @Override
     public int getItemViewType(int position) {
-        if (mFooterView != null && position == mFooterPosition) return VIEW_TYPE_FOOTER;
-        Message message = getItem(position);
-        Identity authenticatedUser = mLayerClient.getAuthenticatedUser();
-        boolean isMe = message!=null && authenticatedUser != null && authenticatedUser.equals(message.getSender());
-        for (AtlasCellFactory factory : mCellFactories) {
-            if (!factory.isBindable(message)) continue;
-            return isMe ? mMyViewTypesByCell.get(factory) : mTheirViewTypesByCell.get(factory);
+        try {
+            if (mFooterView != null && position == mFooterPosition) return VIEW_TYPE_FOOTER;
+            Message message = getItem(position);
+            Identity authenticatedUser = mLayerClient.getAuthenticatedUser();
+            boolean isMe = message != null && authenticatedUser != null && authenticatedUser.equals(message.getSender());
+            for (AtlasCellFactory factory : mCellFactories) {
+                if (!factory.isBindable(message)) continue;
+                return isMe ? mMyViewTypesByCell.get(factory) : mTheirViewTypesByCell.get(factory);
+            }
+        } catch (Exception e) {
+            if (BuildConfig.DEBUG)
+                e.printStackTrace();
         }
         return -1;
     }
