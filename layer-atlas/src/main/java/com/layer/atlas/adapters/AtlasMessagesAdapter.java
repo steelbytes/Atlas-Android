@@ -464,6 +464,7 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
     @Override
     public Message getItem(int position) {
         if (mFooterView != null && position == mFooterPosition) return null;
+        if (position < 0 || position > mQueryController.getItemCount()) return null;
         return mQueryController.getItem(position);
     }
 

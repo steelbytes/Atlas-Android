@@ -2,6 +2,7 @@ package com.layer.atlas.messagetypes.text;
 
 import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
+import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,10 +27,11 @@ public class TextCellFactory extends AtlasCellFactory<TextCellFactory.CellHolder
 
     public static boolean isType(Message message) {
         if (message==null || message.getMessageParts().isEmpty()) return false;
-        return message.getMessageParts().get(0).getMimeType().equals(MIME_TYPE);
+        return TextUtils.equals(message.getMessageParts().get(0).getMimeType(), MIME_TYPE);
     }
 
     public static String getMessagePreview(Context context, Message message) {
+        if (message==null || message.getMessageParts().isEmpty()) return null;
         MessagePart part = message.getMessageParts().get(0);
         // For large text content, the MessagePart may not be downloaded yet.
         return part.isContentReady() ? new String(part.getData()) : "";
@@ -56,6 +58,7 @@ public class TextCellFactory extends AtlasCellFactory<TextCellFactory.CellHolder
 
     @Override
     public TextInfo parseContent(LayerClient layerClient, Message message) {
+        if (message==null || message.getMessageParts().isEmpty()) return null;
         MessagePart part = message.getMessageParts().get(0);
         String text = part.isContentReady() ? new String(part.getData()) : "";
         String name;
