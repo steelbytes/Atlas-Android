@@ -38,7 +38,14 @@ public final class MyEditText extends AppCompatMultiAutoCompleteTextView {
                     return true;
                 }
             }
-            return super.onTextContextMenuItem(id);
+            boolean res = false;
+            try {
+                res = super.onTextContextMenuItem(id);
+            } catch (Exception e) {
+                if (BuildConfig.DEBUG)
+                    e.printStackTrace();
+            }
+            return res;
         } catch (Exception e) {
             if (BuildConfig.DEBUG)
                 e.printStackTrace();
