@@ -136,6 +136,10 @@ public final class AtlasImagePopupActivity extends Activity implements LayerProg
         mProgressBar.hide();
     }
 
+    @Override
+    public void onPreviewReleased() {
+    }
+
 
     //==============================================================================================
     // LayerProgressListener: update progress bar while downloading
