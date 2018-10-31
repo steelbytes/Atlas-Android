@@ -130,7 +130,13 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
         setHasStableIds(false);
 
         mIdentityEventListener = new IdentityRecyclerViewEventListener(this);
-        mLayerClient.registerEventListener(mIdentityEventListener);
+        try {
+            // LRs: just got a ConcurrentModificationException in here :-/
+            mLayerClient.registerEventListener(mIdentityEventListener);
+        } catch (Exception e) {
+            if (BuildConfig.DEBUG)
+                e.printStackTrace();
+        }
     }
 
     public void setShowReadDeliveryField(boolean showReadDeliveryField) {
