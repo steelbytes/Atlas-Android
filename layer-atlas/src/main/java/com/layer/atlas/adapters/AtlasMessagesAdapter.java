@@ -292,13 +292,18 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        mQueryController.updateBoundPosition(position);
-        if (mFooterView != null && position == mFooterPosition) {
-            // Footer
-            bindFooter(viewHolder);
-        } else {
-            // Cell
-            bindCellViewHolder((CellViewHolder) viewHolder, position);
+        try {
+            mQueryController.updateBoundPosition(position);
+            if (mFooterView != null && position == mFooterPosition) {
+                // Footer
+                bindFooter(viewHolder);
+            } else {
+                // Cell
+                bindCellViewHolder((CellViewHolder) viewHolder, position);
+            }
+        } catch (Exception e) {
+            if (BuildConfig.DEBUG)
+                e.printStackTrace();
         }
     }
 
@@ -453,29 +458,35 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
     }
 
     @Override
-    public int getItemCount() {
-        return mQueryController.getItemCount() + ((mFooterView == null) ? 0 : 1);
+    public final int getItemCount() {
+        try {
+            return mQueryController.getItemCount() + ((mFooterView == null) ? 0 : 1);
+        } catch (Exception e) {
+            if (BuildConfig.DEBUG)
+                e.printStackTrace();
+            return 0;
+        }
     }
 
     @Override
-    public Integer getPosition(Message message) {
+    public final Integer getPosition(Message message) {
         return mQueryController.getPosition(message);
     }
 
     @Override
-    public Integer getPosition(Message message, int lastPosition) {
+    public final Integer getPosition(Message message, int lastPosition) {
         return mQueryController.getPosition(message, lastPosition);
     }
 
     @Override
-    public Message getItem(int position) {
+    public final Message getItem(int position) {
         if (mFooterView != null && position == mFooterPosition) return null;
         if (position < 0 || position > mQueryController.getItemCount()) return null;
         return mQueryController.getItem(position);
     }
 
     @Override
-    public Message getItem(RecyclerView.ViewHolder viewHolder) {
+    public final Message getItem(RecyclerView.ViewHolder viewHolder) {
         if (!(viewHolder instanceof CellViewHolder)) return null;
         return ((CellViewHolder) viewHolder).mMessage;
     }
