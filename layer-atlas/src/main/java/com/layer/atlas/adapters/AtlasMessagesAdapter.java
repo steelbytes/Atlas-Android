@@ -192,9 +192,13 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
 
         if (wasNull && !isNull) {
             // Insert
+            if (BuildConfig.DEBUG && Looper.getMainLooper() != Looper.myLooper())
+                throw new AssertionError("adapter notify on wrong thread");
             notifyItemInserted(mFooterPosition);
         } else if (!wasNull && isNull) {
             // Delete
+            if (BuildConfig.DEBUG && Looper.getMainLooper() != Looper.myLooper())
+                throw new AssertionError("adapter notify on wrong thread");
             notifyItemRemoved(mFooterPosition);
         } else if (!wasNull && !isNull) {
             // Change
@@ -606,6 +610,8 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
     public void onQueryItemInserted(RecyclerViewController controller, int position) {
         mFooterPosition++;
         updateRecipientStatusPosition();
+        if (BuildConfig.DEBUG && Looper.getMainLooper() != Looper.myLooper())
+            throw new AssertionError("adapter notify on wrong thread");
         notifyItemInserted(position);
         if (mAppendListener != null && (position + 1) == getItemCount()) {
             mAppendListener.onMessageAppend(this, getItem(position));
@@ -616,6 +622,8 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
     public void onQueryItemRangeInserted(RecyclerViewController controller, int positionStart, int itemCount) {
         mFooterPosition += itemCount;
         updateRecipientStatusPosition();
+        if (BuildConfig.DEBUG && Looper.getMainLooper() != Looper.myLooper())
+            throw new AssertionError("adapter notify on wrong thread");
         notifyItemRangeInserted(positionStart, itemCount);
         int positionEnd = positionStart + itemCount;
         if (mAppendListener != null && (positionEnd + 1) == getItemCount()) {
@@ -627,6 +635,8 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
     public void onQueryItemRemoved(RecyclerViewController controller, int position) {
         mFooterPosition--;
         updateRecipientStatusPosition();
+        if (BuildConfig.DEBUG && Looper.getMainLooper() != Looper.myLooper())
+            throw new AssertionError("adapter notify on wrong thread");
         notifyItemRemoved(position);
     }
 
@@ -634,12 +644,16 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
     public void onQueryItemRangeRemoved(RecyclerViewController controller, int positionStart, int itemCount) {
         mFooterPosition -= itemCount;
         updateRecipientStatusPosition();
+        if (BuildConfig.DEBUG && Looper.getMainLooper() != Looper.myLooper())
+            throw new AssertionError("adapter notify on wrong thread");
         notifyItemRangeRemoved(positionStart, itemCount);
     }
 
     @Override
     public void onQueryItemMoved(RecyclerViewController controller, int fromPosition, int toPosition) {
         updateRecipientStatusPosition();
+        if (BuildConfig.DEBUG && Looper.getMainLooper() != Looper.myLooper())
+            throw new AssertionError("adapter notify on wrong thread");
         notifyItemMoved(fromPosition, toPosition);
     }
 
