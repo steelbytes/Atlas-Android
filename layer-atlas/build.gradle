@@ -106,7 +106,7 @@ dependencies {
     }
 
     //noinspection GradleDynamicVersion
-    implementation 'com.squareup.okhttp3:okhttp:3.+' // for picasso
+    implementation 'com.squareup.okhttp3:okhttp:3.12.+'  // for picasso.  3.13 requires android 5 / java 8
 
     // Image cache and loading
     //noinspection GradleDynamicVersion
