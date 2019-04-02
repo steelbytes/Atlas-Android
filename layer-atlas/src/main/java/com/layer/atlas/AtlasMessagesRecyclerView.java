@@ -37,6 +37,12 @@ import com.layer.sdk.query.SortDescriptor;
 import com.squareup.picasso.Picasso;
 
 public final class AtlasMessagesRecyclerView extends RecyclerView {
+
+    @Override
+    public final String toString() {
+        return "AtlasMessagesRecyclerView " + super.toString();
+    }
+
     AtlasMessagesAdapter mAdapter;
     private LinearLayoutManager mLayoutManager;
     //private ItemTouchHelper mSwipeItemTouchHelper;
