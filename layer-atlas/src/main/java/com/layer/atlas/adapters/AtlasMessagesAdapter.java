@@ -102,6 +102,11 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
         void onClick(Message m);
     }
 
+    @Override
+    public final String toString() {
+        return "AdapterAtlasMessages " + super.toString();
+    }
+
     public AtlasMessagesAdapter(Context context, LayerClient layerClient, Picasso picasso) {
         mLayerClient = layerClient;
         mPicasso = picasso;
