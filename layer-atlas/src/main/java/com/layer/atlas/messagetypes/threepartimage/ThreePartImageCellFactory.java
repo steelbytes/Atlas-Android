@@ -44,8 +44,6 @@ import java.util.List;
 public class ThreePartImageCellFactory extends AtlasCellFactory<ThreePartImageCellFactory.CellHolder, ThreePartImageCellFactory.Info> implements View.OnClickListener {
     private static final String PICASSO_TAG = ThreePartImageCellFactory.class.getSimpleName();
 
-    private static final int PLACEHOLDER = R.drawable.atlas_message_item_cell_placeholder;
-
     private final WeakReference<Activity> mActivity;
     private final LayerClient mLayerClient;
     private final Picasso mPicasso;
@@ -87,7 +85,7 @@ public class ThreePartImageCellFactory extends AtlasCellFactory<ThreePartImageCe
         params.width = cellDims[0];
         params.height = cellDims[1];
         cellHolder.mProgressBar.show();
-        RequestCreator creator = mPicasso.load(preview.getId()).tag(PICASSO_TAG).placeholder(PLACEHOLDER);
+        RequestCreator creator = mPicasso.load(preview.getId()).tag(PICASSO_TAG).placeholder(R.drawable.atlas_message_item_cell_placeholder);
         switch (info.orientation) {
             case ThreePartImageUtils.ORIENTATION_0:
                 creator.resize(cellDims[0], cellDims[1]);

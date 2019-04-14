@@ -31,7 +31,6 @@ import java.lang.ref.WeakReference;
  */
 public class SinglePartImageCellFactory extends AtlasCellFactory<SinglePartImageCellFactory.CellHolder, SinglePartImageCellFactory.PartId> implements View.OnClickListener {
     private static final String PICASSO_TAG = SinglePartImageCellFactory.class.getSimpleName();
-    private static final int PLACEHOLDER = com.layer.atlas.R.drawable.atlas_message_item_cell_placeholder;
 
     private final WeakReference<Activity> mActivity;
     private final LayerClient mLayerClient;
@@ -62,7 +61,7 @@ public class SinglePartImageCellFactory extends AtlasCellFactory<SinglePartImage
         cellHolder.mImageView.setTag(index);
         cellHolder.mImageView.setOnClickListener(this);
         cellHolder.mProgressBar.show();
-        mPicasso.load(index.mId).tag(PICASSO_TAG).placeholder(PLACEHOLDER)
+        mPicasso.load(index.mId).tag(PICASSO_TAG).placeholder(R.drawable.atlas_message_item_cell_placeholder)
                 .centerInside().resize(specs.maxWidth, specs.maxHeight).onlyScaleDown()
                 .transform(mTransform).into(cellHolder.mImageView, new Callback() {
             @Override

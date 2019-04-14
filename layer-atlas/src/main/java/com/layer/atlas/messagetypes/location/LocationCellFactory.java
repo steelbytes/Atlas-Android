@@ -33,7 +33,6 @@ public class LocationCellFactory extends AtlasCellFactory<LocationCellFactory.Ce
     public static final String KEY_LONGITUDE = "lon";
     public static final String KEY_LABEL = "label";
 
-    private static final int PLACEHOLDER = R.drawable.atlas_message_item_cell_placeholder;
     private static final double GOLDEN_RATIO = (1.0 + Math.sqrt(5.0)) / 2.0;
 
     private final Picasso mPicasso;
@@ -96,7 +95,7 @@ public class LocationCellFactory extends AtlasCellFactory<LocationCellFactory.Ce
         params.height = cellDims[1];
         cellHolder.mProgressBar.show();
         mPicasso.load("https://maps.googleapis.com/maps/api/staticmap?zoom=16&maptype=roadmap&scale=2&center=" + location.mLatitude + "," + location.mLongitude + "&markers=color:red%7C" + location.mLatitude + "," + location.mLongitude + "&size=" + mapWidth + "x" + mapHeight)
-                .tag(PICASSO_TAG).placeholder(PLACEHOLDER).resize(cellDims[0], cellDims[1])
+                .tag(PICASSO_TAG).placeholder(R.drawable.atlas_message_item_cell_placeholder).resize(cellDims[0], cellDims[1])
                 .transform(mTransform).into(cellHolder.mImageView, new Callback() {
             @Override
             public void onSuccess() {
