@@ -2,6 +2,7 @@ package com.layer.atlas.typingindicators;
 
 import android.content.Context;
 import android.content.res.Resources;
+import android.support.v7.content.res.AppCompatResources;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,7 +44,7 @@ public final class BubbleTypingIndicatorFactory implements AtlasTypingIndicator.
         l.setGravity(Gravity.CENTER);
         l.setOrientation(LinearLayout.HORIZONTAL);
         l.setLayoutParams(new AtlasTypingIndicator.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-        l.setBackgroundDrawable(r.getDrawable(R.drawable.atlas_typing_buble));
+        l.setBackgroundDrawable(AppCompatResources.getDrawable(context, R.drawable.atlas_typing_buble));
 
         ImageView v;
         LinearLayout.LayoutParams vp;
@@ -54,7 +55,7 @@ public final class BubbleTypingIndicatorFactory implements AtlasTypingIndicator.
         vp = new LinearLayout.LayoutParams(dotSize, dotSize);
         vp.setMargins(0, 0, dotSpace, 0);
         v.setLayoutParams(vp);
-        v.setBackgroundDrawable(r.getDrawable(DOT_RES_ID));
+        v.setBackgroundDrawable(AppCompatResources.getDrawable(context, DOT_RES_ID));
         dots.add(v);
         l.addView(v);
 
@@ -62,14 +63,14 @@ public final class BubbleTypingIndicatorFactory implements AtlasTypingIndicator.
         vp = new LinearLayout.LayoutParams(dotSize, dotSize);
         vp.setMargins(0, 0, dotSpace, 0);
         v.setLayoutParams(vp);
-        v.setBackgroundDrawable(r.getDrawable(DOT_RES_ID));
+        v.setBackgroundDrawable(AppCompatResources.getDrawable(context, DOT_RES_ID));
         dots.add(v);
         l.addView(v);
 
         v = new ImageView(context);
         vp = new LinearLayout.LayoutParams(dotSize, dotSize);
         v.setLayoutParams(vp);
-        v.setBackgroundDrawable(r.getDrawable(DOT_RES_ID));
+        v.setBackgroundDrawable(AppCompatResources.getDrawable(context, DOT_RES_ID));
         dots.add(v);
         l.addView(v);
 

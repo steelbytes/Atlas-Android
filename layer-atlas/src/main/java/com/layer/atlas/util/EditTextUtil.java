@@ -2,6 +2,7 @@ package com.layer.atlas.util;
 
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
+import android.support.v7.content.res.AppCompatResources;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -26,8 +27,8 @@ public final class EditTextUtil {
             Field fCursorDrawable = clazz.getDeclaredField("mCursorDrawable");
             fCursorDrawable.setAccessible(true);
             Drawable[] drawables = new Drawable[2];
-            drawables[0] = editText.getContext().getResources().getDrawable(mCursorDrawableRes);
-            drawables[1] = editText.getContext().getResources().getDrawable(mCursorDrawableRes);
+            drawables[0] = AppCompatResources.getDrawable(editText.getContext(), mCursorDrawableRes);
+            drawables[1] = AppCompatResources.getDrawable(editText.getContext(), mCursorDrawableRes);
             drawables[0].setColorFilter(color, PorterDuff.Mode.SRC_IN);
             drawables[1].setColorFilter(color, PorterDuff.Mode.SRC_IN);
             fCursorDrawable.set(editor, drawables);

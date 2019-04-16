@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
+import android.support.v4.app.ActivityCompat;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
@@ -98,9 +99,9 @@ public final class AtlasAvatar extends View {
         mPaintBorder.setAntiAlias(true);
         mPaintBackground.setAntiAlias(true);
 
-        mPaintBackground.setColor(getResources().getColor(R.color.atlas_avatar_background));
-        mPaintBorder.setColor(getResources().getColor(R.color.atlas_avatar_border));
-        mPaintInitials.setColor(getResources().getColor(R.color.atlas_avatar_text));
+        mPaintBackground.setColor(ActivityCompat.getColor(getContext(), R.color.atlas_avatar_background));
+        mPaintBorder.setColor(ActivityCompat.getColor(getContext(), R.color.atlas_avatar_border));
+        mPaintInitials.setColor(ActivityCompat.getColor(getContext(), R.color.atlas_avatar_text));
 
         return this;
     }

@@ -1,16 +1,10 @@
 package com.layer.atlas.util.views;
 
 import android.content.Context;
-import android.graphics.Canvas;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.AttributeSet;
-import android.view.View;
 import android.widget.FrameLayout;
 
 import com.layer.atlas.R;
-import com.layer.atlas.adapters.AtlasBaseAdapter;
-import com.layer.sdk.query.Queryable;
 
 
 public final class SwipeableItem extends FrameLayout {

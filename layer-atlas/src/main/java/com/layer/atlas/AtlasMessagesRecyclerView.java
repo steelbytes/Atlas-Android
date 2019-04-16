@@ -18,9 +18,9 @@ package com.layer.atlas;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -217,22 +217,22 @@ public final class AtlasMessagesRecyclerView extends RecyclerView {
     final void parseStyle(Context context, AttributeSet attrs, int defStyle) {
         TypedArray ta = context.getTheme().obtainStyledAttributes(attrs, R.styleable.AtlasMessagesRecyclerView, R.attr.AtlasMessagesRecyclerView, defStyle);
         MessageStyle.Builder messageStyleBuilder = new MessageStyle.Builder();
-        messageStyleBuilder.myTextColor(ta.getColor(R.styleable.AtlasMessagesRecyclerView_myTextColor, context.getResources().getColor(R.color.atlas_text_black)));
+        messageStyleBuilder.myTextColor(ta.getColor(R.styleable.AtlasMessagesRecyclerView_myTextColor, ActivityCompat.getColor(context, R.color.atlas_text_black)));
         int myTextStyle = ta.getInt(R.styleable.AtlasMessagesRecyclerView_myTextStyle, Typeface.NORMAL);
         messageStyleBuilder.myTextStyle(myTextStyle);
         String myTextTypefaceName = ta.getString(R.styleable.AtlasMessagesRecyclerView_myTextTypeface);
         messageStyleBuilder.myTextTypeface(myTextTypefaceName != null ? Typeface.create(myTextTypefaceName, myTextStyle) : null);
         messageStyleBuilder.myTextSize(ta.getDimensionPixelSize(R.styleable.AtlasMessagesRecyclerView_myTextSize, context.getResources().getDimensionPixelSize(R.dimen.atlas_text_size_message_item)));
 
-        messageStyleBuilder.otherTextColor(ta.getColor(R.styleable.AtlasMessagesRecyclerView_theirTextColor, context.getResources().getColor(R.color.atlas_color_primary_blue)));
+        messageStyleBuilder.otherTextColor(ta.getColor(R.styleable.AtlasMessagesRecyclerView_theirTextColor, ActivityCompat.getColor(context, R.color.atlas_color_primary_blue)));
         int otherTextStyle = ta.getInt(R.styleable.AtlasMessagesRecyclerView_theirTextStyle, Typeface.NORMAL);
         messageStyleBuilder.otherTextStyle(otherTextStyle);
         String otherTextTypefaceName = ta.getString(R.styleable.AtlasMessagesRecyclerView_theirTextTypeface);
         messageStyleBuilder.otherTextTypeface(otherTextTypefaceName != null ? Typeface.create(otherTextTypefaceName, otherTextStyle) : null);
         messageStyleBuilder.otherTextSize(ta.getDimensionPixelSize(R.styleable.AtlasMessagesRecyclerView_theirTextSize, context.getResources().getDimensionPixelSize(R.dimen.atlas_text_size_message_item)));
 
-        messageStyleBuilder.myBubbleColor(ta.getColor(R.styleable.AtlasMessagesRecyclerView_myBubbleColor, context.getResources().getColor(R.color.atlas_color_primary_blue)));
-        messageStyleBuilder.otherBubbleColor(ta.getColor(R.styleable.AtlasMessagesRecyclerView_theirBubbleColor, context.getResources().getColor(R.color.atlas_color_primary_gray)));
+        messageStyleBuilder.myBubbleColor(ta.getColor(R.styleable.AtlasMessagesRecyclerView_myBubbleColor, ActivityCompat.getColor(context, R.color.atlas_color_primary_blue)));
+        messageStyleBuilder.otherBubbleColor(ta.getColor(R.styleable.AtlasMessagesRecyclerView_theirBubbleColor, ActivityCompat.getColor(context, R.color.atlas_color_primary_gray)));
 
         ta.recycle();
         this.mMessageStyle = messageStyleBuilder.build();
