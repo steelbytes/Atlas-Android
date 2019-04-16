@@ -33,13 +33,14 @@ tasks.whenTaskAdded { task ->
 }
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     buildToolsVersion "28.0.3"
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionName = "${version}"
+        vectorDrawables.useSupportLibrary = true
     }
     dexOptions {
         preDexLibraries true
