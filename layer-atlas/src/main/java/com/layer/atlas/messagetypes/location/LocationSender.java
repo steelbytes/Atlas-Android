@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
-import android.support.annotation.RequiresPermission;
+import androidx.annotation.RequiresPermission;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -32,8 +32,8 @@ import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
 
-import static android.support.v4.app.ActivityCompat.requestPermissions;
-import static android.support.v4.content.ContextCompat.checkSelfPermission;
+import static androidx.core.app.ActivityCompat.requestPermissions;
+import static androidx.core.content.ContextCompat.checkSelfPermission;
 
 /**
  * LocationSender creates JSON MessagePart with latitude, longitude, and label.  Google's fused

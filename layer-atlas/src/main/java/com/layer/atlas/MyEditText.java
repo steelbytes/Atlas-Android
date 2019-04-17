@@ -4,7 +4,7 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Build;
-import android.support.v7.widget.AppCompatMultiAutoCompleteTextView;
+import androidx.appcompat.widget.AppCompatMultiAutoCompleteTextView;
 import android.text.Editable;
 import android.text.Selection;
 import android.text.Spannable;

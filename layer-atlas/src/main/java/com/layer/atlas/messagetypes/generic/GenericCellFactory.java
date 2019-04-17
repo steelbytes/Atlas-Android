@@ -1,7 +1,7 @@
 package com.layer.atlas.messagetypes.generic;
 
 import android.content.Context;
-import android.support.v4.app.ActivityCompat;
+import androidx.core.app.ActivityCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;

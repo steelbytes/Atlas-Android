@@ -1,6 +1,6 @@
 package com.layer.atlas.util.itemanimators;
 
-import android.support.v7.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 
 public final class NoChangeAnimator extends DefaultItemAnimator {
     public NoChangeAnimator() {

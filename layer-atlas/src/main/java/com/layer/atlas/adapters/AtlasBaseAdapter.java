@@ -1,6 +1,6 @@
 package com.layer.atlas.adapters;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.layer.sdk.query.Queryable;
 

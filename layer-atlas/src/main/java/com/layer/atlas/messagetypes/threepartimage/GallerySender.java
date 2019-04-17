@@ -18,8 +18,8 @@ import com.layer.sdk.messaging.PushNotificationPayload;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 
-import static android.support.v4.app.ActivityCompat.requestPermissions;
-import static android.support.v4.content.ContextCompat.checkSelfPermission;
+import static androidx.core.app.ActivityCompat.requestPermissions;
+import static androidx.core.content.ContextCompat.checkSelfPermission;
 
 /**
  * GallerySender creates a ThreePartImage from the a selected image from the user's gallety.

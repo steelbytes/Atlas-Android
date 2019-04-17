@@ -64,14 +64,14 @@ ext {
 dependencies {
     //ext.supportVersion = '25.+' // 25.+ is last version that works on gingerbread
     //ext.gmsVersion = '10.0.+' // 10.0.+ is last version that works on gingerbread
-    ext.supportVersion = '28.+' //
+    ext.supportVersion = '1.0.+' //
     ext.gmsVersion = '15.+'
     ext.firebaseVersion = ext.gmsVersion
 
     // Android UI
     //implementation "com.android.support:appcompat-v7:$supportVersion" // included in design
     //implementation "com.android.support:recyclerview-v7:$supportVersion" // included in design
-    implementation "com.android.support:design:$supportVersion"
+    implementation "com.google.android.material:material:$supportVersion"
 
     // Google Location
     implementation ("com.google.android.gms:play-services-location:$gmsVersion") {

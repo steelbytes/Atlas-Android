@@ -1,7 +1,7 @@
 package com.layer.atlas.messagetypes;
 
 import android.graphics.Typeface;
-import android.support.annotation.ColorInt;
+import androidx.annotation.ColorInt;
 
 public final class MessageStyle {
     final int mMyBubbleColor;
