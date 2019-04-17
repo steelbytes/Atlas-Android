@@ -446,12 +446,13 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
             }
             if (readCount > 0) {
                 viewHolder.mReceipt.setVisibility(View.VISIBLE);
+                /*
                 // Use 2 to include one other participant plus the current user
                 if (statuses.size() > 2) {
                     String quantityString = viewHolder.mReceipt.getResources()
                             .getQuantityString(R.plurals.atlas_message_item_read_muliple_participants, readCount, readCount);
                     viewHolder.mReceipt.setText(quantityString);
-                } else {
+                } else*/ {
                     viewHolder.mReceipt.setText(R.string.atlas_message_item_read);
                 }
             } else if (delivered) {
