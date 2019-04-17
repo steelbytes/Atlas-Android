@@ -75,12 +75,12 @@ dependencies {
 
     // Google Location
     implementation ("com.google.android.gms:play-services-location:$gmsVersion") {
-        exclude group: 'com.android.support'
+        //exclude group: 'com.android.support'
     }
 
     implementation ("com.google.firebase:firebase-messaging:$firebaseVersion") {
         //exclude group: 'com.google.android.gms'
-        exclude group: 'com.android.support'
+        //exclude group: 'com.android.support'
     }
 
     //noinspection GradleDynamicVersion
@@ -89,7 +89,7 @@ dependencies {
     //noinspection GradleDynamicVersion
     implementation ('com.firebase:firebase-jobdispatcher-with-gcm-dep:0.+') { // used by layer 0.23.14
         //exclude group: 'com.google.android.gms'
-        exclude group: 'com.android.support'
+        //exclude group: 'com.android.support'
     }
 
     //noinspection GradleDynamicVersion
@@ -99,7 +99,7 @@ dependencies {
     //implementation ('com.layer.sdk:layer-sdk:0.+') {
     implementation (name:'layer-sdk-0.23.26',ext:'aar') {
         exclude group: 'com.google.android.gms'
-        exclude group: 'com.android.support'
+        //exclude group: 'com.android.support'
         exclude group: 'com.google.firebase'
         exclude group: 'org.slf4j'
         exclude group: 'com.firebase'
@@ -113,13 +113,13 @@ dependencies {
     //noinspection GradleDynamicVersion
     implementation ('com.squareup.picasso:picasso:2.+') {// used by layer-atlas and kin
         exclude group: 'com.squareup.okhttp3'
-        exclude group: 'com.android.support'
+        //exclude group: 'com.android.support'
     }
 
     // Image popup
     implementation ('com.davemorrissey.labs:subsampling-scale-image-view:3.+') { // 3.5 until atlas is updated
         exclude group: 'com.google.android.gms'
-        exclude group: 'com.android.support'
+        //exclude group: 'com.android.support'
     }
 }
 /*
