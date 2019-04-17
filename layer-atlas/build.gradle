@@ -64,8 +64,8 @@ ext {
 dependencies {
     //ext.supportVersion = '25.+' // 25.+ is last version that works on gingerbread
     //ext.gmsVersion = '10.0.+' // 10.0.+ is last version that works on gingerbread
-    ext.supportVersion = '27.+' //
-    ext.gmsVersion = '15.+' // need 10.2.+ for full android 8.0 compat, but let's just go to 11
+    ext.supportVersion = '28.+' //
+    ext.gmsVersion = '15.+'
     ext.firebaseVersion = ext.gmsVersion
 
     // Android UI

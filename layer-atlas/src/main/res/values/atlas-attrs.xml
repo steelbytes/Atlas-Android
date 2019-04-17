@@ -4,10 +4,8 @@
     <!-- ###################### -->
     <!-- Atlas Component Styles -->
     <!-- ###################### -->
-    <attr name="AtlasConversationsRecyclerView" format="reference" />
     <attr name="AtlasMessageComposer" format="reference" />
     <attr name="AtlasMessagesRecyclerView" format="reference" />
-    <attr name="AtlasAddressBar" format="reference" />
     <attr name="AtlasTypingIndicator" format="reference" />
 
 
@@ -19,28 +17,6 @@
     <!-- #################################### -->
     <!-- Styleable Atlas Component Attributes -->
     <!-- #################################### -->
-
-    <declare-styleable name="AtlasConversationsRecyclerView">
-        <attr name="cellTitleTextColor" />
-        <attr name="cellTitleTextTypeface" />
-        <attr name="cellTitleTextStyle" />
-        <attr name="cellTitleUnreadTextColor" />
-        <attr name="cellTitleUnreadTextTypeface" />
-        <attr name="cellTitleUnreadTextStyle" />
-        <attr name="cellSubtitleTextColor" />
-        <attr name="cellSubtitleTextTypeface" />
-        <attr name="cellSubtitleTextStyle" />
-        <attr name="cellSubtitleUnreadTextColor" />
-        <attr name="cellSubtitleUnreadTextTypeface" />
-        <attr name="cellSubtitleUnreadTextStyle" />
-        <attr name="cellBackgroundColor" />
-        <attr name="cellUnreadBackgroundColor" />
-        <attr name="dateTextColor" />
-        <attr name="dateTextTypeface" />
-        <attr name="avatarTextColor" />
-        <attr name="avatarBackgroundColor" />
-        <attr name="avatarBorderColor" />
-    </declare-styleable>
 
     <declare-styleable name="AtlasMessageComposer">
         <attr name="inputTextColor" />
@@ -64,26 +40,6 @@
         <attr name="theirTextSize" />
         <attr name="theirTextTypeface" />
         <attr name="theirTextStyle" />
-    </declare-styleable>
-
-    <declare-styleable name="AtlasAddressBar">
-        <attr name="inputTextColor" />
-        <attr name="inputTextTypeface" />
-        <attr name="inputTextStyle" />
-        <attr name="inputTextSize" />
-        <attr name="inputUnderlineColor" />
-        <attr name="inputCursorColor" />
-        <attr name="listTextSize" />
-        <attr name="listTextColor" />
-        <attr name="listTextTypeface" />
-        <attr name="listTextStyle" />
-        <attr name="chipTypeface" />
-        <attr name="chipStyle" />
-        <attr name="avatarBackgroundColor" />
-        <attr name="avatarBorderColor" />
-        <attr name="avatarTextColor" />
-        <attr name="avatarTextTypeface" />
-        <attr name="avatarTextStyle" />
     </declare-styleable>
 
     <declare-styleable name="AtlasTypingIndicator"></declare-styleable>
