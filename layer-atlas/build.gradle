@@ -62,35 +62,20 @@ ext {
 }
 
 dependencies {
-    //ext.supportVersion = '25.+' // 25.+ is last version that works on gingerbread
-    //ext.gmsVersion = '10.0.+' // 10.0.+ is last version that works on gingerbread
-    ext.supportVersion = '1.0.+' //
-    ext.gmsVersion = '15.+'
-    ext.firebaseVersion = ext.gmsVersion
+    ext.supportVersion = '1.0.+'
 
-    // Android UI
-    //implementation "com.android.support:appcompat-v7:$supportVersion" // included in design
-    //implementation "com.android.support:recyclerview-v7:$supportVersion" // included in design
-    implementation "com.google.android.material:material:$supportVersion"
+    implementation "androidx.appcompat:appcompat:$supportVersion"
+    implementation "androidx.recyclerview:recyclerview:$supportVersion"
 
-    // Google Location
-    implementation ("com.google.android.gms:play-services-location:$gmsVersion") {
-        //exclude group: 'com.android.support'
-    }
+    implementation ("com.google.android.gms:play-services-location:16.+")
 
-    implementation ("com.google.firebase:firebase-messaging:$firebaseVersion") {
-        //exclude group: 'com.google.android.gms'
-        //exclude group: 'com.android.support'
-    }
+    implementation ("com.google.firebase:firebase-messaging:17.+")
 
     //noinspection GradleDynamicVersion
     implementation 'org.slf4j:slf4j-nop:1.7.+'
 
     //noinspection GradleDynamicVersion
-    implementation ('com.firebase:firebase-jobdispatcher-with-gcm-dep:0.+') { // used by layer 0.23.14
-        //exclude group: 'com.google.android.gms'
-        //exclude group: 'com.android.support'
-    }
+    implementation ('com.firebase:firebase-jobdispatcher-with-gcm-dep:0.+') // used by layer 0.23.14
 
     //noinspection GradleDynamicVersion
     implementation 'com.google.code.gson:gson:2.+' // used by aws and layer
@@ -98,9 +83,6 @@ dependencies {
     // Layer SDK
     //implementation ('com.layer.sdk:layer-sdk:0.+') {
     implementation (name:'layer-sdk-0.23.26',ext:'aar') {
-        exclude group: 'com.google.android.gms'
-        //exclude group: 'com.android.support'
-        exclude group: 'com.google.firebase'
         exclude group: 'org.slf4j'
         exclude group: 'com.firebase'
         exclude group: 'com.google.code.gson'
@@ -113,14 +95,11 @@ dependencies {
     //noinspection GradleDynamicVersion
     implementation ('com.squareup.picasso:picasso:2.+') {// used by layer-atlas and kin
         exclude group: 'com.squareup.okhttp3'
-        //exclude group: 'com.android.support'
     }
 
     // Image popup
-    implementation ('com.davemorrissey.labs:subsampling-scale-image-view:3.+') { // 3.5 until atlas is updated
-        exclude group: 'com.google.android.gms'
-        //exclude group: 'com.android.support'
-    }
+    implementation ('com.davemorrissey.labs:subsampling-scale-image-view:3.+')
+
 }
 /*
 def sdkPom() {
