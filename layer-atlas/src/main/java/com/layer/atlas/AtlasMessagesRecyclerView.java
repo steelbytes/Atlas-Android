@@ -49,6 +49,20 @@ public final class AtlasMessagesRecyclerView extends RecyclerView {
 
     private MessageStyle mMessageStyle;
 
+    public final void onDestroy() {
+        if (mAdapter != null) {
+            mAdapter.onDestroy();
+            mAdapter = null;
+        }
+        setAdapter(null);
+        mLayoutManager = null;
+        mMessageStyle = null;
+        if (onScrollListener != null) {
+            removeOnScrollListener(onScrollListener);
+            onScrollListener = null;
+        }
+    }
+
     public AtlasMessagesRecyclerView(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
         parseStyle(getContext(), attrs, defStyle);
@@ -63,7 +77,7 @@ public final class AtlasMessagesRecyclerView extends RecyclerView {
     }
 
     public final AtlasMessagesRecyclerView init(LayerClient layerClient, Picasso picasso) {
-        mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        mLayoutManager = new LinearLayoutManager(getContext());
         mLayoutManager.setStackFromEnd(true);
         setLayoutManager(mLayoutManager);
 
@@ -82,31 +96,28 @@ public final class AtlasMessagesRecyclerView extends RecyclerView {
         // Don't flash items when changing content
         setItemAnimator(new NoChangeAnimator());
 
-        addOnScrollListener(new OnScrollListener() {
-            @Override
-            public final void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-                for (AtlasCellFactory factory : mAdapter.getCellFactories()) {
-                    factory.onScrollStateChanged(newState);
-                }
-            }
-        });
+        addOnScrollListener(onScrollListener);
 
         return this;
     }
 
+    OnScrollListener onScrollListener = new OnScrollListener() {
+        @Override
+        public final void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+            if (mAdapter != null) {
+                for (AtlasCellFactory factory : mAdapter.getCellFactories()) {
+                    factory.onScrollStateChanged(newState);
+                }
+            }
+        }
+    };
+
+    /*
     @Override
     public final void setAdapter(Adapter adapter) {
         throw new RuntimeException("AtlasMessagesRecyclerView sets its own Adapter");
     }
-
-    /**
-     * Performs cleanup when the Activity/Fragment using the adapter is destroyed.
-     */
-    public final void onDestroy() {
-        if (mAdapter != null) {
-            mAdapter.onDestroy();
-        }
-    }
+    */
 
     /**
      * Automatically refresh on resume

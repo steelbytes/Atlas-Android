@@ -20,8 +20,12 @@ import java.util.Set;
  * view holders in a {@link RecyclerView.Adapter}, and trigger updates in the adapter accordingly.
  */
 public final  class IdentityRecyclerViewEventListener implements LayerChangeEventListener.Weak {
-    private final RecyclerView.Adapter mAdapter;
+    private RecyclerView.Adapter mAdapter;
     private final Map<Uri, Set<Integer>> identityPositions = new HashMap<>();
+
+    public final void onDestroy() {
+        mAdapter = null;
+    }
 
     public IdentityRecyclerViewEventListener(RecyclerView.Adapter adapter) {
         mAdapter = adapter;

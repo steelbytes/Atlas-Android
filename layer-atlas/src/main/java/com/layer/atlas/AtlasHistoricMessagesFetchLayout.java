@@ -24,6 +24,12 @@ public final class AtlasHistoricMessagesFetchLayout extends SwipeRefreshLayout i
         super(context, attrs);
     }
 
+    public final void onDestroy() {
+        mLayerClient = null;
+        mConversation = null;
+        setOnRefreshListener(null);
+    }
+
     public final AtlasHistoricMessagesFetchLayout init(LayerClient layerClient) {
         mLayerClient = layerClient;
         setOnRefreshListener(new OnRefreshListener() {

@@ -63,14 +63,14 @@ import java.util.Set;
 public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessagesAdapter.ViewHolder> implements AtlasBaseAdapter<Message>, RecyclerViewController.Callback {
     private final static int VIEW_TYPE_FOOTER = 0;
 
-    final LayerClient mLayerClient;
-    final Picasso mPicasso;
-    private final RecyclerViewController<Message> mQueryController;
-    final LayoutInflater mLayoutInflater;
+    LayerClient mLayerClient;
+    Picasso mPicasso;
+    private RecyclerViewController<Message> mQueryController;
+    LayoutInflater mLayoutInflater;
     final Handler mUiThreadHandler;
     OnMessageAppendListener mAppendListener;
     //final DisplayMetrics mDisplayMetrics;
-    private final IdentityRecyclerViewEventListener mIdentityEventListener;
+    private IdentityRecyclerViewEventListener mIdentityEventListener;
 
     // Cells
     int mViewTypeCount = VIEW_TYPE_FOOTER;
@@ -106,8 +106,36 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
         return "AdapterAtlasMessages " + super.toString();
     }
 
-    public AtlasMessagesAdapter(Context context, LayerClient layerClient, Picasso picasso) {
-        mLayerClient = layerClient;
+    public final void onDestroy() {
+        if (mLayerClient != null) {
+            if (mIdentityEventListener != null)
+                mLayerClient.unregisterEventListener(mIdentityEventListener);
+            mLayerClient = null;
+        }
+        mPicasso = null;
+        if (mQueryController != null) {
+            mQueryController.setPreProcessCallback(null);
+            mQueryController = null;
+        }
+        mLayoutInflater = null;
+        mAppendListener = null;
+        if (mIdentityEventListener != null) {
+            mIdentityEventListener.onDestroy();
+            mIdentityEventListener = null;
+        }
+        mCellFactories.clear();
+        mMyViewTypesByCell.clear();
+        mTheirViewTypesByCell.clear();
+        mFooterView = null;
+        if (mRecyclerView != null) {
+            mRecyclerView.setAdapter(null);
+            mRecyclerView = null;
+        }
+        mAvatarClickCallback = null;
+    }
+
+    public AtlasMessagesAdapter(Context context, final LayerClient layerClient_, Picasso picasso) {
+        mLayerClient = layerClient_;
         mPicasso = picasso;
         mLayoutInflater = LayoutInflater.from(context);
         mUiThreadHandler = new Handler(Looper.getMainLooper());
@@ -118,10 +146,12 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
         mShowReadDeliveryField = true;
         mShowOtherParticipantsAvatar = false;
 
-        mQueryController = layerClient.newRecyclerViewController(null, null, this);
+        mQueryController = mLayerClient.newRecyclerViewController(null, null, this);
         mQueryController.setPreProcessCallback(new ListViewController.PreProcessCallback<Message>() {
             @Override
             public void onCache(ListViewController listViewController, Message message) {
+                if (mLayerClient == null)
+                    return;
                 for (AtlasCellFactory factory : mCellFactories) {
                     if (factory.isBindable(message)) {
                         factory.getParsedContent(mLayerClient, message);
@@ -176,10 +206,6 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
     /**
      * Performs cleanup when the Activity/Fragment using the adapter is destroyed.
      */
-    public void onDestroy() {
-        mLayerClient.unregisterEventListener(mIdentityEventListener);
-    }
-
     public AtlasMessagesAdapter setRecyclerView(RecyclerView recyclerView) {
         mRecyclerView = recyclerView;
         return this;
@@ -479,25 +505,49 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
 
     @Override
     public final Integer getPosition(Message message) {
-        return mQueryController.getPosition(message);
+        try {
+            return mQueryController.getPosition(message);
+        } catch (Exception e) {
+            if (BuildConfig.DEBUG)
+                e.printStackTrace();
+            return 0;
+        }
     }
 
     @Override
     public final Integer getPosition(Message message, int lastPosition) {
-        return mQueryController.getPosition(message, lastPosition);
+        try {
+            return mQueryController.getPosition(message, lastPosition);
+        } catch (Exception e) {
+            if (BuildConfig.DEBUG)
+                e.printStackTrace();
+            return 0;
+        }
     }
 
     @Override
     public final Message getItem(int position) {
-        if (mFooterView != null && position == mFooterPosition) return null;
-        if (position < 0 || position > mQueryController.getItemCount()) return null;
-        return mQueryController.getItem(position);
+        try {
+            if (mFooterView != null && position == mFooterPosition) return null;
+            if (position < 0 || position > mQueryController.getItemCount()) return null;
+            return mQueryController.getItem(position);
+        } catch (Exception e) {
+            if (BuildConfig.DEBUG)
+                e.printStackTrace();
+            return null;
+        }
     }
 
     @Override
     public final Message getItem(RecyclerView.ViewHolder viewHolder) {
-        if (!(viewHolder instanceof CellViewHolder)) return null;
-        return ((CellViewHolder) viewHolder).mMessage;
+        try {
+            if (!(viewHolder instanceof CellViewHolder)) return null;
+            return ((CellViewHolder) viewHolder).mMessage;
+        } catch (Exception e) {
+            if (BuildConfig.DEBUG)
+                e.printStackTrace();
+            return null;
+        }
     }
 
 
@@ -570,7 +620,9 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
         mUiThreadHandler.post(new Runnable() {
             @Override
             public void run() {
-                notifyItemChanged(getPosition(message, lastPosition));
+                int i = getPosition(message, lastPosition);
+                if (i >= 0)
+                    notifyItemChanged(i);
             }
         });
     }
@@ -596,6 +648,10 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
 
     @Override
     public void onQueryDataSetChanged(RecyclerViewController controller) {
+        if (mLayerClient == null) {
+            notifyDataSetChanged();
+            return;
+        }
         mFooterPosition = mQueryController.getItemCount();
         updateRecipientStatusPosition();
         notifyDataSetChanged();
@@ -603,16 +659,28 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
 
     @Override
     public void onQueryItemChanged(RecyclerViewController controller, int position) {
+        if (mLayerClient == null) {
+            notifyDataSetChanged();
+            return;
+        }
         notifyItemChanged(position);
     }
 
     @Override
     public void onQueryItemRangeChanged(RecyclerViewController controller, int positionStart, int itemCount) {
+        if (mLayerClient == null) {
+            notifyDataSetChanged();
+            return;
+        }
         notifyItemRangeChanged(positionStart, itemCount);
     }
 
     @Override
     public void onQueryItemInserted(RecyclerViewController controller, int position) {
+        if (mLayerClient == null) {
+            notifyDataSetChanged();
+            return;
+        }
         mFooterPosition++;
         updateRecipientStatusPosition();
         if (BuildConfig.DEBUG && Looper.getMainLooper() != Looper.myLooper())
@@ -625,6 +693,10 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
 
     @Override
     public void onQueryItemRangeInserted(RecyclerViewController controller, int positionStart, int itemCount) {
+        if (mLayerClient == null) {
+            notifyDataSetChanged();
+            return;
+        }
         mFooterPosition += itemCount;
         updateRecipientStatusPosition();
         if (BuildConfig.DEBUG && Looper.getMainLooper() != Looper.myLooper())
@@ -638,6 +710,10 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
 
     @Override
     public void onQueryItemRemoved(RecyclerViewController controller, int position) {
+        if (mLayerClient == null) {
+            notifyDataSetChanged();
+            return;
+        }
         mFooterPosition--;
         updateRecipientStatusPosition();
         if (BuildConfig.DEBUG && Looper.getMainLooper() != Looper.myLooper())
@@ -647,6 +723,10 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
 
     @Override
     public void onQueryItemRangeRemoved(RecyclerViewController controller, int positionStart, int itemCount) {
+        if (mLayerClient == null) {
+            notifyDataSetChanged();
+            return;
+        }
         mFooterPosition -= itemCount;
         updateRecipientStatusPosition();
         if (BuildConfig.DEBUG && Looper.getMainLooper() != Looper.myLooper())
@@ -656,6 +736,10 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
 
     @Override
     public void onQueryItemMoved(RecyclerViewController controller, int fromPosition, int toPosition) {
+        if (mLayerClient == null) {
+            notifyDataSetChanged();
+            return;
+        }
         updateRecipientStatusPosition();
         if (BuildConfig.DEBUG && Looper.getMainLooper() != Looper.myLooper())
             throw new AssertionError("adapter notify on wrong thread");

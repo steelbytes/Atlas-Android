@@ -56,7 +56,7 @@ import com.layer.sdk.messaging.Conversation;
 
 import java.util.ArrayList;
 
-public final class AtlasMessageComposer extends FrameLayout {
+public final class AtlasMessageComposer extends FrameLayout implements TextWatcher {
     private EditText mMessageEditText;
     Button mSendButton;
     private ImageView mAttachButton;
@@ -65,7 +65,7 @@ public final class AtlasMessageComposer extends FrameLayout {
     Conversation mConversation;
 
     private TextSender mTextSender;
-    private final ArrayList<AttachmentSender> mAttachmentSenders = new ArrayList<>();
+    private ArrayList<AttachmentSender> mAttachmentSenders = new ArrayList<>();
     private MessageSender.Callback mMessageSenderCallback;
 
     PopupWindow mAttachmentMenu;
@@ -95,6 +95,36 @@ public final class AtlasMessageComposer extends FrameLayout {
         initAttachmentMenu(context, attrs, defStyle);
     }
 
+    public final void onDestroy() {
+        if (mMessageEditText != null) {
+            mMessageEditText.setOnEditorActionListener(null);
+            mMessageEditText.removeTextChangedListener(this);
+            mMessageEditText = null;
+        }
+        if (mSendButton != null) {
+            mSendButton.setOnClickListener(null);
+            mSendButton = null;
+        }
+        if (mAttachButton != null) {
+            mAttachButton.setOnClickListener(null);
+            mAttachButton = null;
+        }
+        mLayerClient = null;
+        mConversation = null;
+        mTextSender = null;
+        for (AttachmentSender sender : mAttachmentSenders)
+            sender.onDestroy();
+        mAttachmentSenders.clear();
+        mMessageSenderCallback = null;
+        if (mAttachmentMenu != null) {
+            ViewGroup v = (ViewGroup) mAttachmentMenu.getContentView();
+            if (v != null)
+                v.removeAllViews();
+            mAttachmentMenu = null;
+        }
+    }
+
+
     /**
      * Prepares this AtlasMessageComposer for use.
      *
@@ -115,31 +145,7 @@ public final class AtlasMessageComposer extends FrameLayout {
         });
 
         mMessageEditText = findViewById(R.id.message_edit_text);
-        mMessageEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public final void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public final void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public final void afterTextChanged(Editable s) {
-                try {
-                    if (mConversation == null || mConversation.isDeleted()) return;
-                    if (s.length() > 0) {
-                        mSendButton.setEnabled(isEnabled());
-                        mConversation.send(LayerTypingIndicatorListener.TypingIndicator.STARTED);
-                    } else {
-                        mSendButton.setEnabled(false);
-                        mConversation.send(LayerTypingIndicatorListener.TypingIndicator.FINISHED);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+        mMessageEditText.addTextChangedListener(this);
         mMessageEditText.setImeOptions(EditorInfo.IME_ACTION_SEND);
         mMessageEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -161,6 +167,30 @@ public final class AtlasMessageComposer extends FrameLayout {
         });
         applyStyle();
         return this;
+    }
+
+    @Override
+    public final void beforeTextChanged(CharSequence s, int start, int count, int after) {
+    }
+
+    @Override
+    public final void onTextChanged(CharSequence s, int start, int before, int count) {
+    }
+
+    @Override
+    public final void afterTextChanged(Editable s) {
+        try {
+            if (mConversation == null || mConversation.isDeleted()) return;
+            if (s.length() > 0) {
+                mSendButton.setEnabled(isEnabled());
+                mConversation.send(LayerTypingIndicatorListener.TypingIndicator.STARTED);
+            } else {
+                mSendButton.setEnabled(false);
+                mConversation.send(LayerTypingIndicatorListener.TypingIndicator.FINISHED);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     final void doSend() {
@@ -450,7 +480,7 @@ public final class AtlasMessageComposer extends FrameLayout {
             }
         };
 
-        private SavedState(Parcel in) {
+        SavedState(Parcel in) {
             super(in);
             mBundle = in.readBundle();
         }

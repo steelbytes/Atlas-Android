@@ -20,6 +20,14 @@ public abstract class MessageSender {
 
     protected Identity me;
 
+    public void onDestroy() {
+        mConversation = null;
+        mCallback = null;
+        mContext = null;
+        mLayerClient = null;
+        me = null;
+    }
+
     public void init(Context context, LayerClient layerClient) {
         mContext = context;
         mLayerClient = layerClient;

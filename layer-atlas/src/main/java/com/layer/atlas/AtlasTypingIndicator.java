@@ -55,6 +55,14 @@ public final class AtlasTypingIndicator extends FrameLayout implements LayerTypi
         super(context, attrs, defStyle);
     }
 
+    public final void onDestroy() {
+        mTypists.clear();
+        mConversation = null;
+        mActivityListener = null;
+        mTypingIndicatorFactory = null;
+        mIndicatorView = null;
+    }
+
     /**
      * Initializes this AtlasTypingIndicator.
      *
