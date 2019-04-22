@@ -13,6 +13,8 @@ import com.layer.sdk.messaging.MessagePart;
 
 import java.util.concurrent.TimeUnit;
 
+import androidx.annotation.NonNull;
+
 final class MessagePartDecoder implements ImageDecoder {
     private static LayerClient sLayerClient;
 
@@ -21,7 +23,7 @@ final class MessagePartDecoder implements ImageDecoder {
     }
 
     @Override
-    public Bitmap decode(Context context, Uri messagePartId) throws Exception {
+    public Bitmap decode(Context context, @NonNull Uri messagePartId) throws Exception {
         MessagePart part = (MessagePart) sLayerClient.get(messagePartId);
         if (part == null) {
             if (Log.isLoggable(Log.ERROR)) {
@@ -35,7 +37,7 @@ final class MessagePartDecoder implements ImageDecoder {
             }
             return null;
         }
-        if (!Util.downloadMessagePart(sLayerClient, part, 3, TimeUnit.MINUTES)) {
+        if (!Util.downloadMessagePart(part, 3, TimeUnit.MINUTES)) {
             if (Log.isLoggable(Log.ERROR)) {
                 Log.e("Timed out while downloading: " + messagePartId);
             }

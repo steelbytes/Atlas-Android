@@ -2,11 +2,12 @@ package com.layer.atlas.util;
 
 import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import androidx.appcompat.content.res.AppCompatResources;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import java.lang.reflect.Field;
+
+import androidx.appcompat.content.res.AppCompatResources;
 
 public final class EditTextUtil {
 

@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import androidx.core.widget.ContentLoadingProgressBar;
 
 import com.davemorrissey.labs.subscaleview.ImageSource;
 import com.davemorrissey.labs.subscaleview.SubsamplingScaleImageView;
@@ -15,6 +14,8 @@ import com.layer.atlas.util.Log;
 import com.layer.sdk.LayerClient;
 import com.layer.sdk.listeners.LayerProgressListener;
 import com.layer.sdk.messaging.MessagePart;
+
+import androidx.core.widget.ContentLoadingProgressBar;
 
 /**
  * AtlasImagePopupActivity implements a ful resolution image viewer Activity.  This Activity
@@ -173,9 +174,10 @@ public final class AtlasImagePopupActivity extends Activity implements LayerProg
 
     @Override
     protected void onDestroy() {
-        if(mImageView!=null) {
+        if (mImageView != null)
             mImageView.recycle();
-        }
+        mImageView = null;
+        mProgressBar = null;
         super.onDestroy();
     }
 }

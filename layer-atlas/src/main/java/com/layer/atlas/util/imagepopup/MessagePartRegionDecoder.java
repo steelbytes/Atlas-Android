@@ -16,6 +16,8 @@ import com.layer.sdk.messaging.MessagePart;
 
 import java.util.concurrent.TimeUnit;
 
+import androidx.annotation.NonNull;
+
 final class MessagePartRegionDecoder implements ImageRegionDecoder {
     private final Object mLock = new Object();
     private BitmapRegionDecoder mDecoder;
@@ -27,7 +29,7 @@ final class MessagePartRegionDecoder implements ImageRegionDecoder {
     }
 
     @Override
-    public Point init(Context context, Uri messagePartId) throws Exception {
+    public Point init(Context context, @NonNull Uri messagePartId) throws Exception {
         MessagePart part = (MessagePart) sLayerClient.get(messagePartId);
         if (part == null) {
             if (Log.isLoggable(Log.ERROR)) {
@@ -43,7 +45,7 @@ final class MessagePartRegionDecoder implements ImageRegionDecoder {
         }
 
         mMessagePart = part;
-        if (!Util.downloadMessagePart(sLayerClient, mMessagePart, 3, TimeUnit.MINUTES)) {
+        if (!Util.downloadMessagePart(mMessagePart, 3, TimeUnit.MINUTES)) {
             if (Log.isLoggable(Log.ERROR)) {
                 Log.e("Timed out while downloading: " + messagePartId);
             }
@@ -56,8 +58,9 @@ final class MessagePartRegionDecoder implements ImageRegionDecoder {
         }
     }
 
+    @NonNull
     @Override
-    public Bitmap decodeRegion(Rect rect, int sampleSize) {
+    public Bitmap decodeRegion(@NonNull Rect rect, int sampleSize) {
         synchronized (mLock) {
             BitmapFactory.Options options = new BitmapFactory.Options();
             options.inSampleSize = sampleSize;

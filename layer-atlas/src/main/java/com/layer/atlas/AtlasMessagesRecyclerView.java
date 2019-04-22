@@ -18,9 +18,6 @@ package com.layer.atlas;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
-import androidx.core.app.ActivityCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -35,6 +32,11 @@ import com.layer.sdk.query.Predicate;
 import com.layer.sdk.query.Query;
 import com.layer.sdk.query.SortDescriptor;
 import com.squareup.picasso.Picasso;
+
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public final class AtlasMessagesRecyclerView extends RecyclerView {
 
@@ -103,7 +105,7 @@ public final class AtlasMessagesRecyclerView extends RecyclerView {
 
     OnScrollListener onScrollListener = new OnScrollListener() {
         @Override
-        public final void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+        public final void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
             if (mAdapter != null) {
                 for (AtlasCellFactory factory : mAdapter.getCellFactories()) {
                     factory.onScrollStateChanged(newState);
@@ -123,7 +125,7 @@ public final class AtlasMessagesRecyclerView extends RecyclerView {
      * Automatically refresh on resume
      */
     @Override
-    protected void onVisibilityChanged(View changedView, int visibility) {
+    protected void onVisibilityChanged(@NonNull View changedView, int visibility) {
         super.onVisibilityChanged(changedView, visibility);
         if (visibility != View.VISIBLE) return;
         refresh();

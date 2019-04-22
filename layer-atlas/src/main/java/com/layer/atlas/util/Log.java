@@ -20,7 +20,7 @@ public final class Log {
      *
      * @param level Log level to check.
      * @return `true` if the provided log level is loggable.
-     * @see #setLoggingEnabled(boolean)
+     * @see # setLoggingEnabled(boolean)
      */
     public static boolean isLoggable(int level) {
         return android.util.Log.isLoggable(TAG, level);

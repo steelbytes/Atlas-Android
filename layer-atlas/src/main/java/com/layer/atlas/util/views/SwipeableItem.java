@@ -10,7 +10,7 @@ import com.layer.atlas.R;
 public final class SwipeableItem extends FrameLayout {
     private static final int[] STATES_SWIPING_ACTIVE = {R.attr.state_swiping};
 
-    private boolean mSwipingActive = false;
+    private final boolean mSwipingActive = false;
 
     public SwipeableItem(Context context) {
         super(context);
@@ -35,12 +35,14 @@ public final class SwipeableItem extends FrameLayout {
         }
     }
 
+    /*
     SwipeableItem setSwipingActive(boolean swipingActive) {
         if (mSwipingActive == swipingActive) return this;
         mSwipingActive = swipingActive;
         refreshDrawableState();
         return this;
     }
+    */
 
     /**
      * Listens for item swipes on an AtlasConversationsList.

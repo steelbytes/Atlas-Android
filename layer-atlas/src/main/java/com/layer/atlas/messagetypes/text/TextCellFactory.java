@@ -1,6 +1,5 @@
 package com.layer.atlas.messagetypes.text;
 
-import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
 import android.text.TextUtils;
 import android.util.TypedValue;
@@ -30,7 +29,7 @@ public class TextCellFactory extends AtlasCellFactory<TextCellFactory.CellHolder
         return TextUtils.equals(message.getMessageParts().get(0).getMimeType(), MIME_TYPE);
     }
 
-    public static String getMessagePreview(Context context, Message message) {
+    public static String getMessagePreview(Message message) {
         if (message==null || message.getMessageParts().isEmpty()) return null;
         MessagePart part = message.getMessageParts().get(0);
         // For large text content, the MessagePart may not be downloaded yet.
@@ -38,12 +37,12 @@ public class TextCellFactory extends AtlasCellFactory<TextCellFactory.CellHolder
     }
 
     @Override
-    public boolean isBindable(Message message) {
+    public final boolean isBindable(Message message) {
         return TextCellFactory.isType(message);
     }
 
     @Override
-    public CellHolder createCellHolder(ViewGroup cellView, boolean isMe, LayoutInflater layoutInflater) {
+    public final CellHolder createCellHolder(ViewGroup cellView, boolean isMe, LayoutInflater layoutInflater) {
         View v = layoutInflater.inflate(R.layout.atlas_message_item_cell_text, cellView, true);
         v.setBackgroundResource(isMe ? R.drawable.atlas_message_item_cell_me : R.drawable.atlas_message_item_cell_them);
         ((GradientDrawable) v.getBackground()).setColor(isMe ? mMessageStyle.getMyBubbleColor() : mMessageStyle.getOtherBubbleColor());
@@ -57,7 +56,7 @@ public class TextCellFactory extends AtlasCellFactory<TextCellFactory.CellHolder
     }
 
     @Override
-    public TextInfo parseContent(LayerClient layerClient, Message message) {
+    public final TextInfo parseContent(LayerClient layerClient, Message message) {
         if (message==null || message.getMessageParts().isEmpty()) return null;
         MessagePart part = message.getMessageParts().get(0);
         String text = part.isContentReady() ? new String(part.getData()) : "";
@@ -109,16 +108,16 @@ public class TextCellFactory extends AtlasCellFactory<TextCellFactory.CellHolder
             mSize = mString.getBytes().length + mClipboardPrefix.getBytes().length;
         }
 
-        public String getString() {
+        public final String getString() {
             return mString;
         }
 
-        String getClipboardPrefix() {
+        final String getClipboardPrefix() {
             return mClipboardPrefix;
         }
 
         @Override
-        public int sizeOf() {
+        public final int sizeOf() {
             return mSize;
         }
     }

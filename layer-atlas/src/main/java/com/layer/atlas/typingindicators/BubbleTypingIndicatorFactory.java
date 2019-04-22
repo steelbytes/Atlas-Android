@@ -2,7 +2,6 @@ package com.layer.atlas.typingindicators;
 
 import android.content.Context;
 import android.content.res.Resources;
-import androidx.appcompat.content.res.AppCompatResources;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +19,8 @@ import com.layer.sdk.messaging.Identity;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import androidx.appcompat.content.res.AppCompatResources;
 
 public final class BubbleTypingIndicatorFactory implements AtlasTypingIndicator.TypingIndicatorFactory<LinearLayout> {
     // --Commented out by Inspection (2018-08-27 1:09 PM):private static final String TAG = BubbleTypingIndicatorFactory.class.getSimpleName();

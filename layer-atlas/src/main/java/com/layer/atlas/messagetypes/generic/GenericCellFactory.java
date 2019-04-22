@@ -1,7 +1,6 @@
 package com.layer.atlas.messagetypes.generic;
 
 import android.content.Context;
-import androidx.core.app.ActivityCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +12,9 @@ import com.layer.sdk.LayerClient;
 import com.layer.sdk.messaging.Message;
 import com.layer.sdk.messaging.MessagePart;
 
+import androidx.annotation.NonNull;
+import androidx.core.app.ActivityCompat;
+
 /**
  * Mime handles all MIME Types by simply displaying all MessagePart MIME Types as text.
  */
@@ -21,7 +23,7 @@ public class GenericCellFactory extends AtlasCellFactory<GenericCellFactory.Cell
         super(256 * 1024);
     }
 
-    public static String getPreview(Context context, Message message) {
+    public static String getPreview(Message message) {
         StringBuilder b = new StringBuilder();
         boolean isFirst = true;
         b.append("[");
@@ -35,12 +37,12 @@ public class GenericCellFactory extends AtlasCellFactory<GenericCellFactory.Cell
     }
 
     @Override
-    public boolean isBindable(Message message) {
+    public final boolean isBindable(Message message) {
         return true;
     }
 
     @Override
-    public CellHolder createCellHolder(ViewGroup cellView, boolean isMe, LayoutInflater layoutInflater) {
+    public final CellHolder createCellHolder(ViewGroup cellView, boolean isMe, LayoutInflater layoutInflater) {
         Context context = cellView.getContext();
 
         View v = layoutInflater.inflate(R.layout.atlas_message_item_cell_text, cellView, true);
@@ -52,7 +54,7 @@ public class GenericCellFactory extends AtlasCellFactory<GenericCellFactory.Cell
     }
 
     @Override
-    public ParsedContent parseContent(LayerClient layerClient, Message message) {
+    public final ParsedContent parseContent(LayerClient layerClient, Message message) {
         StringBuilder builder = new StringBuilder();
         int i = 0;
         for (MessagePart part : message.getMessageParts()) {
@@ -94,12 +96,13 @@ public class GenericCellFactory extends AtlasCellFactory<GenericCellFactory.Cell
 // --Commented out by Inspection STOP (2018-08-27 1:08 PM)
 
         @Override
-        public int sizeOf() {
+        public final int sizeOf() {
             return mSize;
         }
 
+        @NonNull
         @Override
-        public String toString() {
+        public final String toString() {
             return mString;
         }
     }

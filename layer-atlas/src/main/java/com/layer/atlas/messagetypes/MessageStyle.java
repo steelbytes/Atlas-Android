@@ -1,6 +1,7 @@
 package com.layer.atlas.messagetypes;
 
 import android.graphics.Typeface;
+
 import androidx.annotation.ColorInt;
 
 public final class MessageStyle {
@@ -16,7 +17,7 @@ public final class MessageStyle {
     final float mOtherTextSize;
     Typeface mOtherTextTypeface;
 
-    private MessageStyle(Builder builder) {
+    MessageStyle(Builder builder) {
         mMyBubbleColor = builder.myBubbleColor;
         mMyTextColor = builder.myTextColor;
         mMyTextStyle = builder.myTextStyle;
@@ -82,16 +83,16 @@ public final class MessageStyle {
     }
 
     public static final class Builder {
-        private int myBubbleColor;
-        private int myTextColor;
-        private int myTextStyle;
-        private float myTextSize;
-        private Typeface myTextTypeface;
-        private int otherBubbleColor;
-        private int otherTextColor;
-        private int otherTextStyle;
-        private float otherTextSize;
-        private Typeface otherTextTypeface;
+        int myBubbleColor;
+        int myTextColor;
+        int myTextStyle;
+        float myTextSize;
+        Typeface myTextTypeface;
+        int otherBubbleColor;
+        int otherTextColor;
+        int otherTextStyle;
+        float otherTextSize;
+        Typeface otherTextTypeface;
 
         public Builder() {
         }

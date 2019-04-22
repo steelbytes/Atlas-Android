@@ -3,8 +3,6 @@ package com.layer.atlas.messagetypes.location;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import androidx.core.widget.ContentLoadingProgressBar;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +23,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.net.URLEncoder;
+
+import androidx.core.widget.ContentLoadingProgressBar;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class LocationCellFactory extends AtlasCellFactory<LocationCellFactory.CellHolder, LocationCellFactory.Location> implements View.OnClickListener {
     private static final String PICASSO_TAG = LocationCellFactory.class.getSimpleName();
@@ -50,22 +51,22 @@ public class LocationCellFactory extends AtlasCellFactory<LocationCellFactory.Ce
         return message.getMessageParts().get(0).getMimeType().equals(MIME_TYPE);
     }
 
-    public static String getMessagePreview(Context context, Message message) {
+    public static String getMessagePreview(Context context) {
         return context.getString(R.string.atlas_message_preview_location);
     }
 
     @Override
-    public boolean isBindable(Message message) {
+    public final boolean isBindable(Message message) {
         return LocationCellFactory.isType(message);
     }
 
     @Override
-    public CellHolder createCellHolder(ViewGroup cellView, boolean isMe, LayoutInflater layoutInflater) {
+    public final CellHolder createCellHolder(ViewGroup cellView, boolean isMe, LayoutInflater layoutInflater) {
         return new CellHolder(layoutInflater.inflate(R.layout.atlas_message_item_cell_image, cellView, true));
     }
 
     @Override
-    public Location parseContent(LayerClient layerClient, Message message) {
+    public final Location parseContent(LayerClient layerClient, Message message) {
         try {
             JSONObject o = new JSONObject(new String(message.getMessageParts().get(0).getData()));
             Location c = new Location();
@@ -110,7 +111,7 @@ public class LocationCellFactory extends AtlasCellFactory<LocationCellFactory.Ce
     }
 
     @Override
-    public void onClick(View v) {
+    public final void onClick(View v) {
         Location location = (Location) v.getTag();
         String encodedLabel = (location.mLabel == null) ? URLEncoder.encode("Shared Marker") : URLEncoder.encode(location.mLabel);
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("geo:0,0?q=" + location.mLatitude + "," + location.mLongitude + "(" + encodedLabel + ")&z=16"));
@@ -118,7 +119,7 @@ public class LocationCellFactory extends AtlasCellFactory<LocationCellFactory.Ce
     }
 
     @Override
-    public void onScrollStateChanged(int newState) {
+    public final void onScrollStateChanged(int newState) {
         switch (newState) {
             case RecyclerView.SCROLL_STATE_DRAGGING:
                 mPicasso.pauseTag(PICASSO_TAG);

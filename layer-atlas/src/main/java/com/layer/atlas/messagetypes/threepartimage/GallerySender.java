@@ -31,7 +31,7 @@ public final class GallerySender extends AttachmentSender {
     static final int ACTIVITY_REQUEST_CODE = 10;
     static final int PERMISSION_REQUEST_CODE = 11;
 
-    private WeakReference<Activity> mActivity = new WeakReference<>(null);
+    final private WeakReference<Activity> mActivity;// = new WeakReference<>(null);
 
     public GallerySender(Identity me, int titleResId, Integer iconResId, Activity activity) {
         this(me, activity.getString(titleResId), iconResId, activity);

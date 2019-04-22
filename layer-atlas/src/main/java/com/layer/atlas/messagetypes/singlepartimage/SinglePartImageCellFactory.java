@@ -6,8 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
-import androidx.core.widget.ContentLoadingProgressBar;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,6 +23,9 @@ import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Transformation;
 
 import java.lang.ref.WeakReference;
+
+import androidx.core.widget.ContentLoadingProgressBar;
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * BasicImage handles non-ThreePartImage images.  It relies on the ThreePartImage RequestHandler and does not handle image rotation.
@@ -47,12 +48,12 @@ public class SinglePartImageCellFactory extends AtlasCellFactory<SinglePartImage
     }
 
     @Override
-    public boolean isBindable(Message message) {
+    public final boolean isBindable(Message message) {
         return SinglePartImageCellFactory.isType(message);
     }
 
     @Override
-    public CellHolder createCellHolder(ViewGroup cellView, boolean isMe, LayoutInflater layoutInflater) {
+    public final CellHolder createCellHolder(ViewGroup cellView, boolean isMe, LayoutInflater layoutInflater) {
         return new CellHolder(layoutInflater.inflate(R.layout.atlas_message_item_cell_image, cellView, true));
     }
 
@@ -77,7 +78,7 @@ public class SinglePartImageCellFactory extends AtlasCellFactory<SinglePartImage
     }
 
     @Override
-    public void onClick(View v) {
+    public final void onClick(View v) {
         AtlasImagePopupActivity.init(mLayerClient);
         Activity activity = mActivity.get();
         if (activity == null) return;
@@ -92,7 +93,7 @@ public class SinglePartImageCellFactory extends AtlasCellFactory<SinglePartImage
     }
 
     @Override
-    public void onScrollStateChanged(int newState) {
+    public final void onScrollStateChanged(int newState) {
         switch (newState) {
             case RecyclerView.SCROLL_STATE_DRAGGING:
                 mPicasso.pauseTag(PICASSO_TAG);
@@ -105,7 +106,7 @@ public class SinglePartImageCellFactory extends AtlasCellFactory<SinglePartImage
     }
 
     @Override
-    public PartId parseContent(LayerClient layerClient, Message message) {
+    public final PartId parseContent(LayerClient layerClient, Message message) {
         for (MessagePart part : message.getMessageParts()) {
             if (part.getMimeType().startsWith("image/")) return new PartId(part.getId());
         }
@@ -125,7 +126,7 @@ public class SinglePartImageCellFactory extends AtlasCellFactory<SinglePartImage
         return false;
     }
 
-    public static String getMessagePreview(Context context, Message message) {
+    public static String getMessagePreview(Context context) {
         return context.getString(R.string.atlas_message_preview_image);
     }
 
@@ -152,7 +153,7 @@ public class SinglePartImageCellFactory extends AtlasCellFactory<SinglePartImage
         }
 
         @Override
-        public int sizeOf() {
+        public final int sizeOf() {
             return mId.toString().getBytes().length;
         }
     }

@@ -1,7 +1,6 @@
 package com.layer.atlas;
 
 import android.content.Context;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -10,6 +9,9 @@ import com.layer.sdk.changes.LayerChange;
 import com.layer.sdk.changes.LayerChangeEvent;
 import com.layer.sdk.listeners.LayerChangeEventListener;
 import com.layer.sdk.messaging.Conversation;
+
+import androidx.annotation.NonNull;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 public final class AtlasHistoricMessagesFetchLayout extends SwipeRefreshLayout implements LayerChangeEventListener.BackgroundThread.Weak {
     private LayerClient mLayerClient;
@@ -47,7 +49,7 @@ public final class AtlasHistoricMessagesFetchLayout extends SwipeRefreshLayout i
      * Automatically refresh on resume.
      */
     @Override
-    protected void onVisibilityChanged(View changedView, int visibility) {
+    protected final void onVisibilityChanged(@NonNull View changedView, int visibility) {
         super.onVisibilityChanged(changedView, visibility);
         if (visibility != View.VISIBLE) return;
         refresh();

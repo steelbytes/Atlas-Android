@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
-import androidx.annotation.RequiresPermission;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -31,6 +30,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.lang.ref.WeakReference;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.RequiresPermission;
 
 import static androidx.core.app.ActivityCompat.requestPermissions;
 import static androidx.core.content.ContextCompat.checkSelfPermission;
@@ -188,7 +190,7 @@ public final class LocationSender extends AttachmentSender {
         }
     }
 
-    private final static class GoogleApiCallbacks implements GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
+    final static class GoogleApiCallbacks implements GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
         @Override
         public void onConnected(Bundle bundle) {
             if (Log.isLoggable(Log.VERBOSE)) Log.v("GoogleApiClient connected");
@@ -200,7 +202,7 @@ public final class LocationSender extends AttachmentSender {
         }
 
         @Override
-        public void onConnectionFailed(ConnectionResult connectionResult) {
+        public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
             if (Log.isLoggable(Log.VERBOSE)) Log.v("GoogleApiClient failed: " + connectionResult);
         }
     }

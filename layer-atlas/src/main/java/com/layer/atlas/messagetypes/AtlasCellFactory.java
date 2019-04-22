@@ -1,12 +1,13 @@
 package com.layer.atlas.messagetypes;
 
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.LruCache;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.layer.sdk.LayerClient;
 import com.layer.sdk.messaging.Message;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * CellFactories manage one or more types ot Messages for display within an AtlasMessagesAdapter.

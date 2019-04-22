@@ -32,7 +32,7 @@ import java.util.concurrent.atomic.AtomicReference;
 public final class CameraSender extends AttachmentSender {
     static final int ACTIVITY_REQUEST_CODE = 20;
 
-    private WeakReference<Activity> mActivity = new WeakReference<>(null);
+    final private WeakReference<Activity> mActivity;// = new WeakReference<>(null);
 
     private final AtomicReference<String> mPhotoFilePath = new AtomicReference<>(null);
 

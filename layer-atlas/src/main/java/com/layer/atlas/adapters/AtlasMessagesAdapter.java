@@ -4,7 +4,6 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +35,9 @@ import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
 
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
+
 /**
  * AtlasMessagesAdapter drives an AtlasMessagesList.  The AtlasMessagesAdapter itself handles
  * rendering sender names, avatars, dates, left/right alignment, and message clustering, and leaves
@@ -60,7 +62,7 @@ import java.util.Set;
  *
  * @see AtlasCellFactory
  */
-public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessagesAdapter.ViewHolder> implements AtlasBaseAdapter<Message>, RecyclerViewController.Callback {
+public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessagesAdapter.ViewHolder> implements RecyclerViewController.Callback {
     private final static int VIEW_TYPE_FOOTER = 0;
 
     LayerClient mLayerClient;
@@ -310,8 +312,9 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
         return -1;
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == VIEW_TYPE_FOOTER) {
             return new ViewHolder(mLayoutInflater.inflate(ViewHolder.RESOURCE_ID_FOOTER, parent, false));
         }
@@ -325,7 +328,7 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder viewHolder, int position) {
         try {
             mQueryController.updateBoundPosition(position);
             if (mFooterView != null && position == mFooterPosition) {
@@ -503,6 +506,7 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
         }
     }
 
+    /*
     @Override
     public final Integer getPosition(Message message) {
         try {
@@ -513,8 +517,8 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
             return 0;
         }
     }
+    */
 
-    @Override
     public final Integer getPosition(Message message, int lastPosition) {
         try {
             return mQueryController.getPosition(message, lastPosition);
@@ -525,7 +529,6 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
         }
     }
 
-    @Override
     public final Message getItem(int position) {
         try {
             if (mFooterView != null && position == mFooterPosition) return null;
@@ -538,7 +541,6 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
         }
     }
 
-    @Override
     public final Message getItem(RecyclerView.ViewHolder viewHolder) {
         try {
             if (!(viewHolder instanceof CellViewHolder)) return null;
@@ -802,7 +804,7 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
         }
 
         @Override
-        public void onClick(View v) {
+        public final void onClick(View v) {
             if (v.getId()==R.id.avatar) {
                 if (mAvatarClickCallback!=null) {
                     mAvatarClickCallback.onClick(mMessage);
@@ -835,7 +837,7 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
         }
     }
 
-    private final static class Cluster {
+    final static class Cluster {
         boolean mDateBoundaryWithPrevious;
         ClusterType mClusterWithPrevious;
 
@@ -865,7 +867,7 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
         }
 
         @Override
-        public boolean equals(Object o) {
+        public final boolean equals(Object o) {
             if (this == o) return true;
             if (o == null || getClass() != o.getClass()) return false;
 
@@ -877,7 +879,7 @@ public final class AtlasMessagesAdapter extends RecyclerView.Adapter<AtlasMessag
         }
 
         @Override
-        public int hashCode() {
+        public final int hashCode() {
             int result = (mMe ? 1 : 0);
             result = 31 * result + mCellFactory.hashCode();
             return result;

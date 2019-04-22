@@ -2,7 +2,6 @@ package com.layer.atlas.util;
 
 
 import android.net.Uri;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.layer.sdk.changes.LayerChange;
 import com.layer.sdk.changes.LayerChangeEvent;
@@ -14,6 +13,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * A {@link LayerChangeEventListener} that looks for changes to identities that are bound to

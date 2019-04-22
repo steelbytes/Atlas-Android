@@ -9,8 +9,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Parcel;
 import android.os.Parcelable;
-import androidx.core.widget.ContentLoadingProgressBar;
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,6 +34,9 @@ import org.json.JSONObject;
 import java.lang.ref.WeakReference;
 import java.util.List;
 
+import androidx.core.widget.ContentLoadingProgressBar;
+import androidx.recyclerview.widget.RecyclerView;
+
 /**
  * ThreePartImage handles image Messages with three parts: full image, preview image, and
  * image metadata.  The image metadata contains full image dimensions and rotation information used
@@ -59,17 +60,17 @@ public class ThreePartImageCellFactory extends AtlasCellFactory<ThreePartImageCe
     }
 
     @Override
-    public boolean isBindable(Message message) {
+    public final boolean isBindable(Message message) {
         return ThreePartImageCellFactory.isType(message);
     }
 
     @Override
-    public CellHolder createCellHolder(ViewGroup cellView, boolean isMe, LayoutInflater layoutInflater) {
+    public final CellHolder createCellHolder(ViewGroup cellView, boolean isMe, LayoutInflater layoutInflater) {
         return new CellHolder(layoutInflater.inflate(R.layout.atlas_message_item_cell_image, cellView, true));
     }
 
     @Override
-    public Info parseContent(LayerClient layerClient, Message message) {
+    public final Info parseContent(LayerClient layerClient, Message message) {
         return getInfo(message);
     }
 
@@ -136,7 +137,7 @@ public class ThreePartImageCellFactory extends AtlasCellFactory<ThreePartImageCe
     }
 
     @Override
-    public void onClick(View v) {
+    public final void onClick(View v) {
         AtlasImagePopupActivity.init(mLayerClient);
         Activity activity = mActivity.get();
         if (activity == null) return;
@@ -154,7 +155,7 @@ public class ThreePartImageCellFactory extends AtlasCellFactory<ThreePartImageCe
     }
 
     @Override
-    public void onScrollStateChanged(int newState) {
+    public final void onScrollStateChanged(int newState) {
         switch (newState) {
             case RecyclerView.SCROLL_STATE_DRAGGING:
                 mPicasso.pauseTag(PICASSO_TAG);
@@ -180,7 +181,7 @@ public class ThreePartImageCellFactory extends AtlasCellFactory<ThreePartImageCe
                 parts.get(ThreePartImageUtils.PART_INDEX_INFO).getMimeType().equals(ThreePartImageUtils.MIME_TYPE_INFO);
     }
 
-    public static String getMessagePreview(Context context, Message message) {
+    public static String getMessagePreview(Context context) {
         return context.getString(R.string.atlas_message_preview_image);
     }
 
@@ -215,17 +216,17 @@ public class ThreePartImageCellFactory extends AtlasCellFactory<ThreePartImageCe
         Uri previewPartId;
 
         @Override
-        public int sizeOf() {
+        public final int sizeOf() {
             return ((Integer.SIZE + Integer.SIZE + Integer.SIZE) / Byte.SIZE) + fullPartId.toString().getBytes().length + previewPartId.toString().getBytes().length;
         }
 
         @Override
-        public int describeContents() {
+        public final int describeContents() {
             return 0;
         }
 
         @Override
-        public void writeToParcel(Parcel dest, int flags) {
+        public final void writeToParcel(Parcel dest, int flags) {
             dest.writeInt(orientation);
             dest.writeInt(width);
             dest.writeInt(height);

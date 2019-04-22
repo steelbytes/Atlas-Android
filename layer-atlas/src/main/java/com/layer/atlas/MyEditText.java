@@ -4,12 +4,12 @@ import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.os.Build;
-import androidx.appcompat.widget.AppCompatMultiAutoCompleteTextView;
 import android.text.Editable;
 import android.text.Selection;
-import android.text.Spannable;
 import android.text.Spanned;
 import android.util.AttributeSet;
+
+import androidx.appcompat.widget.AppCompatMultiAutoCompleteTextView;
 
 public final class MyEditText extends AppCompatMultiAutoCompleteTextView {
 
@@ -58,7 +58,7 @@ public final class MyEditText extends AppCompatMultiAutoCompleteTextView {
      */
     private void pastePlain() {
         try {
-            CharSequence mText = getText();
+            Editable mText = getText();
             int min = 0;
             int max = mText.length();
             if (isFocused()) {
@@ -79,12 +79,12 @@ public final class MyEditText extends AppCompatMultiAutoCompleteTextView {
                     paste = (text instanceof Spanned) ? text.toString() : text;
                     if (paste != null) {
                         if (!didFirst) {
-                            Selection.setSelection((Spannable) mText, max);
-                            ((Editable) mText).replace(min, max, paste);
+                            Selection.setSelection(mText, max);
+                            mText.replace(min, max, paste);
                             didFirst = true;
                         } else {
-                            ((Editable) mText).insert(getSelectionEnd(), "\n");
-                            ((Editable) mText).insert(getSelectionEnd(), paste);
+                            mText.insert(getSelectionEnd(), "\n");
+                            mText.insert(getSelectionEnd(), paste);
                         }
                     }
                 }

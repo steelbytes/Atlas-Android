@@ -25,9 +25,6 @@ import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
-import androidx.core.app.ActivityCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
-import androidx.appcompat.content.res.AppCompatResources;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
@@ -56,6 +53,10 @@ import com.layer.sdk.messaging.Conversation;
 
 import java.util.ArrayList;
 
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.app.ActivityCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
+
 public final class AtlasMessageComposer extends FrameLayout implements TextWatcher {
     private EditText mMessageEditText;
     Button mSendButton;
@@ -65,7 +66,7 @@ public final class AtlasMessageComposer extends FrameLayout implements TextWatch
     Conversation mConversation;
 
     private TextSender mTextSender;
-    private ArrayList<AttachmentSender> mAttachmentSenders = new ArrayList<>();
+    private final ArrayList<AttachmentSender> mAttachmentSenders = new ArrayList<>();
     private MessageSender.Callback mMessageSenderCallback;
 
     PopupWindow mAttachmentMenu;
@@ -277,8 +278,8 @@ public final class AtlasMessageComposer extends FrameLayout implements TextWatch
      * Sets an optional callback for receiving MessageSender events.  If non-null, overrides any
      * callbacks already set on MessageSenders.
      *
-     * @param callback Callback to receive MessageSender events.
-     * @return This AtlasMessageComposer.
+     * @ param callback Callback to receive MessageSender events.
+     * @ return This AtlasMessageComposer.
      */
     /*
     public final AtlasMessageComposer setMessageSenderCallback(MessageSender.Callback callback) {

@@ -18,7 +18,6 @@ package com.layer.atlas.util;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
-import androidx.annotation.NonNull;
 import android.text.TextUtils;
 
 import com.layer.atlas.R;
@@ -27,7 +26,6 @@ import com.layer.atlas.messagetypes.location.LocationCellFactory;
 import com.layer.atlas.messagetypes.singlepartimage.SinglePartImageCellFactory;
 import com.layer.atlas.messagetypes.text.TextCellFactory;
 import com.layer.atlas.messagetypes.threepartimage.ThreePartImageCellFactory;
-import com.layer.sdk.LayerClient;
 import com.layer.sdk.listeners.LayerProgressListener;
 import com.layer.sdk.messaging.Identity;
 import com.layer.sdk.messaging.Message;
@@ -39,6 +37,8 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+
+import androidx.annotation.NonNull;
 
 public final class Util {
     //private static final String METADATA_KEY_CONVERSATION_TITLE = "conversationName";
@@ -69,18 +69,18 @@ public final class Util {
     // TODO: base this on registered types
     public static String getLastMessageString(Context context, Message message) {
         if (TextCellFactory.isType(message)) {
-            return TextCellFactory.getMessagePreview(context, message);
+            return TextCellFactory.getMessagePreview(message);
         }
         if (ThreePartImageCellFactory.isType(message)) {
-            return ThreePartImageCellFactory.getMessagePreview(context, message);
+            return ThreePartImageCellFactory.getMessagePreview(context);
         }
         if (LocationCellFactory.isType(message)) {
-            return LocationCellFactory.getMessagePreview(context, message);
+            return LocationCellFactory.getMessagePreview(context);
         }
         if (SinglePartImageCellFactory.isType(message)) {
-            return SinglePartImageCellFactory.getMessagePreview(context, message);
+            return SinglePartImageCellFactory.getMessagePreview(context);
         }
-        return GenericCellFactory.getPreview(context, message);
+        return GenericCellFactory.getPreview(message);
     }
 
 // --Commented out by Inspection START (2018-04-30 7:57 PM):
@@ -262,13 +262,12 @@ public final class Util {
      * Returns `true` if the MessagePart downloaded successfully within the given period of time, or
      * `false` otherwise.
      *
-     * @param layerClient LayerClient to download the MessagePart with.
      * @param part        MessagePart to download.
      * @param timeLength  Length of time to wait for downloading.
      * @param timeUnit    Unit of time to wait for downloading.
      * @return `true` if the MessagePart content is available, or `false` otherwise.
      */
-    public static boolean downloadMessagePart(LayerClient layerClient, MessagePart part, int timeLength, TimeUnit timeUnit) {
+    public static boolean downloadMessagePart(MessagePart part, int timeLength, TimeUnit timeUnit) {
         if (part.isContentReady()) return true;
 
         final CountDownLatch latch = new CountDownLatch(1);

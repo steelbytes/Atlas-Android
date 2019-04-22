@@ -7,7 +7,6 @@ import android.graphics.Paint;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
-import androidx.core.app.ActivityCompat;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
@@ -30,6 +29,8 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 import java.util.concurrent.atomic.AtomicLong;
+
+import androidx.core.app.ActivityCompat;
 
 public final class AtlasAvatar extends View {
     static final String TAG = AtlasAvatar.class.getSimpleName();
@@ -371,7 +372,7 @@ public final class AtlasAvatar extends View {
         return diff;
     }
 
-    private final static class Diff {
+    final static class Diff {
         final List<Identity> existing = new ArrayList<>();
         final List<Identity> added = new ArrayList<>();
         final List<Identity> removed = new ArrayList<>();
